@@ -1,0 +1,44 @@
+.nav-title{
+    font-family: "Alice", serif;
+}
+
+
+*{
+    font-family: "Nunito", sans-serif;
+}
+
+  /* Tipografías importadas */
+  @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:wght@700&display=swap');
+  .font-playfair {
+      font-family: 'Playfair Display', serif;
+  }
+  .font-lato {
+      font-family: 'Lato', sans-serif;
+  }
+  
+  /* Sombra sutil para los botones */
+  .shadow-lg {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+
+    /* Estilos para el efecto de foco en color rosa */
+    input:focus, textarea:focus {
+        border-color: #f472b6; /* Rosa */
+        box-shadow: 0 0 0 2px rgba(244, 114, 182, 0.3); /* Sombra rosa */
+        outline: none;
+      }
+        /* Estilo de foco en los campos del formulario */
+
+  /* Fondo gris para el botón de candado */
+  #togglePassword {
+    background-color: #f3f4f6; /* Gris claro */
+    transition: background-color 0.3s;
+  }
+  
+  /* Efecto hover para el botón de candado */
+  #togglePassword:hover {
+    background-color: #e5e7eb; /* Gris más oscuro */
+  }
+  html {
+    scroll-behavior: smooth;
+}
