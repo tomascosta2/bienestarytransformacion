@@ -46,8 +46,7 @@
         </div>
         <!-- Derechos Reservados -->
         <div class="mt-10 border-t border-gray-700 pt-4 text-center text-gray-400 text-sm">
-            <p>&copy; <?php echo date("Y"); ?> Luz Mística. Todos los derechos reservados.</p>
-            <p class="text-xs mt-2">Creado por <a href="https://zonacode.com" target="_blank" class="text-pink-300 hover:text-white">zonacode.com</a></p>
+            <p>&copy; Luz Mística 2025. Todos los derechos reservados.</p>
         </div>
     </div>
 </footer>
