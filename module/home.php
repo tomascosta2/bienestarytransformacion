@@ -1,4 +1,5 @@
 <?php
+echo 'Hola';
 // Incrementar la cantidad de visitas para el día actual
 $dateToday = date('Y-m-d');
 $insertVisitQuery = "
