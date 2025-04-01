@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['id'])) {
-    header("Location: https://luzmistica.net/?page=ingresar");
+    header("Location: https://espaciobienestarintegral.com/?page=ingresar");
     exit();
 }
 ?>
@@ -81,7 +81,7 @@ if (!isset($_SESSION['id'])) {
     <div class="confirmation-container">
         <h1>¡Felicidades!</h1>
         <p>Ahora eres un usuario premium. Disfruta de todos los beneficios exclusivos que tenemos para ti.</p>
-        <a href="https://luzmistica.net/?page=plan_premium" class="btn">Ir a los cursos premium</a>
+        <a href="https://espaciobienestarintegral.com/?page=plan_premium" class="btn">Ir a los cursos premium</a>
     </div>
 </body>
 </html>

@@ -23,7 +23,7 @@ if ($status === 'approved') {
 
     if ($stmt->execute()) {
         // Redirigir al usuario a la página de "Mis Cursos"
-        header("Location: https://luzmistica.net/?page=mis_cursos");
+        header("Location: https://espaciobienestarintegral.com/?page=mis_cursos");
         exit();
     } else {
         echo "Error al registrar la compra: " . $conn->error;

@@ -3,7 +3,7 @@
 // Verifica si el usuario está autenticado
 if (!isset($_SESSION['id'])) {
     // Redirige al usuario a la página de inicio de sesión si no está autenticado
-    header("Location: https://luzmistica.net/?page=ingresar");
+    header("Location: https://espaciobienestarintegral.com/?page=ingresar");
     exit();
 }
 // ID del usuario autenticado

@@ -167,7 +167,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <a href='$activation_url' class='button'>Activar Cuenta</a>
                         </div>
                         <div class='footer'>
-                            <p>Si tienes algún problema, no dudes en contactarnos a soporte@luzmistica.net</p>
+                            <p>Si tienes algún problema, no dudes en contactarnos a soporte@espaciobienestarintegral.com</p>
                         </div>
                     </div>
                 </body>

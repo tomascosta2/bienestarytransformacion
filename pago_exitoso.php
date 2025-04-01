@@ -6,7 +6,7 @@ require_once 'mercadopago_config.php';
 if (!isset($_SESSION['id'])) {
     echo "<script>
         alert('Debes iniciar sesión para acceder a esta sección.');
-        window.location.href = 'https://luzmistica.net/?page=ingresar'; // Redirigir a la página de inicio de sesión
+        window.location.href = 'https://espaciobienestarintegral.com/?page=ingresar'; // Redirigir a la página de inicio de sesión
     </script>";
     exit();
 }
@@ -55,7 +55,7 @@ if ($subscription && ($subscription->status == 'authorized' || $subscription->st
 
     if ($stmt->execute()) {
         // Redirigir al usuario a una página de confirmación
-        header("Location: https://luzmistica.net/pago_exitoso_confirmacion.php");
+        header("Location: https://espaciobienestarintegral.com/pago_exitoso_confirmacion.php");
         exit();
     } else {
         echo "Hubo un error al actualizar tu estado a premium: " . $stmt->error;

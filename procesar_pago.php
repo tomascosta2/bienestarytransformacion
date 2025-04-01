@@ -45,8 +45,8 @@ if ($result->num_rows > 0) {
 
     // Definir la URL de retorno en caso de éxito
     $preference->back_urls = array(
-        "success" => "https://luzmistica.net/acceso_curso.php?id=$curso_id&user=$usuario_id&status=approved", // Página de acceso tras pago exitoso
-        "failure" => "https://luzmistica.net/acceso_curso.php?id=$curso_id&status=failure", // Página de error en caso de fallo
+        "success" => "https://espaciobienestarintegral.com/acceso_curso.php?id=$curso_id&user=$usuario_id&status=approved", // Página de acceso tras pago exitoso
+        "failure" => "https://espaciobienestarintegral.com/acceso_curso.php?id=$curso_id&status=failure", // Página de error en caso de fallo
     );
 
     // Definir el tipo de pago

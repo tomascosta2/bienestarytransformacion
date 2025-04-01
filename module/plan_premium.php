@@ -5,7 +5,7 @@ session_start();
 if (!isset($_SESSION['id'])) {
     echo "<script>
         alert('Debes iniciar sesión para acceder a esta sección.');
-        window.location.href = 'https://luzmistica.net/?page=ingresar'; // Redirigir a la página de inicio de sesión
+        window.location.href = 'https://espaciobienestarintegral.com/?page=ingresar'; // Redirigir a la página de inicio de sesión
     </script>";
     exit();
 }
@@ -43,7 +43,7 @@ echo "End Date: " . $end_date . "<br>";
 // Crear la suscripción (Preapproval) para el Plan Premium
 $preapproval = new MercadoPago\Preapproval();
 $preapproval->payer_email = $user_email;  // Email del usuario
-$preapproval->back_url = "https://luzmistica.net/pago_exitoso.php";  // URL de retorno
+$preapproval->back_url = "https://espaciobienestarintegral.com/pago_exitoso.php";  // URL de retorno
 $preapproval->reason = "Suscripción mensual al Plan Premium";  // Descripción de la suscripción
 $preapproval->auto_recurring = array(
     "frequency" => 1,  // Frecuencia de cobro (1 mes)

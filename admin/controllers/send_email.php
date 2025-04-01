@@ -99,7 +99,7 @@ try {
                     <p>Tenemos grandes noticias para ti. Hemos subido un nuevo curso a nuestra plataforma.</p>
                     <p>Este curso te ayudará a profundizar en tu conexión interior, mejorar tus prácticas espirituales y encontrar equilibrio en tu vida diaria.</p>
                     <p>No te pierdas esta oportunidad de crecer junto a nuestra comunidad.</p>
-                    <a href="https://luzmistica.net" target="_blank">Visitar Luz Mistica</a>
+                    <a href="https://espaciobienestarintegral.com" target="_blank">Visitar Luz Mistica</a>
                 </div>
                 <div class="footer">
                     <p>Si tienes alguna duda o consulta, no dudes en contactarnos a luzmisticaescuela@gmail.com</p>
