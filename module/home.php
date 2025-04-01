@@ -1,13 +1,13 @@
 <?php
-echo 'Hola';
+// echo 'Hola';
 // Incrementar la cantidad de visitas para el día actual
-$dateToday = date('Y-m-d');
-$insertVisitQuery = "
-    INSERT INTO visitas (fecha, cantidad)
-    VALUES ('$dateToday', 1)
-    ON DUPLICATE KEY UPDATE cantidad = cantidad + 1;
-";
-$conn->query($insertVisitQuery);
+// $dateToday = date('Y-m-d');
+// $insertVisitQuery = "
+//     INSERT INTO visitas (fecha, cantidad)
+//     VALUES ('$dateToday', 1)
+//     ON DUPLICATE KEY UPDATE cantidad = cantidad + 1;
+// ";
+// $conn->query($insertVisitQuery);
 ?>
 <section class="relative text-left" style="min-height: 90vh;">
     <!-- Video de fondo con brillo ajustado -->
