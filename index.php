@@ -1,5 +1,5 @@
 <?php
-// Activar el buffer de salida para evitar problemas con el header
+// Activar el buffer de salida para evitar problemas con el header prueba
 ob_start();
 ?>
 
