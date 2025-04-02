@@ -1,4 +1,5 @@
 <?php
+
 session_name("admin_session");
 session_start();
 include './connection/database.php';
@@ -11,6 +12,8 @@ if (!isset($_SESSION['admin_id']) || $_SESSION['role'] !== 'administrador') {
 
 include("./include/head.php");
 
+$conn->query("SET GLOBAL sql_mode = ''");
+
 // Consulta para obtener el total de usuarios registrados
 $totalUsuariosQuery = "SELECT COUNT(*) as total FROM usuarios";
 $totalUsuariosResult = $conn->query($totalUsuariosQuery);
@@ -21,15 +24,22 @@ $totalVisitasQuery = "SELECT SUM(cantidad) as total_visitas FROM visitas";
 $totalVisitasResult = $conn->query($totalVisitasQuery);
 $totalVisitas = $totalVisitasResult->fetch_assoc()['total_visitas'];
 
-// Consulta para obtener el número de usuarios registrados por mes (último año)
-$usuariosPorMesQuery = "
-    SELECT DATE_FORMAT(created_at, '%b') AS mes, COUNT(*) AS cantidad 
-    FROM usuarios 
-    WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
-    GROUP BY DATE_FORMAT(created_at, '%Y-%m')
-    ORDER BY created_at
-";
-$usuariosPorMesResult = $conn->query($usuariosPorMesQuery);
+try {
+    // Consulta para obtener el número de usuarios registrados por mes (último año)
+    $usuariosPorMesQuery = "
+        SELECT 
+            DATE_FORMAT(MIN(created_at), '%b') AS mes, 
+            COUNT(*) AS cantidad 
+        FROM usuarios 
+        WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
+        GROUP BY YEAR(created_at), MONTH(created_at)
+        ORDER BY YEAR(created_at), MONTH(created_at);
+    ";
+    $usuariosPorMesResult = $conn->query($usuariosPorMesQuery);
+} catch (Exception $e) {
+    echo 'Error en la consulta: ' . $e->getMessage();
+    exit();
+}
 
 // Preparar datos para el JSON de usuarios nuevos
 $meses = [];
@@ -39,15 +49,23 @@ while ($row = $usuariosPorMesResult->fetch_assoc()) {
     $cantidades[] = $row['cantidad'];
 }
 
-// Consulta para obtener el número de visitas por mes (último año)
-$visitasPorMesQuery = "
-    SELECT DATE_FORMAT(fecha, '%b') AS mes, SUM(cantidad) AS total_visitas 
-    FROM visitas 
-    WHERE fecha >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
-    GROUP BY DATE_FORMAT(fecha, '%Y-%m')
-    ORDER BY fecha
-";
-$visitasPorMesResult = $conn->query($visitasPorMesQuery);
+try {
+    // Consulta para obtener el número de visitas por mes (último año)
+    $visitasPorMesQuery = "
+        SELECT 
+            DATE_FORMAT(fecha, '%b') AS mes, 
+            SUM(cantidad) AS total_visitas,
+            MIN(fecha) AS fecha_orden 
+        FROM visitas 
+        WHERE fecha >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
+        GROUP BY YEAR(fecha), MONTH(fecha) 
+        ORDER BY fecha_orden;
+    ";
+    $visitasPorMesResult = $conn->query($visitasPorMesQuery);
+} catch (Exception $e) {
+    echo 'Error en la consulta: ' . $e->getMessage();
+    exit();
+}
 
 // Preparar datos para el JSON de visitas mensuales
 $mesesVisitas = [];
@@ -56,6 +74,7 @@ while ($row = $visitasPorMesResult->fetch_assoc()) {
     $mesesVisitas[] = $row['mes'];
     $cantidadesVisitas[] = $row['total_visitas'];
 }
+
 ?>
 
 <div class="flex h-screen">
@@ -73,7 +92,7 @@ while ($row = $visitasPorMesResult->fetch_assoc()) {
             <p class="text-sm text-purple-200">Luz Mística</p>
         </div>
         <nav class="mt-6 flex-grow overflow-y-auto scrollbar-thin scrollbar-thumb-purple-500 scrollbar-track-purple-200">
-        <ul class="space-y-2">
+            <ul class="space-y-2">
                 <li>
                     <a href="./?page=home" class="flex items-center p-3 text-gray-700 hover:bg-purple-400 hover:text-white transition duration-300 rounded-md mx-3 my-1">
                         <i class="fas fa-home mr-2 text-lg"></i> Dashboard
@@ -116,11 +135,11 @@ while ($row = $visitasPorMesResult->fetch_assoc()) {
                 </li>
                 <li class="relative">
                     <button type="button" class="flex justify-between items-center w-full p-3 text-gray-700 hover:bg-purple-400 hover:text-white transition duration-300 rounded-md mx-3 my-1 dropdown-button">
-                    <span class="flex items-center"><i class="fas fa-chalkboard-teacher mr-2 text-lg"></i>Clases en Vivo</span>
-                    <i class="fas fa-chevron-down"></i>
+                        <span class="flex items-center"><i class="fas fa-chalkboard-teacher mr-2 text-lg"></i>Clases en Vivo</span>
+                        <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="mt-1 rounded-md shadow-lg bg-purple-100 hidden dropdown-menu z-20">
-                    <a href="./?page=clase" class="flex items-center p-3 text-gray-700 hover:bg-purple-400 hover:text-white transition duration-300 rounded-md mx-3 my-1">Subir Clase En vivo</a>
+                        <a href="./?page=clase" class="flex items-center p-3 text-gray-700 hover:bg-purple-400 hover:text-white transition duration-300 rounded-md mx-3 my-1">Subir Clase En vivo</a>
                         <a href="./?page=ver_clase" class="block px-4 py-2 text-gray-700 hover:bg-purple-200 rounded-md">Ver Clases en vivo</a>
                     </div>
                 </li>

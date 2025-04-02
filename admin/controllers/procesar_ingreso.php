@@ -8,6 +8,7 @@ session_start();
 
 // Verificar si el formulario fue enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    echo 'entra';
     // Capturar los datos del formulario
     $email = $_POST['email'];
     $password = $_POST['password'];
@@ -30,9 +31,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Vincular las variables al resultado
             $stmt->bind_result($id, $nombre, $apellido, $hashed_password, $role);
             $stmt->fetch();
+
+            echo 'existe el administrador';
+            echo 'password: ' . $password;
+            echo 'id: ' . $id;
+            echo 'nombre: ' . $nombre;
             
             // Verificar la contraseña
             if (password_verify($password, $hashed_password) && $role === 'administrador') {
+                echo 'La contraseña es correcta y el usuario es un administrador';
+                
                 // Iniciar sesión exitosamente
                 $_SESSION['admin_id'] = $id;
                 $_SESSION['nombre'] = $nombre;
