@@ -10,7 +10,7 @@
 
             <li class="relative">
                 <a href="#cursos-gratuitos" id="courses-link" class="hover:text-purple-700 transition duration-300 ease-in-out navbar flex items-center cursor-pointer">
-                    Nuestros cursos
+                    Nuestras propuestas
                     <!-- Icono de flecha -->
                     <svg class="ml-1 h-5 w-5 transition-transform duration-300" id="courses-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -18,9 +18,9 @@
                 </a>
                 <!-- Submenú -->
                 <ul id="courses-submenu" class="hidden absolute bg-white shadow-lg border border-gray-200 mt-2 rounded-lg space-y-2 p-4 w-80 z-50">
-                    <li><a href="#cursosgratuitos" class="hover:text-purple-700 transition duration-300 ease-in-out">Cursos y charlas gratuitas</a></li>
-                    <li><a href="#cursosdestacados" class="hover:text-purple-700 transition duration-300 ease-in-out">Cursos y charlas más destacados</a></li>
-                    <li><a href="#planpremium" class="hover:text-purple-700 transition duration-300 ease-in-out">Plan PREMIUM</a></li>
+                    <li><a href="#cursosgratuitos" class="hover:text-purple-700 transition duration-300 ease-in-out">Recursos gratuitos</a></li>
+                    <li><a href="#cursosdestacados" class="hover:text-purple-700 transition duration-300 ease-in-out">Cursos, talleres y diplomados</a></li>
+                    <li><a href="#planpremium" class="hover:text-purple-700 transition duration-300 ease-in-out">Plan Premium</a></li>
                 </ul>
             </li>
             <li><a href="#contacto" class="hover:text-purple-700 transition duration-300 ease-in-out navbar">Contacto</a></li>
