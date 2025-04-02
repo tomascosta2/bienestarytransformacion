@@ -9,6 +9,7 @@ session_start();
 // Verificar si el formulario fue enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo 'entra';
+    
     // Capturar los datos del formulario
     $email = $_POST['email'];
     $password = $_POST['password'];

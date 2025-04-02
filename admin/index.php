@@ -10,9 +10,15 @@ if (!isset($_SESSION['admin_id']) || $_SESSION['role'] !== 'administrador') {
     exit();
 }
 
+
 include("./include/head.php");
 
-$conn->query("SET GLOBAL sql_mode = ''");
+
+try { 
+    $conn->query("SET GLOBAL sql_mode = ''");
+} catch (Exception $e) {
+    echo $e;
+}
 
 // Consulta para obtener el total de usuarios registrados
 $totalUsuariosQuery = "SELECT COUNT(*) as total FROM usuarios";
