@@ -38,7 +38,7 @@
         <!-- Logo y Nombre en el menú (Visible en ambas versiones) -->
         <a href="./">
             <div class="text-right">
-                <h1 class="text-2xl font-bold text-purple-900 text-center nav-title">Luz Mística</h1>
+                <h1 class="text-2xl font-bold text-purple-900 text-center nav-title">Escuela Bienestar Integral</h1>
                 <p class="text-gray-500 text-sm text-center nav-title">Transformación y Bienestar</p>
             </div>
         </a>

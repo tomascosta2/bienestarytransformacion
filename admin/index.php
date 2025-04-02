@@ -95,7 +95,7 @@ while ($row = $visitasPorMesResult->fetch_assoc()) {
     <aside id="sidebar" class="w-64 bg-gradient-to-br from-purple-300 via-pink-200 to-purple-300 text-gray-900 flex-shrink-0 hidden lg:flex lg:flex-col shadow-xl overflow-hidden">
         <div class="p-6 bg-purple-500 flex flex-col items-center justify-center">
             <h1 class="text-2xl font-bold text-white">Admin Panel</h1>
-            <p class="text-sm text-purple-200">Luz Mística</p>
+            <p class="text-sm text-purple-200">Escuela Bienestar Integral</p>
         </div>
         <nav class="mt-6 flex-grow overflow-y-auto scrollbar-thin scrollbar-thumb-purple-500 scrollbar-track-purple-200">
             <ul class="space-y-2">

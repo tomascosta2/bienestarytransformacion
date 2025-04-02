@@ -5,7 +5,7 @@
                 <p class="mt-2 text-sm text-gray-600">Crea una cuenta para acceder a nuestros servicios</p>
             </div>
 
-            <form class="space-y-6" action="./controllers/procesar_registro" method="POST">
+            <form class="space-y-6" action="./controllers/procesar_registro.php" method="POST">
                 <!-- Nombre -->
                 <div>
                     <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>

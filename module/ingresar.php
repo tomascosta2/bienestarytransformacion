@@ -14,7 +14,7 @@ if (isset($_SESSION['error'])) {
 
   <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md border border-black">
   <h2 class="text-3xl font-semibold text-purple-800 text-center mb-6 mt-10">
-      Iniciar sesión en Luz Mística
+      Iniciar sesión en Escuela Bienestar Integral
     </h2>
     <p class="text-gray-600 text-center mb-8">Accede a tu cuenta y continúa tu viaje de transformación.</p>
     

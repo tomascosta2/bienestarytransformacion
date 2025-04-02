@@ -23,11 +23,11 @@ try {
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
-    $mail->setFrom('luzmisticaescuela@gmail.com', 'Luz Mistica');
+    $mail->setFrom('luzmisticaescuela@gmail.com', 'Escuela Bienestar Integral');
     $mail->addAddress($user['correo'], $user['nombre']);
 
     $mail->isHTML(true);
-    $mail->Subject = '¡Novedades de Luz Mistica!';
+    $mail->Subject = '¡Novedades de Escuela Bienestar Integral!';
     $mail->Body = '
         <html>
         <head>
@@ -92,14 +92,14 @@ try {
         <body>
             <div class="container">
                 <div class="header">
-                    <h1>Luz Mistica</h1>
+                    <h1>Escuela Bienestar Integral</h1>
                 </div>
                 <div class="content">
                     <h2>¡Hola ' . htmlspecialchars($user['nombre']) . '!</h2>
                     <p>Tenemos grandes noticias para ti. Hemos subido un nuevo curso a nuestra plataforma.</p>
                     <p>Este curso te ayudará a profundizar en tu conexión interior, mejorar tus prácticas espirituales y encontrar equilibrio en tu vida diaria.</p>
                     <p>No te pierdas esta oportunidad de crecer junto a nuestra comunidad.</p>
-                    <a href="https://espaciobienestarintegral.com" target="_blank">Visitar Luz Mistica</a>
+                    <a href="https://espaciobienestarintegral.com" target="_blank">Visitar Escuela Bienestar Integral</a>
                 </div>
                 <div class="footer">
                     <p>Si tienes alguna duda o consulta, no dudes en contactarnos a luzmisticaescuela@gmail.com</p>
@@ -111,6 +111,6 @@ try {
     $mail->send();
     echo "Correo enviado con éxito.";
 } catch (Exception $e) {
-    echo "Error al enviar correo: " . $mail->ErrorInfo;
+    echo "Error al enviar correo: " . $mail->ErrorInfo . " ERROR: " . $e;
 }
 ?>

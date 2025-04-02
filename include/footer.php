@@ -3,7 +3,7 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             <!-- Descripción de la Empresa -->
             <div>
-                <h2 class="text-2xl font-bold mb-4">Luz Mística</h2>
+                <h2 class="text-2xl font-bold mb-4">Escuela Bienestar Integral</h2>
                 <p class="text-gray-300 text-sm">Somos un espacio dedicado a la transformación y bienestar personal a través de cursos y sesiones personalizadas. Conéctate con tu paz interior y encuentra el equilibrio que buscas.</p>
             </div>
 
@@ -46,7 +46,7 @@
         </div>
         <!-- Derechos Reservados -->
         <div class="mt-10 border-t border-gray-700 pt-4 text-center text-gray-400 text-sm">
-            <p>&copy; Luz Mística 2025. Todos los derechos reservados.</p>
+            <p>&copy; Escuela Bienestar Integral 2025. Todos los derechos reservados.</p>
         </div>
     </div>
 </footer>

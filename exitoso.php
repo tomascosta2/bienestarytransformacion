@@ -14,7 +14,7 @@
             Por favor, revisa tu bandeja de entrada (o carpeta de spam) y sigue las instrucciones para activar tu cuenta.
         </p>
         <p class="text-gray-600 mb-6">
-            Una vez activada tu cuenta, podrás iniciar sesión y comenzar tu experiencia con Luz Mística.
+            Una vez activada tu cuenta, podrás iniciar sesión y comenzar tu experiencia con Escuela Bienestar Integral.
         </p>
         
         <a href="./" class="bg-gradient-to-r from-purple-600 to-pink-500 text-white py-2 px-4 rounded-full font-semibold hover:from-purple-700 hover:to-pink-600 transition duration-300 shadow-lg">

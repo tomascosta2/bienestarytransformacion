@@ -20,11 +20,11 @@
     <div class="container mx-auto relative z-10 px-6 md:px-0 py-20 flex flex-col items-start justify-center space-y-6">
         <!-- Título con tipografía serif y mayor tamaño -->
         <h1 class="text-5xl md:text-6xl font-bold text-white mb-4 font-playfair">
-            Bienvenidos a Luz Mística
+            Bienvenidos a Escuela Bienestar Integral
         </h1>
         <!-- Descripción con tipografía sans-serif y espaciado amplio -->
         <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mb-8 font-lato leading-relaxed">
-            En Luz Mística, ofrecemos un espacio dedicado al bienestar personal y desarrollo profesional. Con herramientas hacia el equilibrio y crecimiento en todas las etapas de tu vida. Integrando lo mental, emocional y energético
+            En Escuela Bienestar Integral, ofrecemos un espacio dedicado al bienestar personal y desarrollo profesional. Con herramientas hacia el equilibrio y crecimiento en todas las etapas de tu vida. Integrando lo mental, emocional y energético
         </p>
         <!-- Botones de CTA con estilo refinado -->
         <div class="flex justify-start space-x-4">

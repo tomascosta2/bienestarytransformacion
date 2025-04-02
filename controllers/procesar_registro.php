@@ -14,7 +14,7 @@ $secretKey = "6LdwmoAqAAAAAAOC0IC9ubJyjrOZ2A7C7Kd-frhp";
 $captchaResponse = $_POST['g-recaptcha-response'];
 
 // Verificar si el captcha fue completado
-if (!$captchaResponse) {
+if (!$captchaResponse && $_SERVER['HTTP_HOST'] !== 'localhost:8000') {
     die("Por favor completa el reCAPTCHA.");
 }
 
@@ -23,12 +23,13 @@ $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?s
 $responseKeys = json_decode($response, true);
 
 // Verificar la respuesta de Google
-if (intval($responseKeys["success"]) !== 1) {
+if (intval($responseKeys["success"]) !== 1 && $_SERVER['HTTP_HOST'] !== 'localhost:8000') {
     die("Error de verificación de reCAPTCHA. Intenta nuevamente.");
 }
 
 // Verifica que el formulario haya sido enviado mediante POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    echo "Entra";
     // Recupera y limpia los datos del formulario
     $nombre = mysqli_real_escape_string($conn, $_POST['name']);
     $correo = mysqli_real_escape_string($conn, $_POST['email']);
@@ -64,7 +65,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Generar un token único para la activación de la cuenta
     $token = bin2hex(random_bytes(50));
-
     // Inserta el usuario en la base de datos (con token)
     $sql = "INSERT INTO usuarios (nombre, correo, contraseña, token, is_active) VALUES ('$nombre', '$correo', '$contraseña_hash', '$token', 0)";
 
@@ -80,18 +80,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com'; // Usa el servidor SMTP de tu elección
             $mail->SMTPAuth = true;
-            $mail->Username = 'luzmisticaescuela@gmail.com'; // Tu correo de Gmail
-            $mail->Password = 'lmbofezojmjijhbr'; // Tu contraseña de Gmail o app password
+            $mail->Username = 'bienestarintegralescuela@gmail.com'; // Tu correo de Gmail
+            $mail->Password = 'espaciobienestarintegral'; // Tu contraseña de Gmail o app password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
+            $mail->Port = 587; // o 465
+
+            print_r($mail);
 
             // Remitente y destinatario
-            $mail->setFrom('luzmisticaescuela@gmail.com', 'Luz Mistica');
+            $mail->setFrom('bienestarintegralescuela@gmail.com', 'Escuela Bienestar Integral');
             $mail->addAddress($correo, $nombre); // Destinatario
+
+            echo 'pasa 2';
 
             // Contenido del correo
             $mail->isHTML(true);
-            $mail->Subject = 'Activa tu cuenta en Luz Mistica';
+            $mail->Subject = 'Activa tu cuenta en Escuela Bienestar Integral';
             $base_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
             $activation_url = $base_url . "/activar.php?token=" . urlencode($token);
             $mail->Body    = "
@@ -159,7 +163,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <body>
                     <div class='container'>
                         <div class='header'>
-                            <h1>Luz Mistica</h1>
+                            <h1>Escuela Bienestar Integral</h1>
                         </div>
                         <div class='content'>
                             <h2>Gracias por registrarte, $nombre</h2>
@@ -173,9 +177,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </body>
                 </html>";
 
+            echo 'pasa 3';
+
             // Enviar el correo
             $mail->send();
             echo 'Correo de confirmación enviado.';
+
+            echo 'pasa 4';
 
             // Redirige a la página de éxito después de enviar el correo
             header("Location: ../exitoso");

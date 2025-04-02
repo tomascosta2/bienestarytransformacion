@@ -7,10 +7,10 @@
   </a>
   <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md border border-black">
   <h2 class="text-3xl font-semibold text-purple-800 text-center mb-6">
-      Registro en Luz Mística
+      Registro en Escuela Bienestar Integral
     </h2>
     <p class="text-gray-600 text-center mb-8">Únete a nuestra comunidad y comienza tu viaje de transformación.</p>
-    <form method="POST" action="./controllers/procesar_registro" class="space-y-4">
+    <form method="POST" action="./controllers/procesar_registro.php" class="space-y-4">
       <div class="w-full">
         <label for="name" class="block text-gray-600 font-medium">Nombre completo</label>
         <div class="flex items-center border border-gray-300 rounded-md p-2 focus-within:border-purple-400 w-full">
