@@ -1,5 +1,5 @@
 <footer class="bg-purple-900 text-white py-12 opacity-50">
-    <div class="container mx-auto px-6 md:px-0">
+    <div class="max-w-7xl mx-auto px-6 md:px-0">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             <!-- Descripción de la Empresa -->
             <div>
