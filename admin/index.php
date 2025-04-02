@@ -17,7 +17,7 @@ include("./include/head.php");
 try { 
     $conn->query("SET GLOBAL sql_mode = ''");
 } catch (Exception $e) {
-    echo '<div class="bg-warning fixed bottom-[20px] rigth-[20px] p-4 rounded-sm">' . $e . '</div>';
+    echo '<div class="hidden --warning">' . $e . '</div>';
 }
 
 // Consulta para obtener el total de usuarios registrados
