@@ -2,7 +2,7 @@
 // Parámetros de conexión a la base de datos
 $host = 'localhost'; // Cambia esto a tu host de base de datos
 $usuario = 'u770229669_luzmistica'; // Cambia esto a tu usuario de base de datos
-$password = 'luzMistica24'; // Cambia esto a tu contraseña de base de datos
+$password = 'LMacceso!25'; // Cambia esto a tu contraseña de base de datos
 $base_datos = 'u770229669_dbluzmistica'; // Cambia esto al nombre de tu base de datos
 
 // Crear conexión
