@@ -11,12 +11,12 @@
             <div>
                 <h3 class="text-xl font-semibold mb-4">Enlaces Rápidos</h3>
                 <ul class="space-y-2 text-gray-300">
-                    <li><a href="#cursos-gratuitos" class="hover:text-pink-300">Charlas y Cursos Gratuitos</a></li>
-                    <li><a href="#cursos-talleres" class="hover:text-pink-300">Cursos y Talleres Pagos</a></li>
-                    <li><a href="#plan-premium" class="hover:text-pink-300">Plan Premium</a></li>
-                    <li><a href="#lanzamientos" class="hover:text-pink-300">Lanzamientos</a></li>
-                    <li><a href="#quiensoy" class="hover:text-pink-300">¿Quién Soy?</a></li>
-                    <li><a href="#contacto" class="hover:text-pink-300">Contacto</a></li>
+                    <li><a href="/#cursos-gratuitos" class="hover:text-pink-300">Recursos Gratuitos</a></li>
+                    <li><a href="/#cursos-talleres" class="hover:text-pink-300">Cursos, Talleres y Diplomados</a></li>
+                    <li><a href="/#plan-premium" class="hover:text-pink-300">Plan Premium</a></li>
+                    <li><a href="/#lanzamientos" class="hover:text-pink-300">Lanzamientos</a></li>
+                    <li><a href="/pages/sobremi/" class="hover:text-pink-300">¿Quién Soy?</a></li>
+                    <li><a href="/#contacto" class="hover:text-pink-300">Contacto</a></li>
                 </ul>
             </div>
 
@@ -51,9 +51,9 @@
     </div>
 </footer>
 
-<script src="./js/carousel.js"></script>
-<script src="./js/verContrasenaReg.js"></script>
-<script src="./js/verContrasenaIng.js"></script>
-<script src="./js/menu.js"></script>
+<script src="/js/carousel.js"></script>
+<script src="/js/verContrasenaReg.js"></script>
+<script src="/js/verContrasenaIng.js"></script>
+<script src="/js/menu.js"></script>
 </body>
 </html>

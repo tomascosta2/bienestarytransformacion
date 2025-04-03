@@ -29,12 +29,15 @@
                     En Escuela Bienestar Integral, ofrecemos un espacio dedicado al bienestar personal y desarrollo profesional. Con herramientas hacia el equilibrio y crecimiento en todas las etapas de tu vida. Integrando lo mental, emocional y energético
                 </p>
                 <!-- Botones de CTA con estilo refinado -->
-                <div class="flex justify-start space-x-4">
-                    <a href="#cursos" class="bg-gray-700 text-white text-sm md:text-lg px-6 md:px-10 py-2 md:py-4 rounded-full border border-gray-500 shadow-lg hover:bg-gray-800 transition duration-300">
+                <div class="flex justify-start gap-8 md:gap-4 md:flex-row flex-col md:w-fit w-full">
+                    <div class="relative">
+                        <span class="absolute -rotate-12 px-12 top-[6px] left-[calc(50%-90px)] md:left-[35px] py-3 bg-red-700 text-white rounded-md text-[14px]">Agenda llena</span>
+                        <button href="#contacto" class="md:w-fit w-full bg-gray-600 cursor-default text-white text-sm md:text-lg px-6 md:px-10 py-4 md:py-4 rounded-full shadow-lg">
+                            AGENDA UNA SESIÓN
+                        </button>
+                    </div>
+                    <a href="#cursosdestacados" class="md:w-fit w-full bg-purple-600 text-center text-white text-sm md:text-lg px-6 md:px-10 py-4 md:py-4 rounded-full border border-purple-500 shadow-lg hover:bg-purple-700 transition duration-300">
                         VER NUESTROS CURSOS
-                    </a>
-                    <a href="#contacto" class="bg-purple-600 text-white text-sm md:text-lg px-6 md:px-10 py-2 md:py-4 rounded-full border border-purple-500 shadow-lg hover:bg-purple-700 transition duration-300">
-                        AGENDA UNA SESIÓN
                     </a>
                 </div>
                 <!-- Testimonio breve con separación y cursiva mejorada -->
@@ -60,7 +63,7 @@
                 <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4 relative z-10">
                     <!-- Carta 1: Charlas Gratuitas -->
                     <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-                        <h3 class="text-2xl font-semibold mb-4" style="color: #c09ecc;">CHARLAS GRATUITAS</h3>
+                        <h3 class="text-2xl font-semibold mb-4" style="color: #c09ecc;">Recursos Gratuitos</h3>
                         <p class="text-gray-700 mb-6">
                             Accede a nuestros cursos gratuitos y conoce las bases del equilibrio emocional y físico. Perfecto para dar el primer paso en tu camino de autoconocimiento.
                             Recibe recursos exclusivos como guías, ejercicios y meditaciones para iniciar tu transformación personal de manera gratuita.
@@ -72,7 +75,7 @@
 
                     <!-- Carta 2: Cursos y Talleres -->
                     <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-                        <h3 class="text-2xl font-semibold mb-4" style="color: #c09ecc;">CURSOS Y TALLERES</h3>
+                        <h3 class="text-2xl font-semibold mb-4" style="color: #c09ecc;">Cursos, Talleres y Diplomados</h3>
                         <p class="text-gray-700 mb-6">
                             Cursos diseñados para profundizar en temas de sanacion y autoconocimiento. Explora nuestras capacitaciones y elegi las que mejor complementen tu camino profesional y personal. Podras consultarme ante dudas. Te acompaño en cada paso del proceso.
                         </p>
@@ -82,7 +85,7 @@
                     </div>
                     <!-- Carta 3: Plan Premium -->
                     <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-                        <h3 class="text-2xl font-semibold mb-4" style="color: #c09ecc;">PLAN PREMIUM</h3>
+                        <h3 class="text-2xl font-semibold mb-4" style="color: #c09ecc;">Plan Premium</h3>
                         <p class="text-gray-700 mb-6">
                             Acceso ilimitado a todos los cursos y talleres de nuestro catálogo con una suscripción mensual. Explora sin límites y a tu propio ritmo.
                             Recibe contenidos especiales cada mes, como nuevos módulos, actualizaciones y charlas exclusivas solo para miembros premium.
@@ -98,7 +101,7 @@
     <section id="cursosgratuitos" class="bg-gray-100 py-16">
         <div class="max-w-7xl mx-auto">
             <div class="container mx-auto text-center mb-10 px-4">
-                <h2 class="text-3xl font-bold" style="color: #c09ecc;">CURSOS Y CHARLAS GRATUITAS</h2>
+                <h2 class="text-3xl font-bold" style="color: #c09ecc;">Recursos Gratuitos</h2>
                 <p class="text-gray-600">Explora nuestras capacitaciones y elige las que mejor complementen tu camino!</p>
             </div>
 
@@ -134,7 +137,7 @@
     <section id="cursosdestacados" class="bg-gray-100 py-16">
         <div class="max-w-7xl mx-auto">
             <div class="container mx-auto text-center mb-10 px-4">
-                <h2 class="text-4xl font-bold mb-4" style="color: #c09ecc;">CURSOS Y TALLERES</h2>
+                <h2 class="text-4xl font-bold mb-4" style="color: #c09ecc;">Cursos, Talleres y Diplomados</h2>
                 <p class="text-gray-600 text-lg max-w-2xl mx-auto">Explora nuestras capacitaciones y elige las que mejor complementen tu camino profesional y personal!</p>
             </div>
 
@@ -177,7 +180,7 @@
 
     <section id="planpremium" class="bg-gray-100 py-16">
         <div class="container mx-auto text-center mb-10 px-4">
-            <h2 class="text-3xl font-bold" style="color: #c09ecc;">PLAN PREMIUM</h2>
+            <h2 class="text-3xl font-bold" style="color: #c09ecc;">Plan Premium</h2>
             <p class="text-gray-600">En este Plan vas a Tener Acceso a Todos los Cursos, talleres y contenido exclusivo para miembros.</p>
         </div>
 

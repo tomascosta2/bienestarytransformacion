@@ -24,7 +24,11 @@
                 </ul>
             </li>
             <li><a href="#contacto" class="hover:text-purple-700 transition duration-300 ease-in-out navbar">Contacto</a></li>
-            <a href="./?page=mis_cursos" class="hover:text-purple-700 transition duration-300 ease-in-out navbar">Mis cursos</a></li>
+            <?php if (isset($_SESSION['nombre'])): ?>
+                <li><a href="./?page=mis_cursos" class="hover:text-purple-700 transition duration-300 ease-in-out navbar">Mis cursos</a></li>
+            <?php endif; ?>
+            <li><a href="/pages/sobremi/" class="hover:text-purple-700 transition duration-300 ease-in-out navbar">Conóceme mejor</a></li>
+
 
             <?php if (isset($_SESSION['nombre'])): ?>
                 <!-- Botón de salir para usuarios autenticados -->
@@ -36,7 +40,7 @@
         </ul>
 
         <!-- Logo y Nombre en el menú (Visible en ambas versiones) -->
-        <a href="./">
+        <a href="/">
             <div class="text-right">
                 <h1 class="text-2xl font-bold text-purple-900 text-center nav-title">Escuela Bienestar Integral</h1>
                 <p class="text-gray-500 text-sm text-center nav-title">Transformación y Bienestar</p>
