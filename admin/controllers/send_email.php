@@ -18,12 +18,12 @@ try {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'luzmisticaescuela@gmail.com';
-    $mail->Password = 'lmbofezojmjijhbr';
+    $mail->Username = 'bienestarintegralescuela@gmail.com';
+    $mail->Password = 'usufewmgrfqpazpf';
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port = 587;
 
-    $mail->setFrom('luzmisticaescuela@gmail.com', 'Escuela Bienestar Integral');
+    $mail->setFrom('bienestarintegralescuela@gmail.com', 'Escuela Bienestar Integral');
     $mail->addAddress($user['correo'], $user['nombre']);
 
     $mail->isHTML(true);

@@ -22,11 +22,15 @@
             <div class="container mx-auto relative z-10 px-6 md:px-0 py-20 flex flex-col items-start justify-center space-y-6">
                 <!-- Título con tipografía serif y mayor tamaño -->
                 <h1 class="text-5xl md:text-6xl font-bold text-white mb-4 font-playfair">
-                    Bienvenidos a Escuela Bienestar Integral
+                    Bienvenidos a Escuela Bienestar Integral 
                 </h1>
                 <!-- Descripción con tipografía sans-serif y espaciado amplio -->
                 <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mb-8 font-lato leading-relaxed">
-                    En Escuela Bienestar Integral, ofrecemos un espacio dedicado al bienestar personal y desarrollo profesional. Con herramientas hacia el equilibrio y crecimiento en todas las etapas de tu vida. Integrando lo mental, emocional y energético
+                    Escuela Bienestar integral, es un espacio creado por
+                    Karen Manzi, donde tu trasformación personal y
+                    profesional son simples y accesibles. Ciencia y energia
+                    se combinan para brindarte herramientas practicas y
+                    aplicables, mas alla de la información.
                 </p>
                 <!-- Botones de CTA con estilo refinado -->
                 <div class="flex justify-start gap-8 md:gap-4 md:flex-row flex-col md:w-fit w-full">
@@ -42,7 +46,7 @@
                 </div>
                 <!-- Testimonio breve con separación y cursiva mejorada -->
                 <blockquote class="mt-12 italic text-gray-400 text-lg md:text-xl max-w-xl border-l-4 border-purple-500 pl-4">
-                    “Nuestro compromiso es acompañarte con seriedad y dedicación en tu camino hacia el bienestar y la paz interior.”
+                    “Expande tu consciencia, transforma tu vida.”
                 </blockquote>
             </div>
         </div>
@@ -55,10 +59,6 @@
             </div>
             <!-- Contenedor con imagen de fondo -->
             <div class="relative">
-                <!-- Imagen de fondo detrás de las cartas -->
-                <div class="absolute inset-0 bg-center bg-no-repeat bg-cover" style="background-image: url('./images/background-card.png'); top: 30px; bottom: 30px;">
-                </div>
-
                 <!-- Cartas con contenido -->
                 <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4 relative z-10">
                     <!-- Carta 1: Charlas Gratuitas -->
@@ -130,6 +130,9 @@
                     <?php endif; ?>
                 </div>
             </div>
+            <a href="#cursosdestacados" class="block mt-8 mx-auto md:w-fit w-full bg-purple-600 text-center text-white text-sm md:text-lg px-6 md:px-10 py-4 md:py-4 rounded-full border border-purple-500 shadow-lg hover:bg-purple-700 transition duration-300">
+                Ver todos
+            </a>
         </div>
     </section>
 
@@ -166,6 +169,9 @@
                     <p class="text-gray-700 text-center">No hay cursos disponibles en este momento.</p>
                 <?php endif; ?>
             </div>
+                <a href="#cursosdestacados" class="block mt-8 mx-auto md:w-fit w-full bg-purple-600 text-center text-white text-sm md:text-lg px-6 md:px-10 py-4 md:py-4 rounded-full border border-purple-500 shadow-lg hover:bg-purple-700 transition duration-300">
+                    Ver todos
+                </a>
         </div>
     </section>
 

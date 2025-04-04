@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->Host = 'smtp.gmail.com'; // Usa el servidor SMTP de tu elección
             $mail->SMTPAuth = true;
             $mail->Username = 'bienestarintegralescuela@gmail.com'; // Tu correo de Gmail
-            $mail->Password = 'espaciobienestarintegral'; // Tu contraseña de Gmail o app password
+            $mail->Password = 'usufewmgrfqpazpf'; // Tu contraseña de Gmail o app password
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587; // o 465
 
