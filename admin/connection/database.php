@@ -5,7 +5,6 @@ if ($_SERVER['HTTP_HOST'] === 'localhost:8000') {
     $password = 'root';
     $base_datos = 'u770229669_dbluzmistica'; // Puedes cambiar esto si el nombre de la base local es diferente
 } else {
-    echo "entra a produccion";
     $host = 'localhost'; // Cambia esto a tu host de producción si es diferente
     $usuario = 'u770229669_luzmistica';
     $password = 'LMacceso!25';
