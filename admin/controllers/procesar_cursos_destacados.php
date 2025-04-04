@@ -4,96 +4,74 @@ include("../connection/database.php");
 // Manejo de la subida de archivos
 $nombreCurso = $_POST['nombre_curso'];
 $descripcion = $_POST['descripcion'];
-$precio = $_POST['precio'];
+
+// Capturar y convertir las categorías a JSON
+$categorias = isset($_POST['categorias']) ? json_encode($_POST['categorias']) : json_encode([]);
 
 // Definir las rutas donde se guardarán los archivos subidos
-$targetDir = "uploads/"; // Asegúrate de que esta carpeta existe y tiene permisos de escritura
+$targetDir = "uploads/";
 
 // Verificar si el directorio existe y si no, crearlo
 if (!is_dir($targetDir)) {
-    mkdir($targetDir, 0777, true); // Crea la carpeta si no existe
+    mkdir($targetDir, 0777, true);
 }
 
 // Manejo de la imagen de portada
 $imagenPortadaPath = $targetDir . basename($_FILES['imagen_portada_destacados']['name']);
 move_uploaded_file($_FILES['imagen_portada_destacados']['tmp_name'], $imagenPortadaPath);
 
-// Preparar y ejecutar la consulta SQL para insertar los datos en la tabla cursos_destacados
-$sqlCurso = "INSERT INTO cursos_destacados (nombre_curso, descripcion, precio, imagen_portada)
+// Preparar y ejecutar la consulta SQL para insertar el curso en la tabla cursos_destacados
+$sqlCurso = "INSERT INTO cursos_destacados (nombre_curso, descripcion, categorias, imagen_portada)
              VALUES (?, ?, ?, ?)";
 $stmtCurso = $conn->prepare($sqlCurso);
-$stmtCurso->bind_param("ssds", $nombreCurso, $descripcion, $precio, $imagenPortadaPath);
+$stmtCurso->bind_param("ssss", $nombreCurso, $descripcion, $categorias, $imagenPortadaPath);
 
 if ($stmtCurso->execute()) {
     $cursoId = $stmtCurso->insert_id; // Obtener el ID del curso recién insertado
 
     // Manejo de los archivos PDF
-    if (isset($_FILES['materiales_pdf'])) {
-        $pdfPaths = [];
+    if (!empty($_FILES['materiales_pdf']['name'][0])) {
+        $sqlPdf = "INSERT INTO archivos_pdf_destacados (curso_id, ruta_pdf) VALUES (?, ?)";
+        $stmtPdf = $conn->prepare($sqlPdf);
+
         foreach ($_FILES['materiales_pdf']['tmp_name'] as $key => $tmpName) {
             $pdfPath = $targetDir . basename($_FILES['materiales_pdf']['name'][$key]);
             if (move_uploaded_file($tmpName, $pdfPath)) {
-                $pdfPaths[] = $pdfPath; // Guardar la ruta del archivo subido
-            }
-        }
-
-        // Insertar los archivos PDF en la tabla
-        if (!empty($pdfPaths)) {
-            $sqlPdf = "INSERT INTO archivos_pdf_destacados (curso_id, ruta_pdf) VALUES (?, ?)";
-            $stmtPdf = $conn->prepare($sqlPdf);
-            
-            foreach ($pdfPaths as $pdfPath) {
                 $stmtPdf->bind_param("is", $cursoId, $pdfPath);
                 $stmtPdf->execute();
             }
-            $stmtPdf->close();
         }
+        $stmtPdf->close();
     }
 
     // Manejo de las imágenes
-    if (isset($_FILES['imagenes_curso'])) {
-        $imagenPaths = [];
+    if (!empty($_FILES['imagenes_curso']['name'][0])) {
+        $sqlImagen = "INSERT INTO imagenes_curso_destacados (curso_id, ruta_imagen) VALUES (?, ?)";
+        $stmtImagen = $conn->prepare($sqlImagen);
+
         foreach ($_FILES['imagenes_curso']['tmp_name'] as $key => $tmpName) {
             $imagenPath = $targetDir . basename($_FILES['imagenes_curso']['name'][$key]);
             if (move_uploaded_file($tmpName, $imagenPath)) {
-                $imagenPaths[] = $imagenPath; // Guardar la ruta de la imagen subida
-            }
-        }
-
-        // Insertar las imágenes en la tabla
-        if (!empty($imagenPaths)) {
-            $sqlImagen = "INSERT INTO imagenes_curso_destacados (curso_id, ruta_imagen) VALUES (?, ?)";
-            $stmtImagen = $conn->prepare($sqlImagen);
-            
-            foreach ($imagenPaths as $imagenPath) {
                 $stmtImagen->bind_param("is", $cursoId, $imagenPath);
                 $stmtImagen->execute();
             }
-            $stmtImagen->close();
         }
+        $stmtImagen->close();
     }
 
-    // Manejo de los videos adicionales del curso
-    if (isset($_FILES['videos_curso'])) {
-        $videoPaths = [];
+    // Manejo de los videos
+    if (!empty($_FILES['videos_curso']['name'][0])) {
+        $sqlVideo = "INSERT INTO videos_curso_destacados (curso_id, ruta_video) VALUES (?, ?)";
+        $stmtVideo = $conn->prepare($sqlVideo);
+
         foreach ($_FILES['videos_curso']['tmp_name'] as $key => $tmpName) {
             $videoPath = $targetDir . basename($_FILES['videos_curso']['name'][$key]);
             if (move_uploaded_file($tmpName, $videoPath)) {
-                $videoPaths[] = $videoPath; // Guardar la ruta del video subido
-            }
-        }
-
-        // Insertar los videos en la tabla
-        if (!empty($videoPaths)) {
-            $sqlVideo = "INSERT INTO videos_curso_destacados (curso_id, ruta_video) VALUES (?, ?)";
-            $stmtVideo = $conn->prepare($sqlVideo);
-            
-            foreach ($videoPaths as $videoPath) {
                 $stmtVideo->bind_param("is", $cursoId, $videoPath);
                 $stmtVideo->execute();
             }
-            $stmtVideo->close();
         }
+        $stmtVideo->close();
     }
 
     echo "Curso subido con éxito.";
