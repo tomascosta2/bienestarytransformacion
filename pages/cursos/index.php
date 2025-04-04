@@ -5,23 +5,28 @@ include("../../include/head.php");
 include("../../include/navbar.php");
 
 // Obtener categorías desde la base de datos
-$sqlCategorias = "
-    SELECT DISTINCT categoria
-	FROM (
-		SELECT JSON_EXTRACT(categorias, '$') AS categorias_json FROM cursos_gratuitos
-		UNION ALL
-		SELECT JSON_EXTRACT(categorias, '$') FROM cursos_premium
-		UNION ALL
-		SELECT JSON_EXTRACT(categorias, '$') FROM cursos_destacados
-	) AS todas
-	JOIN JSON_TABLE(
-		todas.categorias_json,
-		'$[*]' COLUMNS (categoria VARCHAR(255) PATH '$')
-	) AS categorias_expandidas
-	WHERE categoria IS NOT NULL AND categoria != 'null' AND categoria != '';
-";
-$resultCategorias = $conn->query($sqlCategorias);
-$categorias = $resultCategorias->fetch_all(MYSQLI_ASSOC);
+try {
+    $sqlCategorias = "
+		SELECT DISTINCT categoria
+		FROM (
+			SELECT JSON_EXTRACT(categorias, '$') AS categorias_json FROM cursos_gratuitos
+			UNION ALL
+			SELECT JSON_EXTRACT(categorias, '$') FROM cursos_premium
+			UNION ALL
+			SELECT JSON_EXTRACT(categorias, '$') FROM cursos_destacados
+		) AS todas
+		JOIN JSON_TABLE(
+			todas.categorias_json,
+			'$[*]' COLUMNS (categoria VARCHAR(255) PATH '$')
+		) AS categorias_expandidas
+		WHERE categoria IS NOT NULL AND categoria != 'null' AND categoria != '';
+	";
+	$resultCategorias = $conn->query($sqlCategorias);
+	$categorias = $resultCategorias->fetch_all(MYSQLI_ASSOC);
+
+} catch (Exception $e) {
+    echo $e;
+}
 
 // Parámetros de paginación
 $porPagina = 9;
