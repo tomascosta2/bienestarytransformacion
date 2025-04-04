@@ -1,13 +1,12 @@
 <?php
-// echo 'Hola';
 // Incrementar la cantidad de visitas para el día actual
-// $dateToday = date('Y-m-d');
-// $insertVisitQuery = "
-//     INSERT INTO visitas (fecha, cantidad)
-//     VALUES ('$dateToday', 1)
-//     ON DUPLICATE KEY UPDATE cantidad = cantidad + 1;
-// ";
-// $conn->query($insertVisitQuery);
+$dateToday = date('Y-m-d');
+$insertVisitQuery = "
+    INSERT INTO visitas (fecha, cantidad)
+    VALUES ('$dateToday', 1)
+    ON DUPLICATE KEY UPDATE cantidad = cantidad + 1;
+";
+$conn->query($insertVisitQuery);
 ?>
 <div>
     <section class="relative text-left" style="min-height: 90vh;">
@@ -187,7 +186,13 @@
     <section id="planpremium" class="bg-gray-100 py-16">
         <div class="container mx-auto text-center mb-10 px-4">
             <h2 class="text-3xl font-bold" style="color: #c09ecc;">Plan Premium</h2>
-            <p class="text-gray-600">En este Plan vas a Tener Acceso a Todos los Cursos, talleres y contenido exclusivo para miembros.</p>
+            <p class="text-gray-600 mt-4">
+                En este plan, tendrás acceso exclusivo a todos los cursos, talleres, prácticas en
+                <br><br>
+                vivo, contenido especial y nuevos cursos todos los meses por $14.900 por mes
+                <br><br>
+                Si deseas inscribirte y ser parte de la comunidad, pulsa el botón de abajo
+            </p>
         </div>
 
         <?php if (isset($_SESSION['es_premium']) && $_SESSION['es_premium']): ?>
@@ -228,8 +233,8 @@
         <?php else: ?>
             <!-- Mensaje para usuarios no premium -->
             <div class="container mx-auto text-center mt-10 px-4">
-                <p class="text-gray-700 text-lg">Esta sección es para usuarios premium. Si deseas inscribirte en nuestro plan, pulsa el botón de abajo.</p>
-                <a href="./?page=plan_premium" class="inline-block bg-purple-500 text-white px-4 py-2 mt-4 rounded-lg hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-300">
+                <!-- <p class="text-gray-700 text-lg">Esta sección es para usuarios premium. Si deseas inscribirte en nuestro plan, pulsa el botón de abajo.</p> -->
+                <a href="./?page=plan_premium" class="block mt-8 mx-auto md:w-fit w-full bg-purple-600 text-center text-white text-sm md:text-lg px-6 md:px-10 py-4 md:py-4 rounded-full border border-purple-500 shadow-lg hover:bg-purple-700 transition duration-300">
                     Inscribirse en el Plan Premium
                 </a>
             </div>
