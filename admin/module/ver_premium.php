@@ -84,6 +84,10 @@ $result = $conn->query($sql);
                                     class="inline-block bg-yellow-400 text-gray-800 font-semibold py-1 px-4 rounded-full shadow-md hover:bg-yellow-500 hover:shadow-lg transition duration-200 ease-in-out transform hover:scale-105">
                                     Modificar Título
                                 </a>
+                                <a href="./?page=modificar_curso_categorias&id=<?php echo $row['id']; ?>&tipo=premium"
+                                    class="inline-block bg-yellow-400 text-gray-800 font-semibold py-1 px-4 rounded-full shadow-md hover:bg-yellow-500 hover:shadow-lg transition duration-200 ease-in-out transform hover:scale-105">
+                                    Modificar Categorias
+                                </a>
                                 <a href="./?page=modificar_curso_descripcion_premium&id=<?php echo $row['id']; ?>"
                                     class="inline-block bg-yellow-400 text-gray-800 font-semibold py-1 px-4 rounded-full shadow-md hover:bg-yellow-500 hover:shadow-lg transition duration-200 ease-in-out transform hover:scale-105">
                                     Modificar Descripción

@@ -188,6 +188,9 @@ while ($row = $visitasPorMesResult->fetch_assoc()) {
             case 'modificar_curso_titulo':
                 include './module/modificar_curso_titulo.php';
                 break;
+            case 'modificar_curso_categorias':
+                include './module/modificar_curso_categorias.php';
+                break;
             case 'modificar_curso_descripcion':
                 include './module/modificar_curso_descripcion.php';
                 break;
