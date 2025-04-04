@@ -16,7 +16,7 @@ $tipoCurso = $_GET['tipo']; // puede ser 'gratis', 'premium' o 'destacado'
 // Determinar tabla
 $tabla = "";
 switch ($tipoCurso) {
-    case "gratis":
+    case "gratuito":
         $tabla = "cursos_gratuitos";
         break;
     case "premium":
