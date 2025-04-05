@@ -9,15 +9,6 @@ use PHPMailer\PHPMailer\Exception;
 // Asegúrate de tener configurado el autoload de Composer si estás usando Composer.
 require '../vendor/autoload.php';
 
-// Verificación de reCAPTCHA
-$secretKey = "6LdwmoAqAAAAAAOC0IC9ubJyjrOZ2A7C7Kd-frhp";
-$captchaResponse = $_POST['g-recaptcha-response'];
-
-// Verificar si el captcha fue completado
-if (!$captchaResponse && $_SERVER['HTTP_HOST'] !== 'localhost:8000') {
-    die("Por favor completa el reCAPTCHA.");
-}
-
 // Enviar la solicitud para verificar el captcha con Google
 $response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secretKey&response=$captchaResponse");
 $responseKeys = json_decode($response, true);
