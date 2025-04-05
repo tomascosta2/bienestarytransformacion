@@ -47,9 +47,6 @@
         </div>
       </div>
 
-      <!-- reCAPTCHA -->
-      <div class="g-recaptcha" data-sitekey="6LdwmoAqAAAAAMlXjwwQ-hj18OEu7FMHjnIHN5xJ"></div>
-
       <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white py-3 rounded-full font-semibold hover:from-purple-700 hover:to-pink-600 transition duration-300 flex items-center justify-center shadow-lg transform hover:scale-105 mt-4">
         <i class="fas fa-user-plus mr-2"></i> Registrarme
       </button>

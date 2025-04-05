@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Verifica si la cuenta está activada
         if ($usuario['is_active'] == 0) {
             $_SESSION['error'] = "Tu cuenta no está activada. Por favor, revisa tu correo para activarla.";
-            header("Location: https://espaciobienestarintegral.com/?page=ingresar");
+            echo "<script>alert('Tu cuenta no está activada. Por favor, revisa tu correo para activarla.');</script>";
             exit();
         }
 
@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     } else {
         $_SESSION['error'] = "No se encontró una cuenta con este correo.";
-        header("Location: https://espaciobienestarintegral.com/?page=ingresar");
+        header("Location: /?page=ingresar");
         exit();
     }
 
