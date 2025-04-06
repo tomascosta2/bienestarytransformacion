@@ -105,7 +105,7 @@ $resultVideo = $stmtVideo->get_result();
             <div class="swiper-button-prev"></div>
 
             <!-- Paginación opcional -->
-            <div class="swiper-pagination mt-4"></div>
+            <div class="swiper-pagination"></div>
         </div>
 
         <!-- Swiper Init -->
