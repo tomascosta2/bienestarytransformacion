@@ -195,8 +195,7 @@ $conn->query($insertVisitQuery);
         </div>
 
         <?php 
-        print_r($_SESSION);
-        if (!$_SESSION['es_premium']): ?>
+        if ($_SESSION['es_premium'] != 1): ?>
             <!-- Mensaje para usuarios no premium -->
             <div class="container mx-auto text-center mt-10 px-4">
                 <!-- <p class="text-gray-700 text-lg">Esta sección es para usuarios premium. Si deseas inscribirte en nuestro plan, pulsa el botón de abajo.</p> -->
