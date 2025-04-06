@@ -77,6 +77,7 @@ $totalPaginas = ceil($totalCursos / $porPagina);
 // echo '</pre>';
 
 print_r($_SESSION);
+$usuario_es_premium = $_SESSION['es_premium'];
 ?>
 
 <section>
@@ -108,7 +109,7 @@ print_r($_SESSION);
 					<?php foreach ($cursos as $curso): 
 						$es_premium = $curso['tipo'] == 'premium'?>
 						<a 	
-							href="<?php echo !$es_premium ? '/?page=detalles_cursos&id=' . $curso['id'] : '/#planpremium' ?>" 
+							href="<?php echo !$es_premium && !$usuario_es_premium ? '/?page=detalles_cursos&id=' . $curso['id'] : '/#planpremium' ?>" 
 							class="p-4 rounded-sm border border-gray-300 relative"
 						>
 							<?php if ($es_premium) : ?>
