@@ -26,7 +26,7 @@ $stmt->close();
 
 if (!$user_email) {
     echo "Error: No se pudo obtener el email del usuario.";
-    exit();
+    die();
 }
 
 // Forzar la zona horaria UTC

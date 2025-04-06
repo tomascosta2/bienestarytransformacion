@@ -45,7 +45,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
 
             $action = isset($_GET['action']) ? $_GET['action'] : '';
-            echo '<script>alert("' . $action . '");</script>';
             if ($action == 'pay') {
                 header("Location: /?page=plan_premium");
             } else {

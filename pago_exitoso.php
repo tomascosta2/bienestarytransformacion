@@ -55,7 +55,7 @@ if ($subscription && ($subscription->status == 'authorized' || $subscription->st
 
     if ($stmt->execute()) {
         // Redirigir al usuario a una página de confirmación
-        header("Location: https://espaciobienestarintegral.com/pago_exitoso_confirmacion.php");
+        header("Location: /");
         exit();
     } else {
         echo "Hubo un error al actualizar tu estado a premium: " . $stmt->error;
