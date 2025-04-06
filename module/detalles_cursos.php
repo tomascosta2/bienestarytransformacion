@@ -46,140 +46,122 @@ $stmtVideo->execute();
 $resultVideo = $stmtVideo->get_result();
 ?>
 
-<div class="container mx-auto mt-10">
-    <h1 class="text-4xl font-bold text-center text-gray-900 mb-6"><?php echo htmlspecialchars($curso['nombre_curso']); ?></h1>
+<div class="container mx-auto px-4 mt-10">
+    <!-- Título del Curso -->
+    <h1 class="text-4xl font-bold text-center text-gray-900 mb-10"><?php echo htmlspecialchars($curso['nombre_curso']); ?></h1>
 
-    <!-- Descripcion -->
+    <!-- Descripción -->
     <?php if ($resultDescripcion->num_rows > 0): ?>
-        <h2 class="text-3xl font-semibold text-gray-800 bg-gray-200 py-2 relative mb-6 mt-6">
-            General
-            <span class="absolute bottom-0 left-0 w-full h-1 bg-gray-500"></span>
-        </h2>
-        <?php while ($descripcion = $resultDescripcion->fetch_assoc()): ?>
-            <p class="text-gray-800 text-base leading-relaxed">
-                <?php echo ($descripcion['descripcion']); ?>
-            </p>
-        <?php endwhile; ?>
-        <br>
+        <section class="mb-10">
+            <h2 class="text-3xl font-semibold text-gray-800 border-b-4 border-purple-600 inline-block mb-4">
+                Descripción general
+            </h2>
+            <?php while ($descripcion = $resultDescripcion->fetch_assoc()): ?>
+                <p class="text-lg text-gray-700 leading-relaxed bg-gray-50 p-4 rounded shadow-sm">
+                    <?php echo nl2br(htmlspecialchars($descripcion['descripcion'])); ?>
+                </p>
+            <?php endwhile; ?>
+        </section>
     <?php endif; ?>
 
     <!-- Carrusel de videos -->
     <?php if ($resultVideo->num_rows > 0): ?>
-        <h2 class="text-2xl font-medium text-gray-900 bg-gray-200 py-2 relative mb-6">
-            Videos del Curso
-            <span class="absolute bottom-0 left-0 w-full h-1 bg-gray-500"></span>
-        </h2>
-
-        <div class="relative">
-            <!-- Contenedor de carrusel -->
-            <div class="flex space-x-4 overflow-x-auto snap-x snap-mandatory" id="videoCarousel">
-                <?php
-                $videoIndex = 1;
-                while ($video = $resultVideo->fetch_assoc()): ?>
-                    <div class="relative flex-shrink-0 w-full max-w-xs snap-center">
-                        <!-- Superposición de etiqueta -->
-                        <div class="absolute top-2 left-2 bg-purple-600 text-white px-3 py-1 rounded-md text-sm font-semibold">
+        <section class="mb-12 relative">
+            <h2 class="text-2xl font-bold text-gray-800 border-b-4 border-purple-600 inline-block mb-6">
+                Videos del Curso
+            </h2>
+            <div class="flex overflow-x-auto space-x-6 snap-x snap-mandatory pb-4" id="videoCarousel">
+                <?php $videoIndex = 1; ?>
+                <?php while ($video = $resultVideo->fetch_assoc()): ?>
+                    <div class="relative flex-shrink-0 snap-center w-80">
+                        <div class="absolute top-2 left-2 bg-purple-600 text-white text-sm px-2 py-1 rounded-md font-semibold z-10">
                             Video <?php echo $videoIndex; ?>
                         </div>
-
-                        <!-- Video -->
-                        <video class="w-full h-64 rounded-lg shadow-md" controls controlsList="nodownload">
+                        <video class="w-full h-48 rounded-lg shadow-md" controls controlsList="nodownload">
                             <source src="./admin/controllers/<?php echo htmlspecialchars($video['ruta_video']); ?>" type="video/mp4">
-                            Tu navegador no soporta el elemento de video.
+                            Tu navegador no soporta el video.
                         </video>
                     </div>
-                <?php
-                    $videoIndex++;
-                endwhile; ?>
+                    <?php $videoIndex++; ?>
+                <?php endwhile; ?>
             </div>
 
-            <!-- Controles -->
-            <button id="scrollLeftButton" class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700 focus:outline-none">
+            <!-- Botones de scroll -->
+            <button id="scrollLeftButton" class="absolute top-1/2 left-0 -translate-y-1/2 bg-gray-800 text-white p-3 rounded-full shadow-md hover:bg-gray-700 z-10">
                 <i class="fas fa-chevron-left"></i>
             </button>
-            <button id="scrollRightButton" class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full hover:bg-gray-700 focus:outline-none">
+            <button id="scrollRightButton" class="absolute top-1/2 right-0 -translate-y-1/2 bg-gray-800 text-white p-3 rounded-full shadow-md hover:bg-gray-700 z-10">
                 <i class="fas fa-chevron-right"></i>
             </button>
-        </div>
+        </section>
 
         <script>
             const carousel = document.getElementById('videoCarousel');
-            const scrollLeftButton = document.getElementById('scrollLeftButton');
-            const scrollRightButton = document.getElementById('scrollRightButton');
-
-            function scrollCarouselLeft() {
-                carousel.scrollBy({
-                    left: -carousel.offsetWidth,
-                    behavior: 'smooth'
-                });
-            }
-
-            function scrollCarouselRight() {
-                carousel.scrollBy({
-                    left: carousel.offsetWidth,
-                    behavior: 'smooth'
-                });
-            }
-
-            scrollLeftButton.addEventListener('click', scrollCarouselLeft);
-            scrollRightButton.addEventListener('click', scrollCarouselRight);
+            document.getElementById('scrollLeftButton').onclick = () => {
+                carousel.scrollBy({ left: -carousel.offsetWidth, behavior: 'smooth' });
+            };
+            document.getElementById('scrollRightButton').onclick = () => {
+                carousel.scrollBy({ left: carousel.offsetWidth, behavior: 'smooth' });
+            };
         </script>
     <?php endif; ?>
 
-    <!-- Sección de PDFs -->
+    <!-- Archivos PDF -->
     <?php if ($resultPdf->num_rows > 0): ?>
-        <h2 class="text-2xl font-medium text-gray-900 bg-gray-200 py-2 relative mb-6">
-            Archivos PDF
-            <span class="absolute bottom-0 left-0 w-full h-1 bg-gray-500"></span>
-        </h2>
-
-        <ul class="list-disc list-inside mb-6 space-y-2">
-            <?php while ($pdf = $resultPdf->fetch_assoc()): ?>
-                <li class="flex items-center">
-                    <i class="fas fa-file-pdf text-red-600 mr-2"></i>
-                    <a href="./admin/controllers/<?php echo htmlspecialchars($pdf['ruta_pdf']); ?>" class="text-blue-600 underline hover:text-blue-800 transition duration-200" target="_blank">
-                        <?php echo htmlspecialchars(basename($pdf['ruta_pdf'])); ?>
-                    </a>
-                </li>
-            <?php endwhile; ?>
-        </ul>
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 border-b-4 border-purple-600 inline-block mb-4">
+                Archivos PDF
+            </h2>
+            <ul class="space-y-3">
+                <?php while ($pdf = $resultPdf->fetch_assoc()): ?>
+                    <li class="flex items-center space-x-2 bg-white p-3 rounded shadow-sm">
+                        <i class="fas fa-file-pdf text-red-600 text-lg"></i>
+                        <a href="./admin/controllers/<?php echo htmlspecialchars($pdf['ruta_pdf']); ?>" 
+                           class="text-blue-700 underline hover:text-blue-900 transition" 
+                           target="_blank">
+                            <?php echo htmlspecialchars(basename($pdf['ruta_pdf'])); ?>
+                        </a>
+                    </li>
+                <?php endwhile; ?>
+            </ul>
+        </section>
     <?php endif; ?>
 
-    <!-- Sección de imágenes -->
+    <!-- Imágenes -->
     <?php if ($resultImagenes->num_rows > 0): ?>
-        <h2 class="text-2xl font-medium text-gray-900 bg-gray-200 py-2 relative mb-6">
-            Imágenes
-            <span class="absolute bottom-0 left-0 w-full h-1 bg-gray-500"></span>
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <?php while ($imagen = $resultImagenes->fetch_assoc()): ?>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden transition transform hover:scale-105 duration-300 cursor-pointer" onclick="openModal('<?php echo './admin/controllers/' . htmlspecialchars($imagen['ruta_imagen']); ?>')">
-                    <img src="./admin/controllers/<?php echo htmlspecialchars($imagen['ruta_imagen']); ?>" alt="Imagen del curso" class="w-full h-100 object-cover rounded-lg">
-                </div>
-            <?php endwhile; ?>
-        </div>
-        <br>
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 border-b-4 border-purple-600 inline-block mb-6">
+                Galería de Imágenes
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <?php while ($imagen = $resultImagenes->fetch_assoc()): ?>
+                    <div onclick="openModal('<?php echo './admin/controllers/' . htmlspecialchars($imagen['ruta_imagen']); ?>')"
+                         class="cursor-pointer hover:scale-105 transform transition duration-300 shadow-md rounded overflow-hidden bg-white">
+                        <img src="./admin/controllers/<?php echo htmlspecialchars($imagen['ruta_imagen']); ?>" 
+                             alt="Imagen del curso" 
+                             class="w-full h-56 object-cover rounded">
+                    </div>
+                <?php endwhile; ?>
+            </div>
+        </section>
     <?php endif; ?>
 </div>
 
-<!-- Modal para imagen en pantalla completa -->
-<div id="imageModal" class="fixed inset-0 bg-black bg-opacity-75 hidden flex items-center justify-center z-50">
-    <span class="absolute top-5 right-5 text-white cursor-pointer text-3xl" onclick="closeModal()">&times;</span>
-    <img id="modalImage" class="max-w-full max-h-full object-contain" src="" alt="Imagen a pantalla completa">
+<!-- Modal de imagen -->
+<div id="imageModal" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50">
+    <span onclick="closeModal()" class="absolute top-6 right-6 text-white text-4xl cursor-pointer">&times;</span>
+    <img id="modalImage" class="max-w-3xl max-h-[90vh] object-contain rounded shadow-lg" src="" alt="Imagen del curso">
 </div>
 
 <script>
-    // Funciones de modal para ver las imágenes en pantalla completa
     function openModal(imageSrc) {
-        const modal = document.getElementById('imageModal');
-        const modalImage = document.getElementById('modalImage');
-        modalImage.src = imageSrc;
-        modal.classList.remove('hidden');
+        document.getElementById('modalImage').src = imageSrc;
+        document.getElementById('imageModal').classList.remove('hidden');
+        document.getElementById('imageModal').classList.add('flex');
     }
 
     function closeModal() {
-        const modal = document.getElementById('imageModal');
-        modal.classList.add('hidden');
+        document.getElementById('imageModal').classList.remove('flex');
+        document.getElementById('imageModal').classList.add('hidden');
     }
 </script>
