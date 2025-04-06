@@ -76,7 +76,7 @@ $totalPaginas = ceil($totalCursos / $porPagina);
 // print_r($cursos);
 // echo '</pre>';
 
-print_r($_SESSION);
+// print_r($_SESSION);
 $usuario_es_premium = $_SESSION['es_premium'];
 ?>
 
