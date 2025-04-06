@@ -1,3 +1,8 @@
+<?php
+$action = isset($_GET['action']) ? $_GET['action'] : '';
+$processFormUrl = $action == 'pay' ? './controllers/procesar_registro.php?action=pay' : './controllers/procesar_registro.php';
+?>
+
 <div class="py-[60px] flex items-center justify-center bg-gradient-to-r from-purple-200 via-pink-100 to-purple-200">
   <a href="./" class="absolute top-4 left-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white py-2 px-4 rounded-full font-semibold hover:from-purple-700 hover:to-pink-600 hover:scale-105 transition duration-300 shadow-lg transform">
     <i class="fas fa-arrow-left mr-2"></i> Volver al inicio
@@ -7,7 +12,7 @@
       Registro en Escuela Bienestar Integral
     </h2>
     <p class="text-gray-600 text-center mb-8">Únete a nuestra comunidad y comienza tu viaje de transformación.</p>
-    <form method="POST" id="protectedForm" action="./controllers/procesar_registro.php" class="space-y-4">
+    <form method="POST" id="protectedForm" action="<?php echo $processFormUrl; ?>" class="space-y-4">
       <div class="w-full">
         <label for="name" class="block text-gray-600 font-medium">Nombre completo</label>
         <div class="flex items-center border border-gray-300 rounded-md p-2 focus-within:border-purple-400 w-full">

@@ -68,19 +68,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587; // o 465
 
-            print_r($mail);
-
             // Remitente y destinatario
             $mail->setFrom('bienestarintegralescuela@gmail.com', 'Escuela Bienestar Integral');
             $mail->addAddress($correo, $nombre); // Destinatario
-
-            echo 'pasa 2';
 
             // Contenido del correo
             $mail->isHTML(true);
             $mail->Subject = 'Activa tu cuenta en Escuela Bienestar Integral';
             $base_url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'];
-            $activation_url = $base_url . "/activar.php?token=" . urlencode($token);
+            
+            $action = isset($_GET['action']) ? $_GET['action'] : '';
+            if ($action == 'pay') {
+                $activation_url = $base_url . "/activar.php?action=pay&token=" . urlencode($token);
+            } else {
+                $activation_url = $base_url . "/activar.php?token=" . urlencode($token);
+            }
             $mail->Body    = "
                 <html>
                 <head>
