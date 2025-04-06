@@ -3,7 +3,7 @@
 <nav class="bg-white p-4 shadow-lg border-b border-gray-200">
     <div class="max-w-[1200px] mx-auto flex justify-between items-center">
         <!-- Menú de Navegación -->
-        <ul class="hidden md:flex space-x-8 text-gray-800 font-semibold text-lg">
+        <ul class="hidden md:flex space-x-8 text-gray-800 font-semibold text-[16px]">
             <?php if (isset($_SESSION['nombre'])): ?>
                 <!-- Saludo al inicio -->
                 <li class="text-purple-900 font-semibold">Hola, <?php echo htmlspecialchars($_SESSION['nombre']); ?>!</li>
