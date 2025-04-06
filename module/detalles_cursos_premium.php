@@ -73,13 +73,12 @@ $resultDescripcion = $stmtDescripcion->get_result();
 
     <!-- Carrusel de videos -->
     <?php if ($resultVideo->num_rows > 0): ?>
-        <h2 class="text-2xl font-medium text-gray-900 bg-gray-200 py-2 relative mb-6">
-            Videos del Curso
-            <span class="absolute bottom-0 left-0 w-full h-1 bg-gray-500"></span>
-        </h2>
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 border-b-4 border-purple-600 inline-block mb-6">
+                Videos del Curso
+            </h2>
 
-        <div class="max-w-[1040px] mx-auto">
-            <div class="swiper mySwiper">
+            <div class="swiper mySwiper w-full rounded-lg shadow-md">
                 <div class="swiper-wrapper">
                     <?php $videoIndex = 1; ?>
                     <?php while ($video = $resultVideo->fetch_assoc()): ?>
@@ -88,7 +87,7 @@ $resultDescripcion = $stmtDescripcion->get_result();
                                 <div class="absolute top-3 left-3 bg-purple-600 text-white text-sm px-3 py-1 rounded-md z-10">
                                     Video <?php echo $videoIndex; ?>
                                 </div>
-                                <video class="w-full h-64 object-cover rounded-lg shadow-md" controls controlsList="nodownload">
+                                <video class="w-full h-64 object-cover rounded-lg" controls controlsList="nodownload">
                                     <source src="./admin/controllers/<?php echo htmlspecialchars($video['ruta_video']); ?>" type="video/mp4">
                                     Tu navegador no soporta el video.
                                 </video>
@@ -101,25 +100,25 @@ $resultDescripcion = $stmtDescripcion->get_result();
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-pagination mt-4"></div>
             </div>
-        </div>
 
-        <!-- Swiper JS -->
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-        <script>
-            const swiper = new Swiper(".mySwiper", {
-                slidesPerView: 1,
-                spaceBetween: 20,
-                loop: false,
-                navigation: {
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                },
-                pagination: {
-                    el: ".swiper-pagination",
-                    clickable: true,
-                },
-            });
-        </script>
+            <!-- Swiper JS -->
+            <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+            <script>
+                const swiper = new Swiper(".mySwiper", {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                    loop: false,
+                    navigation: {
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev",
+                    },
+                    pagination: {
+                        el: ".swiper-pagination",
+                        clickable: true,
+                    },
+                });
+            </script>
+        </section>
     <?php endif; ?>
 
     <!-- PDFs -->
@@ -194,6 +193,7 @@ $resultDescripcion = $stmtDescripcion->get_result();
         document.getElementById('modalImage').src = imageSrc;
         document.getElementById('imageModal').classList.remove('hidden');
     }
+
     function closeModal() {
         document.getElementById('imageModal').classList.add('hidden');
     }
