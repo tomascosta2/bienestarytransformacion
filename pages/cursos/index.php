@@ -105,7 +105,7 @@ $totalPaginas = ceil($totalCursos / $porPagina);
 				<div class="grid grid-cols-3 gap-4">
 					<?php foreach ($cursos as $curso): ?>
 						<a 	
-							href="./?page=detalles_cursos&id=<?php echo $curso['id']; ?>" 
+							href="/?page=detalles_cursos&id=<?php echo $curso['id']; ?>" 
 							class="p-4 rounded-sm border border-gray-300 relative"
 						>
 							<?php if ($curso['tipo'] == 'premium') : ?>
