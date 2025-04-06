@@ -21,7 +21,9 @@
                 <ul id="courses-submenu" class="hidden absolute bg-white shadow-lg border border-gray-200 mt-2 rounded-lg space-y-2 p-4 w-80 z-50">
                     <li><a href="/#cursosgratuitos" class="hover:text-purple-700 transition duration-300 ease-in-out">Recursos gratuitos</a></li>
                     <li><a href="/pages/cursos" class="hover:text-purple-700 transition duration-300 ease-in-out">Cursos, talleres y diplomados</a></li>
-                    <li><a href="/#planpremium" class="hover:text-purple-700 transition duration-300 ease-in-out">Plan Premium</a></li>
+                    <?php if (!$_SESSION['es_premium']) : ?>
+                        <li><a href="/#planpremium" class="hover:text-purple-700 transition duration-300 ease-in-out">Plan Premium</a></li>
+                    <?php endif; ?>
                 </ul>
             </li>
             <li><a href="#contacto" class="hover:text-purple-700 transition duration-300 ease-in-out navbar">Contacto</a></li>
