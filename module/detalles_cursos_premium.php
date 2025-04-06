@@ -83,7 +83,7 @@ $resultDescripcion = $stmtDescripcion->get_result();
                                 <div class="absolute top-3 left-3 bg-purple-600 text-white text-sm px-3 py-1 rounded-md z-10">
                                     Video <?php echo $videoIndex; ?>
                                 </div>
-                                <video class="w-full h-64 object-cover rounded-lg" controls controlsList="nodownload">
+                                <video class="w-full aspect-video object-cover rounded-lg" controls controlsList="nodownload">
                                     <source src="./admin/controllers/<?php echo htmlspecialchars($video['ruta_video']); ?>" type="video/mp4">
                                     Tu navegador no soporta el video.
                                 </video>
