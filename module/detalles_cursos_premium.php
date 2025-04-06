@@ -92,8 +92,8 @@ $resultDescripcion = $stmtDescripcion->get_result();
                         <?php $videoIndex++; ?>
                     <?php endwhile; ?>
                 </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next hidden md:block"></div>
+                <div class="swiper-button-prev hidden md:block"></div>
                 <div class="swiper-pagination"></div>
             </div>
         </section>

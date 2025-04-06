@@ -101,8 +101,8 @@ $resultVideo = $stmtVideo->get_result();
             </div>
 
             <!-- Botones de navegación -->
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next hidden md:block"></div>
+            <div class="swiper-button-prev hidden md:block"></div>
 
             <!-- Paginación opcional -->
             <div class="swiper-pagination"></div>
