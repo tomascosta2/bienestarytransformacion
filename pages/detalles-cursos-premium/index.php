@@ -77,7 +77,7 @@ $totalModulos = count($videos);
         <nav>
             <ul class="space-y-2">
                 <li>
-                    <a href="./?id=<?php echo $cursoId; ?>#general" class="flex items-center p-2 rounded-md hover:bg-purple-100 <?php echo !isset($_GET['modulo']) ? 'bg-purple-200 text-purple-800 font-medium' : ''; ?>">
+                    <a href="./?id=<?php echo $cursoId; ?>" class="flex items-center p-2 rounded-md hover:bg-purple-100 <?php echo !isset($_GET['modulo']) ? 'bg-purple-200 text-purple-800 font-medium' : ''; ?>">
                         <i class="fas fa-info-circle mr-2"></i>
                         <span>Información General</span>
                     </a>
