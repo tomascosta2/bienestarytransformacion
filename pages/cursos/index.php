@@ -72,9 +72,9 @@ $sqlTotal .= ") AS totalCursos";
 $resultTotal = $conn->query($sqlTotal);
 $totalCursos = $resultTotal->fetch_assoc()['total'];
 $totalPaginas = ceil($totalCursos / $porPagina);
-echo '<pre>';
-print_r($cursos);
-echo '</pre>';
+// echo '<pre>';
+// print_r($cursos);
+// echo '</pre>';
 ?>
 
 <section>
