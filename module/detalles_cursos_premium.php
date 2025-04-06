@@ -94,7 +94,7 @@ $resultDescripcion = $stmtDescripcion->get_result();
                 </div>
                 <div class="swiper-button-next"></div>
                 <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination mt-4"></div>
+                <div class="swiper-pagination"></div>
             </div>
         </section>
     <?php endif; ?>
