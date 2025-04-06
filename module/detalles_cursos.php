@@ -78,7 +78,7 @@ $resultVideo = $stmtVideo->get_result();
         </h2>
 
         <!-- Swiper -->
-        <div class="swiper mySwiper w-full rounded-lg">
+        <div class="swiper mySwiper w-full rounded-lg h-fit pb-[40px]">
             <div class="swiper-wrapper">
                 <?php $videoIndex = 1; ?>
                 <?php while ($video = $resultVideo->fetch_assoc()): ?>
