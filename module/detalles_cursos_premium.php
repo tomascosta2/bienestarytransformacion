@@ -1,9 +1,6 @@
 <?php
-
-// Obtener el ID del curso de la URL
 $cursoId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-// Consulta principal para obtener los detalles del curso
 $sqlCurso = "SELECT * FROM cursos_premium WHERE id = ?";
 $stmtCurso = $conn->prepare($sqlCurso);
 $stmtCurso->bind_param("i", $cursoId);
@@ -17,7 +14,6 @@ if ($resultCurso->num_rows > 0) {
     exit();
 }
 
-// Consultas relacionadas
 $sqlPdf = "SELECT ruta_pdf FROM archivos_pdf_premium WHERE curso_id = ?";
 $stmtPdf = $conn->prepare($sqlPdf);
 $stmtPdf->bind_param("i", $cursoId);
@@ -47,31 +43,31 @@ $stmtDescripcion = $conn->prepare($sqlDescripcion);
 $stmtDescripcion->bind_param("i", $cursoId);
 $stmtDescripcion->execute();
 $resultDescripcion = $stmtDescripcion->get_result();
-
 ?>
 
-<!-- Swiper CSS -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
 <div class="container mx-auto mt-10">
-    <h1 class="text-4xl font-bold text-center text-gray-900 mb-6"><?php echo htmlspecialchars($curso['nombre_curso']); ?></h1>
+
+    <h1 class="text-4xl font-bold text-center text-gray-900 mb-6">
+        <?php echo htmlspecialchars($curso['nombre_curso']); ?>
+    </h1>
 
     <!-- Descripción -->
     <?php if ($resultDescripcion->num_rows > 0): ?>
-        <h2 class="text-3xl font-semibold text-gray-800 bg-gray-200 py-2 relative mb-6 mt-6">
-            General
-            <span class="absolute bottom-0 left-0 w-full h-1 bg-gray-500"></span>
-        </h2>
-
-        <?php while ($descripcion = $resultDescripcion->fetch_assoc()): ?>
-            <p class="text-gray-800 text-base leading-relaxed">
-                <?php echo $descripcion['descripcion']; ?>
-            </p>
-        <?php endwhile; ?>
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 border-b-4 border-purple-600 inline-block mb-6">
+                General
+            </h2>
+            <?php while ($descripcion = $resultDescripcion->fetch_assoc()): ?>
+                <p class="text-gray-800 text-base leading-relaxed">
+                    <?php echo $descripcion['descripcion']; ?>
+                </p>
+            <?php endwhile; ?>
+        </section>
     <?php endif; ?>
-    <br>
 
-    <!-- Carrusel de videos -->
+    <!-- Videos -->
     <?php if ($resultVideo->num_rows > 0): ?>
         <section class="mb-12">
             <h2 class="text-2xl font-bold text-gray-800 border-b-4 border-purple-600 inline-block mb-6">
@@ -100,95 +96,90 @@ $resultDescripcion = $stmtDescripcion->get_result();
                 <div class="swiper-button-prev"></div>
                 <div class="swiper-pagination mt-4"></div>
             </div>
-
-            <!-- Swiper JS -->
-            <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-            <script>
-                const swiper = new Swiper(".mySwiper", {
-                    slidesPerView: 1,
-                    spaceBetween: 20,
-                    loop: false,
-                    navigation: {
-                        nextEl: ".swiper-button-next",
-                        prevEl: ".swiper-button-prev",
-                    },
-                    pagination: {
-                        el: ".swiper-pagination",
-                        clickable: true,
-                    },
-                });
-            </script>
         </section>
     <?php endif; ?>
 
     <!-- PDFs -->
     <?php if ($resultPdf->num_rows > 0): ?>
-        <h2 class="text-2xl font-medium text-gray-900 bg-gray-200 py-2 relative mb-6">
-            Archivos PDF
-            <span class="absolute bottom-0 left-0 w-full h-1 bg-gray-500"></span>
-        </h2>
-
-        <ul class="list-disc list-inside mb-6 space-y-2">
-            <?php while ($pdf = $resultPdf->fetch_assoc()): ?>
-                <li class="flex items-center">
-                    <i class="fas fa-file-pdf text-red-600 mr-2"></i>
-                    <a href="./admin/controllers/<?php echo htmlspecialchars($pdf['ruta_pdf']); ?>" class="text-blue-600 underline hover:text-blue-800 transition duration-200" target="_blank">
-                        <?php echo htmlspecialchars(basename($pdf['ruta_pdf'])); ?>
-                    </a>
-                </li>
-            <?php endwhile; ?>
-        </ul>
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 border-b-4 border-purple-600 inline-block mb-6">
+                Archivos PDF
+            </h2>
+            <ul class="list-disc list-inside mb-6 space-y-2">
+                <?php while ($pdf = $resultPdf->fetch_assoc()): ?>
+                    <li class="flex items-center">
+                        <i class="fas fa-file-pdf text-red-600 mr-2"></i>
+                        <a href="./admin/controllers/<?php echo htmlspecialchars($pdf['ruta_pdf']); ?>" class="text-blue-600 underline hover:text-blue-800 transition duration-200" target="_blank">
+                            <?php echo htmlspecialchars(basename($pdf['ruta_pdf'])); ?>
+                        </a>
+                    </li>
+                <?php endwhile; ?>
+            </ul>
+        </section>
     <?php endif; ?>
 
     <!-- Imágenes -->
     <?php if ($resultImagenes->num_rows > 0): ?>
-        <h2 class="text-2xl font-medium text-gray-900 bg-gray-200 py-2 relative mb-6">
-            Imágenes
-            <span class="absolute bottom-0 left-0 w-full h-1 bg-gray-500"></span>
-        </h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <?php while ($imagen = $resultImagenes->fetch_assoc()): ?>
-                <div class="bg-white shadow-lg rounded-lg overflow-hidden transition transform hover:scale-105 duration-300 cursor-pointer" onclick="openModal('<?php echo './admin/controllers/' . htmlspecialchars($imagen['ruta_imagen']); ?>')">
-                    <img src="./admin/controllers/<?php echo htmlspecialchars($imagen['ruta_imagen']); ?>" alt="Imagen del curso" class="w-full h-100 object-cover rounded-lg">
-                </div>
-            <?php endwhile; ?>
-        </div>
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 border-b-4 border-purple-600 inline-block mb-6">
+                Imágenes
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <?php while ($imagen = $resultImagenes->fetch_assoc()): ?>
+                    <div class="bg-white shadow-lg rounded-lg overflow-hidden transition transform hover:scale-105 duration-300 cursor-pointer" onclick="openModal('<?php echo './admin/controllers/' . htmlspecialchars($imagen['ruta_imagen']); ?>')">
+                        <img src="./admin/controllers/<?php echo htmlspecialchars($imagen['ruta_imagen']); ?>" alt="Imagen del curso" class="w-full h-100 object-cover rounded-lg">
+                    </div>
+                <?php endwhile; ?>
+            </div>
+        </section>
     <?php endif; ?>
-    <br>
 
     <!-- Enlaces -->
     <?php if ($resultEnlaces->num_rows > 0): ?>
-        <h2 class="text-2xl font-medium text-gray-900 bg-gray-200 py-2 relative mb-6">
-            Clases en vivo
-            <span class="absolute bottom-0 left-0 w-full h-1 bg-gray-500"></span>
-        </h2>
-
-        <div class="bg-gray-100 border border-gray-300 rounded-lg p-4">
-            <?php while ($enlace = $resultEnlaces->fetch_assoc()): ?>
-                <div class="mb-4">
-                    <a href="<?php echo htmlspecialchars($enlace['enlace']); ?>" class="text-blue-600 hover:text-blue-800 underline" target="_blank">
-                        <?php echo htmlspecialchars($enlace['enlace']); ?>
-                    </a>
-                    <p class="text-sm text-gray-600 mt-2">
-                        Fecha y hora: <?php echo htmlspecialchars(date("d/m/Y H:i", strtotime($enlace['fecha']))); ?>
-                    </p>
-                </div>
-            <?php endwhile; ?>
-        </div>
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 border-b-4 border-purple-600 inline-block mb-6">
+                Clases en vivo
+            </h2>
+            <div class="bg-gray-100 border border-gray-300 rounded-lg p-4">
+                <?php while ($enlace = $resultEnlaces->fetch_assoc()): ?>
+                    <div class="mb-4">
+                        <a href="<?php echo htmlspecialchars($enlace['enlace']); ?>" class="text-blue-600 hover:text-blue-800 underline" target="_blank">
+                            <?php echo htmlspecialchars($enlace['enlace']); ?>
+                        </a>
+                        <p class="text-sm text-gray-600 mt-2">
+                            Fecha y hora: <?php echo htmlspecialchars(date("d/m/Y H:i", strtotime($enlace['fecha']))); ?>
+                        </p>
+                    </div>
+                <?php endwhile; ?>
+            </div>
+        </section>
     <?php else: ?>
-        <p class="text-red-600">No hay enlaces disponibles para este curso.</p>
+        <p class="text-red-600 mb-12">No hay enlaces disponibles para este curso.</p>
     <?php endif; ?>
-    <br>
 </div>
 
-<!-- Modal para imagen en pantalla completa -->
+<!-- Modal imagen -->
 <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-75 hidden flex items-center justify-center z-50">
     <span class="absolute top-5 right-5 text-white cursor-pointer text-3xl" onclick="closeModal()">&times;</span>
     <img id="modalImage" class="max-w-full max-h-full object-contain" src="" alt="Imagen a pantalla completa">
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
+    const swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 20,
+        loop: false,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+    });
+
     function openModal(imageSrc) {
         document.getElementById('modalImage').src = imageSrc;
         document.getElementById('imageModal').classList.remove('hidden');
