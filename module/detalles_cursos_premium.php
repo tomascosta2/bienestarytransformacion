@@ -47,7 +47,7 @@ $resultDescripcion = $stmtDescripcion->get_result();
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-<div class="container mx-auto mt-10">
+<div class="mx-auto max-w-[1040px] px-4 mt-10">
 
     <h1 class="text-4xl font-bold text-center text-gray-900 mb-6">
         <?php echo htmlspecialchars($curso['nombre_curso']); ?>
