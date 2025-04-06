@@ -190,7 +190,7 @@ $conn->query($insertVisitQuery);
                 En este plan, tendrás acceso exclusivo a todos los <strong>cursos, talleres, prácticas en
                 vivo, contenido especial y nuevos cursos</strong> todos los meses por $24.900 por mes.
                 <br><br>
-                Si deseas inscribirte y ser parte de la comunidad, pulsa el botón de abajo
+                Si deseas inscribirte y ser parte de la comunidad, pulsa el botón de abajo.
             </p>
         </div>
 
