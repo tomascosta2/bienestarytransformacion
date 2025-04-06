@@ -153,8 +153,6 @@ $resultDescripcion = $stmtDescripcion->get_result();
                 <?php endwhile; ?>
             </div>
         </section>
-    <?php else: ?>
-        <p class="text-red-600 mb-12">No hay enlaces disponibles para este curso.</p>
     <?php endif; ?>
 </div>
 
