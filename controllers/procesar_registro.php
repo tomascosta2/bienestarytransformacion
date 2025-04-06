@@ -169,7 +169,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo 'pasa 4';
 
             // Redirige a la página de éxito después de enviar el correo
-            header("Location: ../exitoso");
+            header("Location: /pages/registro-exitoso");
             exit();
 
         } catch (Exception $e) {
