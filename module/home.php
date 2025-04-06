@@ -21,7 +21,7 @@ $conn->query($insertVisitQuery);
             <div class="container mx-auto relative z-10 px-6 md:px-0 py-20 flex flex-col items-start justify-center space-y-6">
                 <!-- Título con tipografía serif y mayor tamaño -->
                 <h1 class="text-5xl md:text-6xl font-bold text-white mb-4 font-playfair">
-                    Bienvenidos a Escuela Bienestar Integral 
+                    Bienvenidos a Escuela Bienestar Integral
                 </h1>
                 <!-- Descripción con tipografía sans-serif y espaciado amplio -->
                 <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mb-8 font-lato leading-relaxed">
@@ -183,20 +183,19 @@ $conn->query($insertVisitQuery);
     }
     ?>
 
-    <section id="planpremium" class="bg-gray-100 py-16">
-        <div class="container mx-auto text-center mb-10 px-4">
-            <h2 class="text-3xl font-bold" style="color: #c09ecc;">Plan Premium</h2>
-            <p class="text-gray-600 mt-4 max-w-[500px] mx-auto">
-                En este plan, tendrás acceso exclusivo a todos los <strong>cursos, talleres, prácticas en
-                vivo, contenido especial y nuevos cursos</strong> todos los meses por $24.900 por mes.
-                <br><br>
-                Si deseas inscribirte y ser parte de la comunidad, pulsa el botón de abajo.
-            </p>
-        </div>
+    <?php
+    if (!$_SESSION['es_premium']): ?>
+        <section id="planpremium" class="bg-gray-100 py-16">
+            <div class="container mx-auto text-center mb-10 px-4">
+                <h2 class="text-3xl font-bold" style="color: #c09ecc;">Plan Premium</h2>
+                <p class="text-gray-600 mt-4 max-w-[500px] mx-auto">
+                    En este plan, tendrás acceso exclusivo a todos los <strong>cursos, talleres, prácticas en
+                        vivo, contenido especial y nuevos cursos</strong> todos los meses por $24.900 por mes.
+                    <br><br>
+                    Si deseas inscribirte y ser parte de la comunidad, pulsa el botón de abajo.
+                </p>
+            </div>
 
-        <?php 
-        print_r($_SESSION);
-        if ($_SESSION['es_premium'] != 1): ?>
             <!-- Mensaje para usuarios no premium -->
             <div class="container mx-auto text-center mt-10 px-4">
                 <!-- <p class="text-gray-700 text-lg">Esta sección es para usuarios premium. Si deseas inscribirte en nuestro plan, pulsa el botón de abajo.</p> -->
@@ -204,8 +203,8 @@ $conn->query($insertVisitQuery);
                     Inscribirse en el Plan Premium
                 </a>
             </div>
-        <?php endif; ?>
-    </section>
+        </section>
+    <?php endif; ?>
 </div>
 
 </div>
