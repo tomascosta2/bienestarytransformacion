@@ -189,7 +189,7 @@ $conn->query($insertVisitQuery);
             <p class="text-gray-600 mt-4">
                 En este plan, tendrás acceso exclusivo a todos los cursos, talleres, prácticas en
                 <br><br>
-                vivo, contenido especial y nuevos cursos todos los meses por $14.900 por mes
+                vivo, contenido especial y nuevos cursos todos los meses por $24.900 por mes
                 <br><br>
                 Si deseas inscribirte y ser parte de la comunidad, pulsa el botón de abajo
             </p>
@@ -241,90 +241,5 @@ $conn->query($insertVisitQuery);
         <?php endif; ?>
     </section>
 </div>
-
-
-
-
-
-
-
-
-<!-- <div id="quiensoy" class="flex flex-col md:flex-row items-center md:items-stretch h-screen bg-white">
-     Sección de imagen a la izquierda 
-    <div class="md:w-1/2 bg-cover bg-center" style="background-image: url('./images/prueba.jpeg');">
-        La imagen se define como fondo de esta sección para ocupar todo el espacio
-    </div>
-
-     Sección de texto a la derecha 
-    <div class="md:w-1/2 flex flex-col justify-center items-start p-10 space-y-4">
-        <h2 class="text-3xl font-semibold text-gray-800">Quién soy</h2>
-        <p class="text-gray-600 text-lg leading-relaxed">
-            Bienvenido/a a un espacio de transformación y bienestar. Soy un guía en el camino de la sanación y el crecimiento interior. A través de prácticas holísticas y personalizadas, acompaño a cada persona en su viaje hacia el equilibrio, la paz y la conexión profunda con su esencia.
-        </p>
-        <p class="text-gray-600 text-lg leading-relaxed">
-            Mi misión es ayudarte a redescubrir tu propio poder y sabiduría interior, proporcionando herramientas que fomenten el amor propio, la calma y la claridad. Desde sesiones personalizadas hasta talleres grupales, cada encuentro está diseñado para armonizar mente, cuerpo y espíritu.
-        </p>
-        <p class="text-gray-600 text-lg leading-relaxed">
-            Si sientes el llamado a reconectar contigo mismo/a y explorar tu verdadero potencial, estaré aquí para acompañarte con amor y respeto en cada paso de tu viaje.
-        </p>
-    </div>
-</div> -->
-<div id="contacto" class="flex flex-col md:flex-row items-center md:items-stretch h-screen bg-white">
-    <!-- Sección de formulario de contacto a la izquierda -->
-    <div class="md:w-1/2 flex flex-col justify-center items-start p-10 space-y-6 order-2 md:order-1">
-        <h2 class="text-4xl font-semibold text-purple-700 flex items-center">
-            <i class="fas fa-envelope-open-text mr-3 text-pink-400"></i> Contáctanos
-        </h2>
-        <p class="text-gray-500 text-lg">Nos encantaría saber de ti. Envíanos un mensaje y te responderemos pronto.</p>
-        <!-- Formulario -->
-        <form id="contactForm" class="w-full max-w-md space-y-4">
-            <div class="flex items-center">
-                <i class="fas fa-user text-pink-400 mr-3"></i>
-                <label for="name" class="block text-gray-600">Nombre</label>
-            </div>
-            <input type="text" id="name" name="name" required class="w-full p-3 border border-gray-300 rounded-md focus:border-pink-400 focus:ring-pink-200" placeholder="Tu nombre">
-
-            <div class="flex items-center mt-4">
-                <i class="fas fa-comment text-pink-400 mr-3"></i>
-                <label for="message" class="block text-gray-600">Mensaje</label>
-            </div>
-            <textarea id="message" name="message" rows="4" required class="w-full p-3 border border-gray-300 rounded-md focus:border-pink-400 focus:ring-pink-200" placeholder="Escribe tu mensaje"></textarea>
-
-            <!-- Botón de envío -->
-            <button type="submit" class="w-full bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-pink-600 transition duration-300 mt-6 flex items-center justify-center">
-                <i class="fas fa-paper-plane mr-2"></i> Enviar
-            </button>
-        </form>
-    </div>
-
-    <!-- Sección de imagen a la derecha -->
-    <div class="md:w-1/2 bg-cover bg-center order-1 md:order-2 h-64 md:h-auto" style="background-image: url('./images/prueba.jpeg');">
-        <!-- La imagen se define como fondo de esta sección para ocupar todo el espacio -->
-    </div>
-</div>
-
-<!-- Script para redirigir a WhatsApp con el mensaje -->
-<script>
-    document.getElementById("contactForm").addEventListener("submit", function(event) {
-        event.preventDefault(); // Evita que el formulario se envíe tradicionalmente
-
-        // Captura los valores de los campos
-        const nombre = document.getElementById("name").value;
-        const mensaje = document.getElementById("message").value;
-
-        // Construir el mensaje de WhatsApp
-        const textoMensaje = `Hola, soy ${nombre}, ${mensaje}`;
-
-        // Número de WhatsApp con el código de país y área
-        const numeroWhatsApp = "5492915386276";
-
-        // URL de WhatsApp con el mensaje formateado
-        const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(textoMensaje)}`;
-
-        // Abrir la URL de WhatsApp en una nueva pestaña
-        window.open(urlWhatsApp, "_blank");
-    });
-</script>
-
 
 </div>
