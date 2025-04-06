@@ -1,15 +1,24 @@
 <?php
+ob_start();
+include '../../connection/database.php';
+include("../../include/head.php");
+include("../../include/navbar.php");
+
 // Obtener el ID del curso y el módulo activo de la URL
-echo 'entra';
 $cursoId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 $moduloActivo = isset($_GET['modulo']) ? intval($_GET['modulo']) : 1;
 
-// Consulta principal para obtener los detalles del curso
-$sqlCurso = "SELECT * FROM cursos_gratuitos WHERE id = ?";
-$stmtCurso = $conn->prepare($sqlCurso);
-$stmtCurso->bind_param("i", $cursoId);
-$stmtCurso->execute();
-$resultCurso = $stmtCurso->get_result();
+try {
+	// Consulta principal para obtener los detalles del curso
+	$sqlCurso = "SELECT * FROM cursos_gratuitos WHERE id = ?";
+	$stmtCurso = $conn->prepare($sqlCurso);
+	$stmtCurso->bind_param("i", $cursoId);
+	$stmtCurso->execute();
+	$resultCurso = $stmtCurso->get_result();
+} catch (Exception $e) {
+	echo "<div class='container mx-auto mt-10'><h2 class='text-red-600 text-center text-lg'>Error al conectar a la base de datos: " . htmlspecialchars($e->getMessage()) . "</h2></div>";
+	exit();
+}
 
 if ($resultCurso->num_rows > 0) {
     $curso = $resultCurso->fetch_assoc();
@@ -245,3 +254,6 @@ $totalModulos = count($videos);
         });
     });
 </script>
+
+
+<?php include("../../include/footer.php"); ?>
