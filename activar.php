@@ -22,7 +22,6 @@ if (isset($_GET['token']) && preg_match('/^[a-f0-9]{100}$/', $_GET['token'])) {
             // Muestra una alerta y redirige al usuario a la página de inicio de sesión
             $action = isset($_GET['action']) ? $_GET['action'] : '';
             echo "<script>
-                alert('¡Cuenta activada con éxito! Ahora puedes iniciar sesión.');
                 window.location.href = 'https://espaciobienestarintegral.com/?page=ingresar" . ($action ? "&action=$action" : "") . "';
             </script>";
             exit();
