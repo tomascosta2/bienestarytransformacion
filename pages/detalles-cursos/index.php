@@ -1,5 +1,6 @@
 <?php
 // Obtener el ID del curso y el módulo activo de la URL
+echo 'entra';
 $cursoId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 $moduloActivo = isset($_GET['modulo']) ? intval($_GET['modulo']) : 1;
 
