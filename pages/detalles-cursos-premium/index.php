@@ -85,7 +85,7 @@ $totalModulos = count($videos);
                 
                 <?php for ($i = 0; $i < $totalModulos; $i++): ?>
                 <li>
-                    <a href="/?id=<?php echo $cursoId; ?>&modulo=<?php echo ($i + 1); ?>" 
+                    <a href="./?id=<?php echo $cursoId; ?>&modulo=<?php echo ($i + 1); ?>" 
                        class="flex items-center p-2 rounded-md hover:bg-purple-100 <?php echo (isset($_GET['modulo']) && $_GET['modulo'] == ($i + 1)) ? 'bg-purple-200 text-purple-800 font-medium' : ''; ?>">
                         <i class="fas fa-play-circle mr-2"></i>
                         <span>Módulo <?php echo ($i + 1); ?></span>
