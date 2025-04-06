@@ -75,6 +75,8 @@ $totalPaginas = ceil($totalCursos / $porPagina);
 // echo '<pre>';
 // print_r($cursos);
 // echo '</pre>';
+
+echo $_SESSION;
 ?>
 
 <section>
