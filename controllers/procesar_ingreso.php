@@ -49,7 +49,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             exit();
         } else {
             $_SESSION['error'] = "Contraseña incorrecta.";
-            header("Location: ../login.php");
             exit();
         }
     } else {

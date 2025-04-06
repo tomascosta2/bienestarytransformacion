@@ -58,7 +58,6 @@
 
 <script>
    function onSubmit(token) {
-    alert('entra')
      document.getElementById("protectedForm").submit();
    }
 </script>
