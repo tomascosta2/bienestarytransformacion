@@ -110,9 +110,9 @@ $conn->query($insertVisitQuery);
             $resultCursos = $conn->query($sqlCursos);
             ?>
             <!-- Cursos y charlas gratuitas -->
-            <div class="relative">
+            <div class="relative px-4">
                 <!-- Cartas con contenido -->
-                <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-4 relative z-10">
+                <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
                     <?php if ($resultCursos->num_rows > 0): ?>
                         <?php while ($curso = $resultCursos->fetch_assoc()): ?>
                             <a href="./?page=detalles_cursos&id=<?php echo $curso['id']; ?>" class="bg-white shadow-lg rounded-lg p-6 text-center transition-transform transform hover:scale-105 shadow-lg hover:shadow-2xl">
@@ -128,10 +128,10 @@ $conn->query($insertVisitQuery);
                         <p class="text-gray-700 text-center">No hay cursos disponibles en este momento.</p>
                     <?php endif; ?>
                 </div>
+                <a href="#cursosdestacados" class="block mt-8 mx-auto md:w-fit w-full bg-purple-600 text-center text-white text-sm md:text-lg px-6 md:px-10 py-4 md:py-4 rounded-full border border-purple-500 shadow-lg hover:bg-purple-700 transition duration-300">
+                    Ver todos
+                </a>
             </div>
-            <a href="#cursosdestacados" class="block mt-8 mx-auto md:w-fit w-full bg-purple-600 text-center text-white text-sm md:text-lg px-6 md:px-10 py-4 md:py-4 rounded-full border border-purple-500 shadow-lg hover:bg-purple-700 transition duration-300">
-                Ver todos
-            </a>
         </div>
     </section>
 
