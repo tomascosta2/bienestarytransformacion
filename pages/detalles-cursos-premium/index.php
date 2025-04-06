@@ -155,7 +155,7 @@ $totalModulos = count($videos);
                             Módulo <?php echo $moduloActivo; ?>
                         </div>
                         <video class="w-full aspect-video object-cover rounded-lg shadow-lg" controls controlsList="nodownload">
-                            <source src="./admin/controllers/<?php echo htmlspecialchars($videoActual['ruta_video']); ?>" type="video/mp4">
+                            <source src="/admin/controllers/<?php echo htmlspecialchars($videoActual['ruta_video']); ?>" type="video/mp4">
                             Tu navegador no soporta el video.
                         </video>
                     </div>
