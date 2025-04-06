@@ -24,13 +24,13 @@
             <div>
                 <h3 class="text-xl font-semibold mb-4">Contacto</h3>
                 <p class="text-gray-300 text-sm mb-2">Email: <a href="mailto:escuelabienestarintegral@gmail.com" class="hover:text-pink-300">Escuelabienestarintegral@gmail.com</a></p>
-<p class="text-gray-300 text-sm mb-2">
-    <a href="https://wa.me/5492915386276?text=Hola%2C%20te%20hablo%20desde%20la%20p%C3%A1gina%20LuzM%C3%ADstica.net%20Estoy%20interesado%20en%20tus%20servicios."
-       target="_blank"
-       class="hover:text-green-500">
-       Teléfono: +54 9 291 53 86 276
-    </a>
-</p>
+                <p class="text-gray-300 text-sm mb-2">
+                    <a href="https://wa.me/5492915386276?text=Hola%2C%20te%20hablo%20desde%20la%20p%C3%A1gina%20LuzM%C3%ADstica.net%20Estoy%20interesado%20en%20tus%20servicios."
+                        target="_blank"
+                        class="hover:text-green-500">
+                        Teléfono: +54 9 291 53 86 276
+                    </a>
+                </p>
                 <p class="text-gray-300 text-sm">Dirección: Pedro Luro, Buenos Aires, Argentina</p>
 
                 <!-- Redes Sociales -->
@@ -55,5 +55,13 @@
 <script src="/js/verContrasenaReg.js"></script>
 <script src="/js/verContrasenaIng.js"></script>
 <script src="/js/menu.js"></script>
+
+<script>
+   function onSubmit(token) {
+     document.getElementById("protectedForm").submit();
+   }
+</script>
+
 </body>
+
 </html>

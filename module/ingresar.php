@@ -18,7 +18,7 @@ if (isset($_SESSION['error'])) {
     </h2>
     <p class="text-gray-600 text-center mb-8">Accede a tu cuenta y continúa tu viaje de transformación.</p>
     
-    <form method="POST" action="./controllers/procesar_ingreso.php" class="space-y-6">
+    <form method="POST" id="protectedForm" action="./controllers/procesar_ingreso.php" class="space-y-6">
       <div>
         <label for="email" class="block text-gray-600 font-medium">Correo electrónico</label>
         <div class="flex items-center border border-gray-300 rounded-md p-2 focus-within:border-purple-400">
@@ -36,7 +36,7 @@ if (isset($_SESSION['error'])) {
           </button>
         </div>
       </div>
-      
+
       <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white py-3 rounded-full font-semibold hover:from-purple-700 hover:to-pink-600 transition duration-300 flex items-center justify-center shadow-lg transform hover:scale-105">
         <i class="fas fa-sign-in-alt mr-2"></i> Ingresar
       </button>
