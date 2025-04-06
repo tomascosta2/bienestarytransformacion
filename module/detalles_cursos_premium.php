@@ -74,7 +74,7 @@ $resultDescripcion = $stmtDescripcion->get_result();
                 Videos del Curso
             </h2>
 
-            <div class="swiper mySwiper w-full rounded-lg shadow-md">
+            <div class="swiper mySwiper w-full rounded-lg">
                 <div class="swiper-wrapper">
                     <?php $videoIndex = 1; ?>
                     <?php while ($video = $resultVideo->fetch_assoc()): ?>
