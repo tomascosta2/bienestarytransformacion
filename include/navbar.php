@@ -27,9 +27,9 @@
                 </ul>
             </li>
             <li><a href="#contacto" class="hover:text-purple-700 transition duration-300 ease-in-out navbar">Contacto</a></li>
-            <?php if (isset($_SESSION['nombre'])): ?>
-                <li><a href="./?page=mis_cursos" class="hover:text-purple-700 transition duration-300 ease-in-out navbar">Mis cursos</a></li>
-            <?php endif; ?>
+            <?php //if (isset($_SESSION['nombre'])): ?>
+                <!-- <li><a href="./?page=mis_cursos" class="hover:text-purple-700 transition duration-300 ease-in-out navbar">Mis cursos</a></li> -->
+            <?php //endif; ?>
             <li><a href="/pages/sobremi/" class="hover:text-purple-700 transition duration-300 ease-in-out navbar">Conóceme mejor</a></li>
 
 
