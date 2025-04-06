@@ -3,6 +3,7 @@ if (isset($_SESSION['error'])) {
     echo "<p style='color: red;'>" . $_SESSION['error'] . "</p>";
     unset($_SESSION['error']);
 }
+$action = isset($_GET['action']) ? $_GET['action'] : '';
 ?>
 
 <div class="py-[60px] flex items-center justify-center bg-gradient-to-r from-purple-200 via-pink-100 to-purple-200">
@@ -12,12 +13,12 @@ if (isset($_SESSION['error'])) {
   </a>
 
   <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md border border-black">
-  <h2 class="text-3xl font-semibold text-purple-800 text-center mb-6 mt-10">
+    <h2 class="text-3xl font-semibold text-purple-800 text-center mb-6 mt-10">
       Iniciar sesión en Escuela Bienestar Integral
     </h2>
     <p class="text-gray-600 text-center mb-8">Accede a tu cuenta y continúa tu viaje de transformación.</p>
     
-    <form method="POST" id="protectedForm" action="./controllers/procesar_ingreso.php" class="space-y-6">
+    <form method="POST" id="protectedForm" action="./controllers/procesar_ingreso.php<?php $action ? '?action=' . $action : '' ?>" class="space-y-6">
       <div>
         <label for="email" class="block text-gray-600 font-medium">Correo electrónico</label>
         <div class="flex items-center border border-gray-300 rounded-md p-2 focus-within:border-purple-400">

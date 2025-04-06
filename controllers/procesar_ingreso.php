@@ -44,8 +44,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION['es_premium'] = false;
             }
 
-            // Redirige al usuario a la página principal
-            header("Location: ../");
+            $action = isset($_GET['action']) ? $_GET['action'] : '';
+            header("Location: /");
+            if ($action == 'pay') {
+                echo '<script>window.open("/?page=plan_premium", "_blank");</script>';
+            }
             exit();
         } else {
             $_SESSION['error'] = "Contraseña incorrecta.";
