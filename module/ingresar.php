@@ -5,8 +5,7 @@ if (isset($_SESSION['error'])) {
 }
 ?>
 
-<br><br><br><br><br>
-<div class="flex items-center justify-center h-screen bg-gradient-to-r from-purple-200 via-pink-100 to-purple-200">
+<div class="py-[80px] flex items-center justify-center h-screen bg-gradient-to-r from-purple-200 via-pink-100 to-purple-200">
   <!-- Botón Volver al inicio en la esquina superior izquierda -->
   <a href="./" class="absolute top-4 left-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white py-2 px-4 rounded-full font-semibold hover:from-purple-700 hover:to-pink-600 transition duration-300 shadow-lg transform hover:scale-105">
     <i class="fas fa-arrow-left mr-2"></i> Volver al inicio
@@ -37,7 +36,14 @@ if (isset($_SESSION['error'])) {
         </div>
       </div>
 
-      <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white py-3 rounded-full font-semibold hover:from-purple-700 hover:to-pink-600 transition duration-300 flex items-center justify-center shadow-lg transform hover:scale-105">
+      <button 
+        data-sitekey="6LfpewsrAAAAAA7pA-mHwzet43F5dCnAzboMyr13" 
+        data-callback='onSubmit' 
+        data-action='submit'
+        type="submit" 
+        type="submit" 
+        class="w-full bg-gradient-to-r from-purple-600 to-pink-500 text-white py-3 rounded-full font-semibold hover:from-purple-700 hover:to-pink-600 transition duration-300 flex items-center justify-center shadow-lg transform hover:scale-105"
+      >
         <i class="fas fa-sign-in-alt mr-2"></i> Ingresar
       </button>
 
@@ -50,4 +56,3 @@ if (isset($_SESSION['error'])) {
     </form>
   </div>
 </div>
-<br><br><br><br><br>
