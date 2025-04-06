@@ -15,7 +15,7 @@ $conn->query($insertVisitQuery);
             <source src="./images/background.mp4" type="video/mp4">
             Tu navegador no soporta video en HTML5.
         </video>
-        <div class="max-w-7xl mx-auto">
+        <div class="max-w-6xl xl:max-w-7xl mx-auto">
             <!-- Overlay en gradiente para un efecto más sofisticado -->
             <div class="absolute inset-0 bg-gradient-to-br from-purple-900 to-purple-700 opacity-80"></div>
             <div class="container mx-auto relative z-10 px-6 md:px-0 py-20 flex flex-col items-start justify-center space-y-6">
@@ -51,7 +51,7 @@ $conn->query($insertVisitQuery);
         </div>
     </section>
     <section class="bg-gray-100 py-16">
-        <div class="max-w-7xl mx-auto">
+        <div class="max-w-6xl xl:max-w-7xl mx-auto">
             <div class="container mx-auto text-center mb-10 px-4">
                 <h2 class="text-3xl font-bold" style="color: #c09ecc;">Únete a nuestra comunidad de aprendizaje espiritual</h2>
                 <p class="text-gray-600">¡Contamos con diferentes opciones para que siempre puedas ser parte!</p>
@@ -98,7 +98,7 @@ $conn->query($insertVisitQuery);
         </div>
     </section>
     <section id="cursosgratuitos" class="bg-gray-100 py-16">
-        <div class="max-w-7xl mx-auto">
+        <div class="max-w-6xl xl:max-w-7xl mx-auto">
             <div class="container mx-auto text-center mb-10 px-4">
                 <h2 class="text-3xl font-bold" style="color: #c09ecc;">Recursos Gratuitos</h2>
                 <p class="text-gray-600">Explora nuestras capacitaciones y elige las que mejor complementen tu camino!</p>
@@ -137,7 +137,7 @@ $conn->query($insertVisitQuery);
 
 
     <section id="cursosdestacados" class="bg-gray-100 py-16">
-        <div class="max-w-7xl mx-auto">
+        <div class="max-w-6xl xl:max-w-7xl mx-auto">
             <div class="container mx-auto text-center mb-10 px-4">
                 <h2 class="text-4xl font-bold mb-4" style="color: #c09ecc;">Cursos, Talleres y Diplomados</h2>
                 <p class="text-gray-600 text-lg max-w-2xl mx-auto">Explora nuestras capacitaciones y elige las que mejor complementen tu camino profesional y personal!</p>

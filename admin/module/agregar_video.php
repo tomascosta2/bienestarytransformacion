@@ -46,7 +46,7 @@ if ($_FILES["video_curso"]["size"] > 500 * 1024 * 1024) { // 500MB
 ?>
 
 <!-- Formulario para agregar video -->
-<div class="max-w-7xl mx-auto mt-10 p-5">
+<div class="max-w-6xl xl:max-w-7xl mx-auto mt-10 p-5">
     <h2 class="text-3xl font-bold mb-6 text-center text-purple-700">Agregar Video al Curso</h2>
 
     <form action="" method="POST" enctype="multipart/form-data">

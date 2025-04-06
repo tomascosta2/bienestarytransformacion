@@ -1,6 +1,6 @@
 
 <nav class="bg-white p-4 shadow-lg border-b border-gray-200">
-    <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <div class="max-w-6xl xl:max-w-7xl mx-auto flex justify-between items-center">
         <!-- Menú de Navegación -->
         <ul class="hidden md:flex space-x-8 text-gray-800 font-semibold text-lg">
             <?php if (isset($_SESSION['nombre'])): ?>

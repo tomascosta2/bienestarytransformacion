@@ -10,7 +10,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 ?>
 
-<div class="max-w-7xl mx-auto mt-10 p-5">
+<div class="max-w-6xl xl:max-w-7xl mx-auto mt-10 p-5">
     <h2 class="text-3xl font-bold mb-6 text-center text-purple-700">Videos del Curso</h2>
 
     <div class="overflow-x-auto">

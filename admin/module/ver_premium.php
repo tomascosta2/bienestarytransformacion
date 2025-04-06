@@ -14,7 +14,7 @@ $sql = "SELECT cg.id, cg.nombre_curso, cg.descripcion, cg.imagen_portada,
 $result = $conn->query($sql);
 ?>
 
-<div class="max-w-7xl mx-auto mt-10 p-5">
+<div class="max-w-6xl xl:max-w-7xl mx-auto mt-10 p-5">
     <h2 class="text-3xl font-bold mb-6 text-center text-purple-700">Cursos premium</h2>
 
     <div class="overflow-x-auto">
