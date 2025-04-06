@@ -18,7 +18,7 @@ $action = isset($_GET['action']) ? $_GET['action'] : '';
     </h2>
     <p class="text-gray-600 text-center mb-8">Accede a tu cuenta y continúa tu viaje de transformación.</p>
     
-    <form method="POST" id="protectedForm" action="./controllers/procesar_ingreso.php<?php $action ? '?action=' . $action : '' ?>" class="space-y-6">
+    <form method="POST" id="protectedForm" action="./controllers/procesar_ingreso.php<?php echo $action ? '?action=' . $action : '' ?>" class="space-y-6">
       <div>
         <label for="email" class="block text-gray-600 font-medium">Correo electrónico</label>
         <div class="flex items-center border border-gray-300 rounded-md p-2 focus-within:border-purple-400">
