@@ -1,5 +1,5 @@
 
-<?php print_r($_SESSION); ?>
+<?php // print_r($_SESSION); ?>
 <nav class="bg-white p-4 shadow-lg border-b border-gray-200">
     <div class="max-w-6xl xl:max-w-7xl mx-auto flex justify-between items-center">
         <!-- Menú de Navegación -->
