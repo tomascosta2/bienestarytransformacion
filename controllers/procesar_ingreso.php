@@ -46,9 +46,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
             $action = isset($_GET['action']) ? $_GET['action'] : '';
             if ($action == 'pay') {
-                echo '<script>window.open("/?page=plan_premium", "_blank");</script>';
+                header("Location: /?page=plan_premium");
+            } else {
+                header("Location: /");
             }
-            header("Location: /");
             exit();
         } else {
             $_SESSION['error'] = "Contraseña incorrecta.";
