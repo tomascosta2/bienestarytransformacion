@@ -5,7 +5,7 @@ if (isset($_SESSION['error'])) {
 }
 ?>
 
-<div class="py-[100px] flex items-center justify-center h-screen bg-gradient-to-r from-purple-200 via-pink-100 to-purple-200">
+<div class="py-[60px] flex items-center justify-center bg-gradient-to-r from-purple-200 via-pink-100 to-purple-200">
   <!-- Botón Volver al inicio en la esquina superior izquierda -->
   <a href="./" class="absolute top-4 left-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white py-2 px-4 rounded-full font-semibold hover:from-purple-700 hover:to-pink-600 transition duration-300 shadow-lg transform hover:scale-105">
     <i class="fas fa-arrow-left mr-2"></i> Volver al inicio
