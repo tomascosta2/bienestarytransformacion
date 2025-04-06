@@ -195,7 +195,7 @@ $conn->query($insertVisitQuery);
         </div>
 
         <?php 
-        echo $_SESSION['es_premium'];
+        print_r($_SESSION);
         if (!$_SESSION['es_premium']): ?>
             <!-- Mensaje para usuarios no premium -->
             <div class="container mx-auto text-center mt-10 px-4">
