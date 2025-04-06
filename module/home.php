@@ -194,42 +194,7 @@ $conn->query($insertVisitQuery);
             </p>
         </div>
 
-        <?php if (isset($_SESSION['es_premium']) && $_SESSION['es_premium']): ?>
-            <?php
-            $sqlCursos = "SELECT * FROM cursos_premium";
-            $resultCursos = $conn->query($sqlCursos);
-            ?>
-            <div class="relative container mx-auto px-4">
-                <?php if ($resultCursos->num_rows > 0): ?>
-                    <?php while ($curso = $resultCursos->fetch_assoc()): ?>
-                        <div class="flex flex-col md:flex-row items-center bg-white shadow-lg rounded-lg p-6 mb-4">
-                            <!-- Imagen del curso -->
-                            <a href="./?page=detalles_cursos_premium&id=<?php echo $curso['id']; ?>" class="md:w-1/3 w-full mb-4 md:mb-0">
-                                <img src="./admin/controllers/<?php echo $curso['imagen_portada']; ?>" alt="Portada del curso" class="w-full h-32 object-cover rounded-lg md:h-48">
-                            </a>
-
-                            <!-- Detalles del curso -->
-                            <div class="md:w-2/3 md:pl-6">
-                                <h4 class="text-xl font-semibold mb-2" style="color: #c09ecc;">
-                                    <?php echo $curso['nombre_curso']; ?>
-                                </h4>
-                                <p class="text-gray-700 mb-4">
-                                    <?php echo substr($curso['descripcion'], 0, 100) . '...'; ?>
-                                </p>
-                            </div>
-                        </div>
-                    <?php endwhile; ?>
-                <?php else: ?>
-                    <p class="text-gray-700 text-center">No hay cursos disponibles en este momento.</p>
-                <?php endif; ?>
-
-                <div class="text-center mt-6">
-                    <a href="./?page=detalles_clases" class="inline-block bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-300">
-                        Ver Clases en Vivo
-                    </a>
-                </div>
-            </div>
-        <?php else: ?>
+        <?php if (!$_SESSION['es_premium']): ?>
             <!-- Mensaje para usuarios no premium -->
             <div class="container mx-auto text-center mt-10 px-4">
                 <!-- <p class="text-gray-700 text-lg">Esta sección es para usuarios premium. Si deseas inscribirte en nuestro plan, pulsa el botón de abajo.</p> -->
