@@ -137,7 +137,7 @@ $conn->query($insertVisitQuery);
 
 
     <section id="cursosdestacados" class="bg-gray-100 py-16">
-        <div class="max-w-6xl xl:max-w-7xl mx-auto">
+        <div class="max-w-6xl xl:max-w-7xl mx-auto px-4">
             <div class="container mx-auto text-center mb-10 px-4">
                 <h2 class="text-4xl font-bold mb-4" style="color: #c09ecc;">Cursos, Talleres y Diplomados</h2>
                 <p class="text-gray-600 text-lg max-w-2xl mx-auto">Explora nuestras capacitaciones y elige las que mejor complementen tu camino profesional y personal!</p>
@@ -149,7 +149,7 @@ $conn->query($insertVisitQuery);
             $resultCursos = $conn->query($sqlCursos);
             ?>
 
-            <div class="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 px-4">
+            <div class="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
                 <?php if ($resultCursos->num_rows > 0): ?>
                     <?php while ($curso = $resultCursos->fetch_assoc()): ?>
                         <div class="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300">
@@ -167,10 +167,10 @@ $conn->query($insertVisitQuery);
                 <?php else: ?>
                     <p class="text-gray-700 text-center">No hay cursos disponibles en este momento.</p>
                 <?php endif; ?>
-                <a href="#cursosdestacados" class="block mt-8 mx-auto md:w-fit w-full bg-purple-600 text-center text-white text-sm md:text-lg px-6 md:px-10 py-4 md:py-4 rounded-full border border-purple-500 shadow-lg hover:bg-purple-700 transition duration-300">
-                    Ver todos
-                </a>
             </div>
+            <a href="#cursosdestacados" class="block mt-8 mx-auto md:w-fit w-full bg-purple-600 text-center text-white text-sm md:text-lg px-6 md:px-10 py-4 md:py-4 rounded-full border border-purple-500 shadow-lg hover:bg-purple-700 transition duration-300">
+                Ver todos
+            </a>
         </div>
     </section>
 
