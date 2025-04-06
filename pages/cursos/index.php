@@ -114,7 +114,7 @@ $usuario_es_premium = $_SESSION['es_premium'];
 						} else if ($curso['tipo'] == 'destacado') {
 							$url = '/?page=detalles_curso_destacado&id=' . $curso['id'];
 						} else if ($curso['tipo'] == 'gratis') {
-							$url = '/?page=detalles_cursos&id=' . $curso['id'];
+							$url = '/pages/detalles-cursos?id=' . $curso['id'];
 						} else {
 							$url = '/#planpremium';
 						}
