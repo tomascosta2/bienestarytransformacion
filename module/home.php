@@ -212,7 +212,7 @@ $conn->query($insertVisitQuery);
                     ¡Ya sos parte de nuestra comunidad premium! Disfruta de acceso ilimitado a todos los cursos y talleres.
                 </p>
                 <a href="/pages/cursos" class="block mt-8 mx-auto md:w-fit w-full bg-purple-600 text-center text-white text-sm md:text-lg px-6 md:px-10 py-4 md:py-4 rounded-full border border-purple-500 shadow-lg hover:bg-purple-700 transition duration-300">
-                    Ver todos
+                    Ver cursos
                 </a>
             </div>
         </section>
