@@ -74,10 +74,12 @@
             </svg>
         </a>
         <!-- Submenú móvil -->
-        <div id="mobile-courses-submenu" class="hidden ml-4 flex flex-col space-y-2">
-            <a href="#cursosdestacados" class="hover:text-purple-700 transition duration-300 ease-in-out">Cursos y charlas más destacados</a>
-            <a href="#cursosgratuitos" class="hover:text-purple-700 transition duration-300 ease-in-out">Cursos y charlas gratuitas</a>
-            <a href="#planpremium" class="hover:text-purple-700 transition duration-300 ease-in-out">Plan PREMIUM</a>
+        <div id="mobile-courses-submenu" class="hidden ml-4 flex flex-col space-y-2 list-none">
+            <li><a href="/#cursosgratuitos" class="hover:text-purple-700 transition duration-300 ease-in-out">Recursos gratuitos</a></li>
+            <li><a href="/pages/cursos" class="hover:text-purple-700 transition duration-300 ease-in-out">Cursos, talleres y diplomados</a></li>
+            <?php if (!$_SESSION['es_premium']) : ?>
+                <li><a href="/#planpremium" class="hover:text-purple-700 transition duration-300 ease-in-out">Plan Premium</a></li>
+            <?php endif; ?>
         </div>
         <a href="#quiensoy" class="hover:text-purple-700 transition duration-300 ease-in-out navbar">¿Quién Soy?</a>
         <a href="#contacto" class="hover:text-purple-700 transition duration-300 ease-in-out navbar">Contacto</a>

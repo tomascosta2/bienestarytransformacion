@@ -82,9 +82,9 @@ $usuario_es_premium = $_SESSION['es_premium'];
 
 <section>
 	<div class="max-w-[1280px] mx-auto md:px-0 px-4 py-[60px]">
-		<div class="flex gap-8">
+		<div class="flex flex-col md:flex-row gap-8">
 			<!-- Sidebar con filtro de categorías -->
-			<div class="bg-gray-100 min-w-[300px] h-[calc(100vh-180px)] p-8 sticky top-[40px] rounded-sm">
+			<div class="bg-gray-100 min-w-[300px] md:h-[calc(100vh-180px)] p-8 md:sticky md:top-[40px] rounded-sm">
 				<h3 class="text-xl font-semibold mb-4">Filtrar por Categoría</h3>
 				<ul>
 					<li>
@@ -105,7 +105,7 @@ $usuario_es_premium = $_SESSION['es_premium'];
 
 			<!-- Contenido principal -->
 			<div>
-				<div class="grid grid-cols-3 gap-4">
+				<div class="grid md:grid-cols-3 gap-4">
 					<?php foreach ($cursos as $curso): 
 						$curso_es_premium = $curso['tipo'] == 'premium';
 						
