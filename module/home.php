@@ -189,10 +189,13 @@ $conn->query($insertVisitQuery);
             <div class="container mx-auto text-center mb-10 px-4">
                 <h2 class="text-3xl font-bold" style="color: #c09ecc;">Plan Premium</h2>
                 <p class="text-gray-600 mt-4 max-w-[500px] mx-auto">
-                    En este plan, tendrás acceso exclusivo a todos los <strong>cursos, talleres, prácticas en
-                        vivo, contenido especial y nuevos cursos</strong> todos los meses por $24.900 por mes.
+                    Accedé al plan Premium y transformá tu experiencia de aprendizaje.
+                    Por solo $24.900 por mes, desbloqueás acceso total a <strong>todos los cursos, talleres, prácticas en vivo, contenido exclusivo y nuevos lanzamientos</strong> cada mes.
                     <br><br>
-                    Si deseas inscribirte y ser parte de la comunidad, pulsa el botón de abajo.
+                    Sumate a una comunidad comprometida con crecer y aprender todos los días.
+                    Si querés avanzar en serio, este es tu lugar.
+                    <br><br>
+                    👉 Pulsa el botón de abajo y empezá hoy.
                 </p>
             </div>
 
