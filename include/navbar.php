@@ -44,16 +44,16 @@
 
         <!-- Logo y Nombre en el menú (Visible en ambas versiones) -->
         <a href="/">
-            <div class="text-right">
-                <h1 class="text-2xl font-bold text-purple-900 text-center nav-title">Escuela Bienestar Integral</h1>
-                <p class="text-gray-500 text-sm text-center nav-title">Transformación y Bienestar</p>
+            <div>
+                <h1 class="text-[18px] font-bold text-purple-900 text-center nav-title">Escuela Bienestar Integral</h1>
+                <p class="text-[12px] text-gray-500 text-sm text-center nav-title">Transformación y Bienestar</p>
             </div>
         </a>
 
         <!-- Botón de Menú Móvil -->
         <div class="md:hidden">
             <button id="menu-btn" class="focus:outline-none">
-                <svg class="h-6 w-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <svg class="size-7 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
@@ -61,7 +61,7 @@
     </div>
 
     <!-- Menú desplegable móvil -->
-    <div id="mobile-menu" class="hidden md:hidden flex flex-col space-y-4 mt-4 text-gray-800 font-semibold text-lg">
+    <div id="mobile-menu" class="hidden md:hidden flex flex-col space-y-4 py-8 text-gray-800 font-semibold text-lg">
         <?php if (isset($_SESSION['nombre'])): ?>
             <!-- Saludo al inicio del menú móvil -->
             <div class="text-purple-900 font-semibold">Hola, <?php echo htmlspecialchars($_SESSION['nombre']); ?>!</div>
