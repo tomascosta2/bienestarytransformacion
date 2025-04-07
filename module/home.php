@@ -128,7 +128,7 @@ $conn->query($insertVisitQuery);
                         <p class="text-gray-700 text-center">No hay cursos disponibles en este momento.</p>
                     <?php endif; ?>
                 </div>
-                <a href="#cursosdestacados" class="block mt-8 mx-auto md:w-fit w-full bg-purple-600 text-center text-white text-sm md:text-lg px-6 md:px-10 py-4 md:py-4 rounded-full border border-purple-500 shadow-lg hover:bg-purple-700 transition duration-300">
+                <a href="/pages/cursos" class="block mt-8 mx-auto md:w-fit w-full bg-purple-600 text-center text-white text-sm md:text-lg px-6 md:px-10 py-4 md:py-4 rounded-full border border-purple-500 shadow-lg hover:bg-purple-700 transition duration-300">
                     Ver todos
                 </a>
             </div>
@@ -168,7 +168,7 @@ $conn->query($insertVisitQuery);
                     <p class="text-gray-700 text-center">No hay cursos disponibles en este momento.</p>
                 <?php endif; ?>
             </div>
-            <a href="#cursosdestacados" class="block mt-8 mx-auto md:w-fit w-full bg-purple-600 text-center text-white text-sm md:text-lg px-6 md:px-10 py-4 md:py-4 rounded-full border border-purple-500 shadow-lg hover:bg-purple-700 transition duration-300">
+            <a href="/pages/cursos" class="block mt-8 mx-auto md:w-fit w-full bg-purple-600 text-center text-white text-sm md:text-lg px-6 md:px-10 py-4 md:py-4 rounded-full border border-purple-500 shadow-lg hover:bg-purple-700 transition duration-300">
                 Ver todos
             </a>
         </div>
