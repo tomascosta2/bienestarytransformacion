@@ -145,7 +145,7 @@ $conn->query($insertVisitQuery);
 
             <?php
             // Consulta para obtener todos los cursos
-            $sqlCursos = "SELECT * FROM cursos_destacados";
+            $sqlCursos = "SELECT * FROM cursos_premium LIMIT 3";
             $resultCursos = $conn->query($sqlCursos);
             ?>
 
@@ -201,6 +201,18 @@ $conn->query($insertVisitQuery);
                 <!-- <p class="text-gray-700 text-lg">Esta sección es para usuarios premium. Si deseas inscribirte en nuestro plan, pulsa el botón de abajo.</p> -->
                 <a href="./?page=registrarse&action=pay" class="block mt-8 mx-auto md:w-fit w-full bg-purple-600 text-center text-white text-sm md:text-lg px-6 md:px-10 py-4 md:py-4 rounded-full border border-purple-500 shadow-lg hover:bg-purple-700 transition duration-300">
                     Inscribirse en el Plan Premium
+                </a>
+            </div>
+        </section>
+    <?php else : ?>
+        <section id="planpremium" class="bg-gray-100 py-16">
+            <div class="container mx-auto text-center mb-10 px-4">
+                <h2 class="text-3xl font-bold" style="color: #c09ecc;">Plan Premium</h2>
+                <p class="text-gray-600 mt-4 max-w-[500px] mx-auto">
+                    ¡Ya sos parte de nuestra comunidad premium! Disfruta de acceso ilimitado a todos los cursos y talleres.
+                </p>
+                <a href="/pages/cursos" class="block mt-8 mx-auto md:w-fit w-full bg-purple-600 text-center text-white text-sm md:text-lg px-6 md:px-10 py-4 md:py-4 rounded-full border border-purple-500 shadow-lg hover:bg-purple-700 transition duration-300">
+                    Ver todos
                 </a>
             </div>
         </section>
