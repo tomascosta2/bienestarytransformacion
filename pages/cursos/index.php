@@ -36,18 +36,30 @@ $offset = ($paginaActual - 1) * $porPagina;
 // Obtener la categoría seleccionada
 $categoriaSeleccionada = isset($_GET['categoria']) ? $_GET['categoria'] : '';
 
-// Construir la consulta con filtro de categoría si está seleccionado
+// Obtener el término de búsqueda
+$busqueda = isset($_GET['busqueda']) ? $conn->real_escape_string($_GET['busqueda']) : '';
+
+// Construir la consulta con filtro de categoría y búsqueda si están seleccionados
 $sqlCursos = "SELECT *, 'gratis' AS tipo FROM cursos_gratuitos WHERE 1=1 ";
 if ($categoriaSeleccionada) {
 	$sqlCursos .= "AND JSON_CONTAINS(categorias, '\"$categoriaSeleccionada\"') ";
+}
+if ($busqueda) {
+	$sqlCursos .= "AND nombre_curso LIKE '%$busqueda%' ";
 }
 $sqlCursos .= "UNION ALL SELECT *, 'premium' AS tipo FROM cursos_premium WHERE 1=1 ";
 if ($categoriaSeleccionada) {
 	$sqlCursos .= "AND JSON_CONTAINS(categorias, '\"$categoriaSeleccionada\"') ";
 }
+if ($busqueda) {
+	$sqlCursos .= "AND nombre_curso LIKE '%$busqueda%' ";
+}
 $sqlCursos .= "UNION ALL SELECT *, 'destacado' AS tipo FROM cursos_destacados WHERE 1=1 ";
 if ($categoriaSeleccionada) {
 	$sqlCursos .= "AND JSON_CONTAINS(categorias, '\"$categoriaSeleccionada\"') ";
+}
+if ($busqueda) {
+	$sqlCursos .= "AND nombre_curso LIKE '%$busqueda%' ";
 }
 $sqlCursos .= "LIMIT $offset, $porPagina";
 $result = $conn->query($sqlCursos);
@@ -59,13 +71,22 @@ $sqlTotal = "SELECT COUNT(*) AS total FROM (
 if ($categoriaSeleccionada) {
 	$sqlTotal .= "AND JSON_CONTAINS(categorias, '\"$categoriaSeleccionada\"') ";
 }
+if ($busqueda) {
+	$sqlTotal .= "AND nombre_curso LIKE '%$busqueda%' ";
+}
 $sqlTotal .= "UNION ALL SELECT id FROM cursos_premium WHERE 1=1 ";
 if ($categoriaSeleccionada) {
 	$sqlTotal .= "AND JSON_CONTAINS(categorias, '\"$categoriaSeleccionada\"') ";
 }
+if ($busqueda) {
+	$sqlTotal .= "AND nombre_curso LIKE '%$busqueda%' ";
+}
 $sqlTotal .= "UNION ALL SELECT id FROM cursos_destacados WHERE 1=1 ";
 if ($categoriaSeleccionada) {
 	$sqlTotal .= "AND JSON_CONTAINS(categorias, '\"$categoriaSeleccionada\"') ";
+}
+if ($busqueda) {
+	$sqlTotal .= "AND nombre_curso LIKE '%$busqueda%' ";
 }
 $sqlTotal .= ") AS totalCursos";
 
@@ -84,17 +105,17 @@ $usuario_es_premium = $_SESSION['es_premium'];
 	<div class="max-w-[1280px] mx-auto md:px-0 px-4 py-[60px]">
 		<div class="flex flex-col md:flex-row gap-8">
 			<!-- Sidebar con filtro de categorías -->
-			<div class="bg-gray-100 min-w-[300px] md:h-[calc(100vh-180px)] p-8 md:sticky md:top-[40px] rounded-sm">
+			<div class="bg-gray-100 min-w-[300px] md:h-[calc(100vh-180px)] p-8 md:sticky md:top-[40px] rounded-sm">				
 				<h3 class="text-xl font-semibold mb-4">Filtrar por Categoría</h3>
 				<ul>
 					<li>
-						<a href="/pages/cursos/" class="block py-2 <?php echo $categoriaSeleccionada == '' ? 'font-bold text-purple-700' : ''; ?>">
+						<a href="<?php echo '/pages/cursos/' . ($busqueda ? '?busqueda=' . urlencode($busqueda) : ''); ?>" class="block py-2 <?php echo $categoriaSeleccionada == '' ? 'font-bold text-purple-700' : ''; ?>">
 							Todas las categorías
 						</a>
 					</li>
 					<?php foreach ($categorias as $cat): ?>
 						<li>
-							<a href="/pages/cursos/?categoria=<?php echo urlencode($cat['categoria']); ?>"
+							<a href="<?php echo '/pages/cursos/?categoria=' . urlencode($cat['categoria']) . ($busqueda ? '&busqueda=' . urlencode($busqueda) : ''); ?>"
 								class="block py-2 <?php echo $categoriaSeleccionada == $cat['categoria'] ? 'font-bold text-purple-700' : ''; ?>">
 								<?php echo $cat['categoria']; ?>
 							</a>
@@ -105,6 +126,33 @@ $usuario_es_premium = $_SESSION['es_premium'];
 
 			<!-- Contenido principal -->
 			<div>
+				<!-- Formulario de búsqueda -->
+				<div class="mb-6">
+					<form class="flex gap-4 justify-end" action="/pages/cursos/" method="GET" class="flex flex-col gap-2">
+						<?php if ($categoriaSeleccionada): ?>
+							<input type="hidden" name="categoria" value="<?php echo htmlspecialchars($categoriaSeleccionada); ?>">
+						<?php endif; ?>
+						<input 
+							type="text" 
+							name="busqueda" 
+							placeholder="Buscar por nombre..." 
+							value="<?php echo htmlspecialchars($busqueda); ?>"
+							class="w-[300px] max-w-full p-2 border border-gray-300 rounded-sm"
+						>
+						<button type="submit" class="bg-purple-700 text-white py-2 px-4 rounded-sm hover:bg-purple-800">
+							Buscar
+						</button>
+					</form>
+				</div>
+				<?php if ($busqueda): ?>
+					<div class="mb-6">
+						<h2 class="text-2xl font-semibold">Resultados para: "<?php echo htmlspecialchars($busqueda); ?>"</h2>
+						<?php if (count($cursos) == 0): ?>
+							<p class="mt-4 text-gray-600">No se encontraron cursos que coincidan con tu búsqueda.</p>
+						<?php endif; ?>
+					</div>
+				<?php endif; ?>
+				
 				<div class="grid md:grid-cols-3 gap-4">
 					<?php foreach ($cursos as $curso): 
 						$curso_es_premium = $curso['tipo'] == 'premium';
@@ -140,13 +188,13 @@ $usuario_es_premium = $_SESSION['es_premium'];
 				<!-- Paginación -->
 				<div class="mt-6 flex justify-center space-x-4">
 					<?php if ($paginaActual > 1): ?>
-						<a href="/pages/cursos/?pagina=<?php echo $paginaActual - 1; ?>&categoria=<?php echo urlencode($categoriaSeleccionada); ?>" class="px-4 py-2 bg-gray-300 rounded">Anterior</a>
+						<a href="/pages/cursos/?pagina=<?php echo $paginaActual - 1; ?>&categoria=<?php echo urlencode($categoriaSeleccionada); ?><?php echo $busqueda ? '&busqueda=' . urlencode($busqueda) : ''; ?>" class="px-4 py-2 bg-gray-300 rounded">Anterior</a>
 					<?php endif; ?>
 
 					<span class="px-4 py-2 bg-gray-500 text-white rounded">Página <?php echo $paginaActual; ?> de <?php echo $totalPaginas; ?></span>
 
 					<?php if ($paginaActual < $totalPaginas): ?>
-						<a href="/pages/cursos/?pagina=<?php echo $paginaActual + 1; ?>&categoria=<?php echo urlencode($categoriaSeleccionada); ?>" class="px-4 py-2 bg-gray-300 rounded">Siguiente</a>
+						<a href="/pages/cursos/?pagina=<?php echo $paginaActual + 1; ?>&categoria=<?php echo urlencode($categoriaSeleccionada); ?><?php echo $busqueda ? '&busqueda=' . urlencode($busqueda) : ''; ?>" class="px-4 py-2 bg-gray-300 rounded">Siguiente</a>
 					<?php endif; ?>
 				</div>
 			</div>
