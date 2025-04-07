@@ -86,10 +86,10 @@
 
         <?php if (isset($_SESSION['nombre'])): ?>
             <!-- Botón de salir al final del menú móvil -->
-            <a href="./controllers/logout.php" class="hover:text-purple-700 transition duration-300 ease-in-out navbar">Salir</a>
+            <a href="/controllers/logout.php" class="hover:text-purple-700 transition duration-300 ease-in-out navbar">Salir</a>
         <?php else: ?>
             <!-- Enlace de inicio de sesión para usuarios no autenticados al final del menú móvil -->
-            <a href="./?page=ingresar" class="hover:text-purple-700 transition duration-300 ease-in-out navbar">Iniciar sesión</a>
+            <a href="/?page=ingresar" class="hover:text-purple-700 transition duration-300 ease-in-out navbar">Iniciar sesión</a>
         <?php endif; ?>
     </div>
 
