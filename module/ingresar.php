@@ -1,8 +1,4 @@
 <?php
-if (isset($_SESSION['error'])) {
-    echo "<p style='color: red;'>" . $_SESSION['error'] . "</p>";
-    unset($_SESSION['error']);
-}
 $action = isset($_GET['action']) ? $_GET['action'] : '';
 ?>
 
@@ -35,6 +31,12 @@ $action = isset($_GET['action']) ? $_GET['action'] : '';
             <i class="fas fa-lock text-white"></i>
           </button>
         </div>
+        <?php
+        if (isset($_SESSION['error'])) {
+          echo "<p class='text-red-400 text-[14px] mt-2'>" . $_SESSION['error'] . "</p>";
+          unset($_SESSION['error']);
+        } 
+        ?>
       </div>
 
       <button 

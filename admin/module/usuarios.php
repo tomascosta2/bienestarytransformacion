@@ -48,7 +48,7 @@ if (!$result) {
                         <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['premium_activated_at']) ?></td>
                         <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['premium_expires_at']) ?></td>
 
-                        <td class="py-3 px-6 text-center">
+                        <td class="py-3 px-6 text-center flex">
                             <!-- Botón para enviar email -->
                             <a href="./controllers/send_email.php?id=<?= $row['id'] ?>" class="text-blue-500 hover:text-blue-700 mx-2" title="Enviar email">
                                 <i class="fas fa-envelope"></i>

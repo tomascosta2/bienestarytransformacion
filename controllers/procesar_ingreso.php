@@ -52,8 +52,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
             exit();
         } else {
-            $_SESSION['error'] = "Contraseña incorrecta.";
-            exit();
+            $_SESSION['error'] = "Contraseña incorrecta. Por favor, inténtalo de nuevo.";
+            header("Location: /?page=ingresar");
         }
     } else {
         $_SESSION['error'] = "No se encontró una cuenta con este correo.";
