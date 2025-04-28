@@ -11,7 +11,7 @@ include("../../include/navbar.php");
 			Siempre me fascinó cómo el conocimiento puede cambiar vidas. Cuando encontré el Reiki Usui, sentí su magia, pero fue la Neurociencia la que me ayudó a entender qué pasaba dentro mío. Hoy, fusiono ambas disciplinas para que vos también puedas transformar tu vida desde adentro.<br><br>
 
 			<strong>Del dolor al propósito: Mi camino hacia el bienestar integral</strong><br><br>
-			Mi historia no es distinta a la de muchas personas. Crecí en un entorno donde el amor y la seguridad no siempre estaban presentes. Después, la vida me puso a prueba con pérdidas que me rompieron el alma: la muerte de mi mamá, mi hijo y mi papá. Me quedé en la oscuridad, sin rumbo, sin sostén.<br><br>
+			Mi historia no es distinta a la de muchas personas. Crecí en un entorno donde el amor y la seguridad no siempre estaban presentes. Después, la vida me puso a prueba con pérdidas que me rompieron el alma: la muerte de mi mamá y mi papá. Me quedé en la oscuridad, sin rumbo, sin sostén.<br><br>
 
 			Pero en medio de ese dolor, encontré el Reiki Usui. Por primera vez en mucho tiempo, sentí paz. Ahí empezó mi transformación… y entendí que no podía guardarme ese aprendizaje solo para mí. Tenía que compartirlo. Así nació mi misión: hacer que la sanación y el bienestar sean accesibles para todos, sin que el dinero sea un límite.<br><br>
 
