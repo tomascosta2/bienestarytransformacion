@@ -79,7 +79,7 @@ $totalModulos = count($videos);
                 <li>
                     <a href="#general" class="flex items-center p-2 rounded-md hover:bg-purple-100 <?php echo !isset($_GET['modulo']) ? 'bg-purple-200 text-purple-800 font-medium' : ''; ?>">
                         <i class="fas fa-info-circle mr-2"></i>
-                        <span>Información General</span>
+                        <span>Información general</span>
                     </a>
                 </li>
                 
@@ -111,7 +111,7 @@ $totalModulos = count($videos);
             <!-- Descripción General -->
             <section id="general" class="mb-12">
                 <h1 class="text-3xl font-bold text-gray-900 mb-6 border-b-4 border-purple-600 pb-2">
-                    Información General
+                    Información general
                 </h1>
                 
                 <?php if ($resultDescripcion->num_rows > 0): ?>
@@ -139,7 +139,7 @@ $totalModulos = count($videos);
                 <?php if ($videoActual): ?>
                 <div class="mb-8">
                     <h2 class="text-2xl font-bold text-gray-800 mb-4">
-                        Video del Módulo
+                        Video del módulo
                     </h2>
                     <div class="relative w-full">
                         <div class="absolute top-3 left-3 bg-purple-600 text-white text-sm px-3 py-1 rounded-md z-10">
@@ -157,7 +157,7 @@ $totalModulos = count($videos);
                 <?php if ($pdfActual): ?>
                 <div class="mb-8">
                     <h2 class="text-2xl font-bold text-gray-800 mb-4">
-                        Material de Estudio
+                        Material de estudio
                     </h2>
                     <div class="bg-white shadow-md rounded-lg p-4 border border-gray-200">
                         <div class="flex items-center">
