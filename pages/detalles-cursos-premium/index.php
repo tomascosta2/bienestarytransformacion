@@ -115,7 +115,7 @@ $totalModulos = count($videos);
     </div>
 
     <!-- Contenido principal -->
-    <div class="flex-1 p-6">
+    <div class="flex-1 p-6 max-w-[750px] mx-auto">
         <?php if (!isset($_GET['modulo'])): ?>
             <!-- Descripción General -->
             <section id="general" class="mb-12">
