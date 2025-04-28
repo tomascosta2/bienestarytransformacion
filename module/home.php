@@ -115,7 +115,7 @@ $conn->query($insertVisitQuery);
                 <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 relative z-10">
                     <?php if ($resultCursos->num_rows > 0): ?>
                         <?php while ($curso = $resultCursos->fetch_assoc()): ?>
-                            <a href="./?page=detalles_cursos&id=<?php echo $curso['id']; ?>" class="bg-white shadow-lg rounded-lg p-6 text-center transition-transform transform hover:scale-105 shadow-lg hover:shadow-2xl">
+                            <a href="/pages/detalles-cursos/?id=<?php echo $curso['id']; ?>" class="bg-white shadow-lg rounded-lg p-6 text-center transition-transform transform hover:scale-105 shadow-lg hover:shadow-2xl">
                                 <img src="./admin/controllers/<?php echo $curso['imagen_portada']; ?>" alt="Portada del curso" class="w-full h-32 object-cover mb-4 rounded-lg md:h-48"> <!-- Ajustar altura para dispositivos móviles -->
                                 <h4 class="text-xl font-semibold mb-2" style="color: #c09ecc;"><?php echo $curso['nombre_curso']; ?></h4>
                                 <p class="text-gray-700 mb-4">
