@@ -36,7 +36,7 @@ $resultDescripcion = $stmtDescripcion->get_result();
     <h1 class="text-4xl font-bold text-center text-gray-900 mb-6"><?php echo htmlspecialchars($curso['nombre_curso']); ?></h1>
 
     <div class="overflow-hidden rounded-lg shadow-md">
-        <img src="./admin/controllers/<?php echo $curso['imagen_portada']; ?>" alt="Portada del curso" class="w-full h-60 object-cover hover:opacity-90 transition duration-300">
+        <img src="/admin/controllers/<?php echo $curso['imagen_portada']; ?>" alt="Portada del curso" class="w-full h-60 object-cover hover:opacity-90 transition duration-300">
     </div>
 
     <h2 class="text-2xl font-semibold text-gray-800 border-b-2 border-gray-300 pb-2 mt-6">

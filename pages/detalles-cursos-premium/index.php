@@ -171,7 +171,7 @@ $totalModulos = count($videos);
                     <div class="bg-white shadow-md rounded-lg p-4 border border-gray-200">
                         <div class="flex items-center">
                             <i class="fas fa-file-pdf text-red-600 text-2xl mr-3"></i>
-                            <a href="./admin/controllers/<?php echo htmlspecialchars($pdfActual['ruta_pdf']); ?>" 
+                            <a href="/admin/controllers/<?php echo htmlspecialchars($pdfActual['ruta_pdf']); ?>" 
                                class="text-blue-600 underline hover:text-blue-800 transition duration-200 text-lg" 
                                target="_blank">
                                 <?php echo htmlspecialchars(basename($pdfActual['ruta_pdf'])); ?>
