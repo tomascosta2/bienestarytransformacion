@@ -180,27 +180,6 @@ $modulosExpandidos = isset($_GET['modulo']);
                         </div>
                     </div>
                 <?php endif; ?>
-                
-                <!-- Recursos adicionales - Ejemplo de sección que podrías agregar -->
-                <div class="mt-8">
-                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Recursos adicionales</h2>
-                    <div class="bg-white shadow-md rounded-lg p-6 border border-gray-200">
-                        <ul class="space-y-3">
-                            <li class="flex items-center">
-                                <i class="fas fa-external-link-alt text-purple-600 mr-3"></i>
-                                <a href="#" class="text-blue-600 hover:underline">Guía de referencia rápida</a>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-external-link-alt text-purple-600 mr-3"></i>
-                                <a href="#" class="text-blue-600 hover:underline">Bibliografía recomendada</a>
-                            </li>
-                            <li class="flex items-center">
-                                <i class="fas fa-external-link-alt text-purple-600 mr-3"></i>
-                                <a href="#" class="text-blue-600 hover:underline">Recursos complementarios</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
             </section>
         <?php elseif ($vista == 'imagenes'): ?>
             <!-- Vista de Imágenes -->
