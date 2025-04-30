@@ -66,6 +66,9 @@ $resultDescripcion = $stmtDescripcion->get_result();
 
 // Determinar el número total de módulos (basado en el número de videos)
 $totalModulos = count($videos);
+
+// Determinar si el menú de módulos debe estar expandido
+$modulosExpandidos = isset($_GET['modulo']);
 ?>
 
 <div class="flex flex-col md:flex-row mx-auto max-w-[1200px] min-h-screen">
@@ -84,7 +87,7 @@ $totalModulos = count($videos);
                     </a>
                 </li>
 
-                <!-- Material de estudio - Ahora con parámetro view=material -->
+                <!-- Material de estudio -->
                 <li>
                     <a href="./?id=<?php echo $cursoId; ?>&view=material" class="flex items-center p-2 rounded-md hover:bg-purple-100 <?php echo ($vista == 'material') ? 'bg-purple-200 text-purple-800 font-medium' : ''; ?>">
                         <i class="fas fa-book mr-2"></i>
@@ -92,15 +95,30 @@ $totalModulos = count($videos);
                     </a>
                 </li>
                 
-                <?php for ($i = 0; $i < $totalModulos; $i++): ?>
+                <!-- Módulos desplegables -->
                 <li>
-                    <a href="./?id=<?php echo $cursoId; ?>&modulo=<?php echo ($i + 1); ?>" 
-                       class="flex items-center p-2 rounded-md hover:bg-purple-100 <?php echo (isset($_GET['modulo']) && $_GET['modulo'] == ($i + 1)) ? 'bg-purple-200 text-purple-800 font-medium' : ''; ?>">
-                        <i class="fas fa-play-circle mr-2"></i>
-                        <span>Módulo <?php echo ($i + 1); ?></span>
-                    </a>
+                    <div class="menu-item">
+                        <button id="modulos-toggle" class="flex items-center justify-between w-full p-2 rounded-md hover:bg-purple-100 <?php echo isset($_GET['modulo']) ? 'bg-purple-200 text-purple-800 font-medium' : ''; ?>">
+                            <div class="flex items-center">
+                                <i class="fas fa-play-circle mr-2"></i>
+                                <span>Módulos</span>
+                            </div>
+                            <i class="fas <?php echo $modulosExpandidos ? 'fa-chevron-down' : 'fa-chevron-right'; ?>"></i>
+                        </button>
+                        
+                        <ul id="modulos-submenu" class="pl-4 mt-1 space-y-1 <?php echo $modulosExpandidos ? '' : 'hidden'; ?>">
+                            <?php for ($i = 0; $i < $totalModulos; $i++): ?>
+                            <li>
+                                <a href="./?id=<?php echo $cursoId; ?>&modulo=<?php echo ($i + 1); ?>" 
+                                   class="flex items-center p-2 rounded-md hover:bg-purple-100 <?php echo (isset($_GET['modulo']) && $_GET['modulo'] == ($i + 1)) ? 'bg-purple-300 text-purple-800 font-medium' : ''; ?>">
+                                    <i class="fas fa-circle text-xs mr-2"></i>
+                                    <span>Módulo <?php echo ($i + 1); ?></span>
+                                </a>
+                            </li>
+                            <?php endfor; ?>
+                        </ul>
+                    </div>
                 </li>
-                <?php endfor; ?>
                 
                 <?php if ($resultImagenes->num_rows > 0): ?>
                 <li>
@@ -345,8 +363,26 @@ $totalModulos = count($videos);
         document.getElementById('imageModal').classList.add('hidden');
     }
     
-    // Scroll to sections when clicking on sidebar links
+    // Manejo del menú desplegable de módulos
     document.addEventListener('DOMContentLoaded', function() {
+        const modulosToggle = document.getElementById('modulos-toggle');
+        const modulosSubmenu = document.getElementById('modulos-submenu');
+        const chevronIcon = modulosToggle.querySelector('.fas');
+        
+        modulosToggle.addEventListener('click', function() {
+            modulosSubmenu.classList.toggle('hidden');
+            
+            // Cambiar el ícono
+            if (chevronIcon.classList.contains('fa-chevron-right')) {
+                chevronIcon.classList.remove('fa-chevron-right');
+                chevronIcon.classList.add('fa-chevron-down');
+            } else {
+                chevronIcon.classList.remove('fa-chevron-down');
+                chevronIcon.classList.add('fa-chevron-right');
+            }
+        });
+        
+        // Scroll to sections when clicking on sidebar links
         const sidebarLinks = document.querySelectorAll('nav a[href^="#"]');
         
         sidebarLinks.forEach(link => {
