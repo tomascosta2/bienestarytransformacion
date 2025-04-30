@@ -7,6 +7,7 @@ include("../../include/navbar.php");
 // Obtener el ID del curso y el módulo activo de la URL
 $cursoId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 $moduloActivo = isset($_GET['modulo']) ? intval($_GET['modulo']) : 1;
+$vista = isset($_GET['view']) ? $_GET['view'] : 'general';
 
 try {
 	// Consulta principal para obtener los detalles del curso
@@ -65,6 +66,9 @@ $resultImagenes = $stmtImagenes->get_result();
 
 // Determinar el número total de módulos (basado en el número de videos)
 $totalModulos = count($videos);
+
+// Determinar si el menú de módulos debe estar expandido
+$modulosExpandidos = isset($_GET['modulo']);
 ?>
 
 <div class="flex flex-col md:flex-row mx-auto max-w-[1200px] min-h-screen">
@@ -77,25 +81,48 @@ $totalModulos = count($videos);
         <nav>
             <ul class="space-y-2">
                 <li>
-                    <a href="#general" class="flex items-center p-2 rounded-md hover:bg-purple-100 <?php echo !isset($_GET['modulo']) ? 'bg-purple-200 text-purple-800 font-medium' : ''; ?>">
+                    <a href="./?id=<?php echo $cursoId; ?>" class="flex items-center p-2 rounded-md hover:bg-purple-100 <?php echo ($vista == 'general' && !isset($_GET['modulo'])) ? 'bg-purple-200 text-purple-800 font-medium' : ''; ?>">
                         <i class="fas fa-info-circle mr-2"></i>
                         <span>Información general</span>
                     </a>
                 </li>
-                
-                <?php for ($i = 0; $i < $totalModulos; $i++): ?>
+
+                <!-- Material de estudio -->
                 <li>
-                    <a href="?id=<?php echo $cursoId; ?>&modulo=<?php echo ($i + 1); ?>" 
-                       class="flex items-center p-2 rounded-md hover:bg-purple-100 <?php echo (isset($_GET['modulo']) && $_GET['modulo'] == ($i + 1)) ? 'bg-purple-200 text-purple-800 font-medium' : ''; ?>">
-                        <i class="fas fa-play-circle mr-2"></i>
-                        <span>Módulo <?php echo ($i + 1); ?></span>
+                    <a href="./?id=<?php echo $cursoId; ?>&view=material" class="flex items-center p-2 rounded-md hover:bg-purple-100 <?php echo ($vista == 'material') ? 'bg-purple-200 text-purple-800 font-medium' : ''; ?>">
+                        <i class="fas fa-book mr-2"></i>
+                        <span>Material de estudio</span>
                     </a>
                 </li>
-                <?php endfor; ?>
+                
+                <!-- Módulos desplegables -->
+                <li>
+                    <div class="menu-item">
+                        <button id="modulos-toggle" class="flex items-center justify-between w-full p-2 rounded-md hover:bg-purple-100 <?php echo isset($_GET['modulo']) ? 'bg-purple-200 text-purple-800 font-medium' : ''; ?>">
+                            <div class="flex items-center">
+                                <i class="fas fa-play-circle mr-2"></i>
+                                <span>Módulos</span>
+                            </div>
+                            <i class="fas <?php echo $modulosExpandidos ? 'fa-chevron-down' : 'fa-chevron-right'; ?>"></i>
+                        </button>
+                        
+                        <ul id="modulos-submenu" class="pl-4 mt-1 space-y-1 <?php echo $modulosExpandidos ? '' : 'hidden'; ?>">
+                            <?php for ($i = 0; $i < $totalModulos; $i++): ?>
+                            <li>
+                                <a href="./?id=<?php echo $cursoId; ?>&modulo=<?php echo ($i + 1); ?>" 
+                                   class="flex items-center p-2 rounded-md hover:bg-purple-100 <?php echo (isset($_GET['modulo']) && $_GET['modulo'] == ($i + 1)) ? 'bg-purple-300 text-purple-800 font-medium' : ''; ?>">
+                                    <i class="fas fa-circle text-xs mr-2"></i>
+                                    <span>Módulo <?php echo ($i + 1); ?></span>
+                                </a>
+                            </li>
+                            <?php endfor; ?>
+                        </ul>
+                    </div>
+                </li>
                 
                 <?php if ($resultImagenes->num_rows > 0): ?>
                 <li>
-                    <a href="#imagenes" class="flex items-center p-2 rounded-md hover:bg-purple-100">
+                    <a href="./?id=<?php echo $cursoId; ?>&view=imagenes" class="flex items-center p-2 rounded-md hover:bg-purple-100 <?php echo ($vista == 'imagenes') ? 'bg-purple-200 text-purple-800 font-medium' : ''; ?>">
                         <i class="fas fa-images mr-2"></i>
                         <span>Imágenes</span>
                     </a>
@@ -107,22 +134,96 @@ $totalModulos = count($videos);
 
     <!-- Contenido principal -->
     <div class="flex-1 p-6 max-w-[750px] mx-auto">
-        <?php if (!isset($_GET['modulo'])): ?>
-            <!-- Descripción General -->
-            <section id="general" class="mb-12">
+        <?php if ($vista == 'material'): ?>
+            <!-- Vista de Material de Estudio -->
+            <section id="material" class="mb-12">
                 <h1 class="text-3xl font-bold text-gray-900 mb-6 border-b-4 border-purple-600 pb-2">
-                    Información general
+                    Material de estudio
                 </h1>
                 
-                <?php if ($resultDescripcion->num_rows > 0): ?>
-                    <?php while ($descripcion = $resultDescripcion->fetch_assoc()): ?>
-                        <p class="text-gray-800 text-base leading-relaxed mb-4 bg-gray-50 p-4 rounded shadow-sm">
-                            <?php echo nl2br(htmlspecialchars($descripcion['descripcion'])); ?>
-                        </p>
-                    <?php endwhile; ?>
+                <?php if (count($pdfs) > 0): ?>
+                    <div class="bg-white shadow-md rounded-lg p-6 border border-gray-200">
+                        <h2 class="text-xl font-semibold text-gray-800 mb-4">Documentos del curso</h2>
+                        
+                        <div class="space-y-4">
+                            <?php foreach ($pdfs as $index => $pdf): ?>
+                                <div class="flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition duration-200">
+                                    <div class="bg-red-100 p-3 rounded-full mr-4">
+                                        <i class="fas fa-file-pdf text-red-600 text-xl"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="font-medium text-gray-800">Material del Módulo <?php echo ($index + 1); ?></h3>
+                                        <p class="text-sm text-gray-500">PDF - <?php echo htmlspecialchars(basename($pdf['ruta_pdf'])); ?></p>
+                                    </div>
+                                    <div>
+                                        <a href="./admin/controllers/<?php echo htmlspecialchars($pdf['ruta_pdf']); ?>" 
+                                           class="inline-flex items-center px-3 py-1 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition duration-200"
+                                           target="_blank">
+                                            <i class="fas fa-download mr-2"></i> Descargar
+                                        </a>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-exclamation-triangle text-yellow-400"></i>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm text-yellow-700">
+                                    No hay materiales de estudio disponibles para este curso.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 <?php endif; ?>
+                
+                <!-- Recursos adicionales - Ejemplo de sección que podrías agregar -->
+                <div class="mt-8">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">Recursos adicionales</h2>
+                    <div class="bg-white shadow-md rounded-lg p-6 border border-gray-200">
+                        <ul class="space-y-3">
+                            <li class="flex items-center">
+                                <i class="fas fa-external-link-alt text-purple-600 mr-3"></i>
+                                <a href="#" class="text-blue-600 hover:underline">Guía de referencia rápida</a>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-external-link-alt text-purple-600 mr-3"></i>
+                                <a href="#" class="text-blue-600 hover:underline">Bibliografía recomendada</a>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-external-link-alt text-purple-600 mr-3"></i>
+                                <a href="#" class="text-blue-600 hover:underline">Recursos complementarios</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </section>
-        <?php else: ?>
+        <?php elseif ($vista == 'imagenes'): ?>
+            <!-- Vista de Imágenes -->
+            <section id="imagenes" class="mb-12">
+                <h1 class="text-3xl font-bold text-gray-900 mb-6 border-b-4 border-purple-600 pb-2">
+                    Imágenes
+                </h1>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <?php 
+                    // Reiniciar el puntero del resultado
+                    $resultImagenes->data_seek(0);
+                    while ($imagen = $resultImagenes->fetch_assoc()): 
+                    ?>
+                        <div class="bg-white shadow-lg rounded-lg overflow-hidden transition transform hover:scale-105 duration-300 cursor-pointer" 
+                             onclick="openModal('<?php echo './admin/controllers/' . htmlspecialchars($imagen['ruta_imagen']); ?>')">
+                            <img src="./admin/controllers/<?php echo htmlspecialchars($imagen['ruta_imagen']); ?>" 
+                                 alt="Imagen del curso" 
+                                 class="w-full h-48 object-cover">
+                        </div>
+                    <?php endwhile; ?>
+                </div>
+            </section>
+        <?php elseif (isset($_GET['modulo'])): ?>
             <!-- Módulo específico -->
             <?php 
             $indiceModulo = $moduloActivo - 1;
@@ -191,10 +292,25 @@ $totalModulos = count($videos);
                     <?php endif; ?>
                 </div>
             </section>
+        <?php else: ?>
+            <!-- Descripción General -->
+            <section id="general" class="mb-12">
+                <h1 class="text-3xl font-bold text-gray-900 mb-6 border-b-4 border-purple-600 pb-2">
+                    Información general
+                </h1>
+                
+                <?php if ($resultDescripcion->num_rows > 0): ?>
+                    <?php while ($descripcion = $resultDescripcion->fetch_assoc()): ?>
+                        <p class="text-gray-800 text-base leading-relaxed mb-4 bg-gray-50 p-4 rounded shadow-sm">
+                            <?php echo nl2br(htmlspecialchars($descripcion['descripcion'])); ?>
+                        </p>
+                    <?php endwhile; ?>
+                <?php endif; ?>
+            </section>
         <?php endif; ?>
         
-        <!-- Imágenes -->
-        <?php if ($resultImagenes->num_rows > 0): ?>
+        <!-- Imágenes - Solo se muestra en la vista de imágenes o en la vista general -->
+        <?php if (($vista == 'imagenes' || $vista == 'general') && $resultImagenes->num_rows > 0 && !isset($_GET['modulo'])): ?>
             <section id="imagenes" class="mb-12">
                 <h2 class="text-2xl font-bold text-gray-800 border-b-4 border-purple-600 inline-block mb-6">
                     Imágenes
@@ -234,8 +350,26 @@ $totalModulos = count($videos);
         document.getElementById('imageModal').classList.add('hidden');
     }
     
-    // Scroll to sections when clicking on sidebar links
+    // Manejo del menú desplegable de módulos
     document.addEventListener('DOMContentLoaded', function() {
+        const modulosToggle = document.getElementById('modulos-toggle');
+        const modulosSubmenu = document.getElementById('modulos-submenu');
+        const chevronIcon = modulosToggle.querySelector('.fas');
+        
+        modulosToggle.addEventListener('click', function() {
+            modulosSubmenu.classList.toggle('hidden');
+            
+            // Cambiar el ícono
+            if (chevronIcon.classList.contains('fa-chevron-right')) {
+                chevronIcon.classList.remove('fa-chevron-right');
+                chevronIcon.classList.add('fa-chevron-down');
+            } else {
+                chevronIcon.classList.remove('fa-chevron-down');
+                chevronIcon.classList.add('fa-chevron-right');
+            }
+        });
+        
+        // Scroll to sections when clicking on sidebar links
         const sidebarLinks = document.querySelectorAll('nav a[href^="#"]');
         
         sidebarLinks.forEach(link => {
@@ -254,6 +388,5 @@ $totalModulos = count($videos);
         });
     });
 </script>
-
 
 <?php include("../../include/footer.php"); ?>
