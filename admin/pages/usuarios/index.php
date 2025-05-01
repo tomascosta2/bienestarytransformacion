@@ -2,7 +2,7 @@
 
 session_name("admin_session");
 session_start();
-include './connection/database.php';
+include '../../../connection/database.php';
 
 // Verificar sesión y rol de administrador
 if (!isset($_SESSION['admin_id']) || $_SESSION['role'] !== 'administrador') {
