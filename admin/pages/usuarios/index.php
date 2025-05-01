@@ -189,7 +189,7 @@ while ($row = $visitasPorMesResult->fetch_assoc()) {
                 die("Error en la consulta: " . mysqli_error($conn));
             }
             ?>
-            <div class="container mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+            <div class="container mx-auto mt-10 p-6 bg-white rounded-lg">
                 <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Usuarios Registrados</h1>
                 
                 <!-- Formulario de búsqueda -->
@@ -216,40 +216,40 @@ while ($row = $visitasPorMesResult->fetch_assoc()) {
                     <table class="min-w-full bg-white border-collapse border border-gray-200">
                         <thead>
                             <tr class="bg-gray-800 text-white text-left">
-                                <th class="py-3 px-6">Nombre</th>
-                                <th class="py-3 px-6">Correo</th>
-                                <th class="py-3 px-6">Activo</th>
-                                <th class="py-3 px-6">Creado en</th>
-                                <th class="py-3 px-6">Premium</th>
-                                <th class="py-3 px-6">Premium Activado</th>
-                                <th class="py-3 px-6">Premium Expira</th>
-                                <th class="py-3 px-6 text-center">Acciones</th>
+                                <th class="py-3 px-4">Nombre</th>
+                                <th class="py-3 px-4">Correo</th>
+                                <th class="py-3 px-4">Activo</th>
+                                <th class="py-3 px-4">Creado en</th>
+                                <th class="py-3 px-4">Premium</th>
+                                <th class="py-3 px-4">Premium Activado</th>
+                                <th class="py-3 px-4">Premium Expira</th>
+                                <th class="py-3 px-4 text-center">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php if (mysqli_num_rows($result) > 0): ?>
                                 <?php while ($row = mysqli_fetch_assoc($result)): ?>
                                     <tr class="hover:bg-gray-100 border-b border-gray-200">
-                                        <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['nombre']) ?></td>
-                                        <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['correo']) ?></td>
-                                        <td class="py-3 px-6 text-center">
+                                        <td class="py-3 px-4 text-gray-700"><?= htmlspecialchars($row['nombre']) ?></td>
+                                        <td class="py-3 px-4 text-gray-700"><?= htmlspecialchars($row['correo']) ?></td>
+                                        <td class="py-3 px-4 text-center">
                                             <?php if ($row['is_active']): ?>
                                                 <i class="fas fa-check-circle text-green-500" title="Activo"></i>
                                             <?php else: ?>
                                                 <i class="fas fa-times-circle text-red-500" title="Inactivo"></i>
                                             <?php endif; ?>
                                         </td>
-                                        <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['created_at']) ?></td>
-                                        <td class="py-3 px-6 text-center">
+                                        <td class="py-3 px-4 text-gray-700"><?= htmlspecialchars($row['created_at']) ?></td>
+                                        <td class="py-3 px-4 text-center">
                                             <?php if ($row['es_premium']): ?>
                                                 <i class="fas fa-star text-yellow-500" title="Premium"></i>
                                             <?php else: ?>
                                                 <i class="fas fa-star text-gray-400" title="No Premium"></i>
                                             <?php endif; ?>
                                         </td>
-                                        <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['premium_activated_at'] ?? '-') ?></td>
-                                        <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['premium_expires_at'] ?? '-') ?></td>
-                                        <td class="py-3 px-6 text-center">
+                                        <td class="py-3 px-4 text-gray-700"><?= htmlspecialchars($row['premium_activated_at'] ?? '-') ?></td>
+                                        <td class="py-3 px-4 text-gray-700"><?= htmlspecialchars($row['premium_expires_at'] ?? '-') ?></td>
+                                        <td class="py-3 px-4 text-center">
                                             <div class="flex justify-center">
                                                 <!-- Botón para enviar email -->
                                                 <a href="./controllers/send_email.php?id=<?= $row['id'] ?>" class="text-blue-500 hover:text-blue-700 mx-2" title="Enviar email">
@@ -269,7 +269,7 @@ while ($row = $visitasPorMesResult->fetch_assoc()) {
                                 <?php endwhile; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="8" class="py-6 px-6 text-center text-gray-500">No se encontraron usuarios con ese nombre</td>
+                                    <td colspan="8" class="py-6 px-4 text-center text-gray-500">No se encontraron usuarios con ese nombre</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>
