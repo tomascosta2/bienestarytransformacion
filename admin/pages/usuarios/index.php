@@ -163,7 +163,6 @@ while ($row = $visitasPorMesResult->fetch_assoc()) {
         </nav>
     </aside>
 
-
 <?php
 // Consulta para obtener todos los usuarios
 $query = "SELECT id, nombre, correo, is_active, created_at, es_premium, premium_activated_at, premium_expires_at FROM usuarios";
@@ -233,6 +232,7 @@ if (!$result) {
             </tbody>
         </table>
     </div>
+</div>
 </div>
 <?php
 // Libera los recursos y cierra la conexión
