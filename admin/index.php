@@ -150,7 +150,7 @@ while ($row = $visitasPorMesResult->fetch_assoc()) {
                     </div>
                 </li>
                 <li>
-                    <a href="./?page=usuarios" class="flex items-center p-3 text-gray-700 hover:bg-purple-400 hover:text-white transition duration-300 rounded-md mx-3 my-1">
+                    <a href="/admin/pages/usuarios" class="flex items-center p-3 text-gray-700 hover:bg-purple-400 hover:text-white transition duration-300 rounded-md mx-3 my-1">
                         <i class="fas fa-users mr-2 text-lg"></i> Usuarios
                     </a>
                 </li>
