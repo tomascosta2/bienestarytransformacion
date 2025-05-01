@@ -252,15 +252,15 @@ while ($row = $visitasPorMesResult->fetch_assoc()) {
                                         <td class="py-3 px-4 text-center">
                                             <div class="flex justify-center">
                                                 <!-- Botón para enviar email -->
-                                                <a href="./controllers/send_email.php?id=<?= $row['id'] ?>" class="text-blue-500 hover:text-blue-700 mx-2" title="Enviar email">
+                                                <a href="/controllers/send_email.php?id=<?= $row['id'] ?>" class="text-blue-500 hover:text-blue-700 mx-2" title="Enviar email">
                                                     <i class="fas fa-envelope"></i>
                                                 </a>
                                                 <!-- Botón para activar Premium -->
-                                                <a href="./controllers/activate_premium.php?id=<?= $row['id'] ?>" class="text-green-500 hover:text-green-700 mx-2" title="Activar Premium">
+                                                <a href="/controllers/activate_premium.php?id=<?= $row['id'] ?>" class="text-green-500 hover:text-green-700 mx-2" title="Activar Premium">
                                                     <i class="fas fa-crown"></i>
                                                 </a>
                                                 <!-- Botón para eliminar usuario -->
-                                                <a href="./controllers/delete_user.php?id=<?= $row['id'] ?>" class="text-red-500 hover:text-red-700 mx-2" title="Eliminar usuario" onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
+                                                <a href="/controllers/delete_user.php?id=<?= $row['id'] ?>" class="text-red-500 hover:text-red-700 mx-2" title="Eliminar usuario" onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </div>
