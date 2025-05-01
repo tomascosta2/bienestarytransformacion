@@ -193,7 +193,7 @@ while ($row = $visitasPorMesResult->fetch_assoc()) {
                 <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Usuarios Registrados</h1>
                 
                 <!-- Formulario de búsqueda -->
-                <div class="mb-6 max-w-[600px] ms-aut0">
+                <div class="mb-6 max-w-[350px] ms-auto">
                     <form action="" method="GET" class="flex items-center">
                         <div class="relative flex-1 mr-4">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
