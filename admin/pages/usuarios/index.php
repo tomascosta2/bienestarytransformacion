@@ -167,50 +167,20 @@ while ($row = $visitasPorMesResult->fetch_assoc()) {
     <div class="flex-1 flex flex-col overflow-hidden">
         <main class="flex-1 overflow-y-auto p-4">
             <?php
-            // Inicializar variables de búsqueda
+            // Consulta para obtener todos los usuarios
+            // Inicializar la variable de búsqueda
             $search = '';
-            $fecha_inicio = '';
-            $fecha_fin = '';
-            
             if (isset($_GET['search'])) {
                 $search = mysqli_real_escape_string($conn, $_GET['search']);
             }
-            
-            if (isset($_GET['fecha_inicio']) && !empty($_GET['fecha_inicio'])) {
-                $fecha_inicio = mysqli_real_escape_string($conn, $_GET['fecha_inicio']);
-            }
-            
-            if (isset($_GET['fecha_fin']) && !empty($_GET['fecha_fin'])) {
-                $fecha_fin = mysqli_real_escape_string($conn, $_GET['fecha_fin']);
-            }
 
-            // Construir la consulta base
+            // Modificar la consulta para incluir la búsqueda por nombre
             $query = "SELECT id, nombre, correo, is_active, created_at, es_premium, premium_activated_at, premium_expires_at FROM usuarios";
             
-            // Array para almacenar las condiciones de búsqueda
-            $conditions = [];
-            
-            // Agregar condición de búsqueda por nombre si se proporcionó
+            // Agregar condición de búsqueda si se proporcionó un término de búsqueda
             if (!empty($search)) {
-                $conditions[] = "nombre LIKE '%$search%'";
+                $query .= " WHERE nombre LIKE '%$search%'";
             }
-            
-            // Agregar condición de búsqueda por fecha si se proporcionaron fechas
-            if (!empty($fecha_inicio) && !empty($fecha_fin)) {
-                $conditions[] = "created_at BETWEEN '$fecha_inicio 00:00:00' AND '$fecha_fin 23:59:59'";
-            } elseif (!empty($fecha_inicio)) {
-                $conditions[] = "created_at >= '$fecha_inicio 00:00:00'";
-            } elseif (!empty($fecha_fin)) {
-                $conditions[] = "created_at <= '$fecha_fin 23:59:59'";
-            }
-            
-            // Combinar condiciones si existen
-            if (!empty($conditions)) {
-                $query .= " WHERE " . implode(" AND ", $conditions);
-            }
-            
-            // Ordenar por fecha de creación descendente
-            $query .= " ORDER BY created_at DESC";
             
             $result = mysqli_query($conn, $query);
 
@@ -219,54 +189,27 @@ while ($row = $visitasPorMesResult->fetch_assoc()) {
                 die("Error en la consulta: " . mysqli_error($conn));
             }
             ?>
-            <div class="container mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+            <div class="container mx-auto mt-10 p-6 bg-white rounded-lg">
                 <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Usuarios Registrados</h1>
                 
-                <!-- Formulario de búsqueda avanzada -->
-                <div class="mb-6">
-                    <form action="" method="GET" class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <!-- Búsqueda por nombre -->
-                        <div class="relative">
+                <!-- Formulario de búsqueda -->
+                <div class="mb-6 max-w-[350px] ms-auto">
+                    <form action="" method="GET" class="flex items-center">
+                        <div class="relative flex-1 mr-4">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-search text-gray-400"></i>
                             </div>
                             <input type="text" name="search" value="<?= htmlspecialchars($search) ?>" placeholder="Buscar por nombre..." class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm">
                         </div>
-                        
-                        <!-- Búsqueda por fecha de inicio -->
-                        <div class="relative">
-                            <label for="fecha_inicio" class="block text-sm font-medium text-gray-700 mb-1">Fecha desde:</label>
-                            <input type="date" id="fecha_inicio" name="fecha_inicio" value="<?= htmlspecialchars($fecha_inicio) ?>" class="block w-full py-2 px-3 border border-gray-300 rounded-md leading-5 bg-white focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm">
-                        </div>
-                        
-                        <!-- Búsqueda por fecha de fin -->
-                        <div class="relative">
-                            <label for="fecha_fin" class="block text-sm font-medium text-gray-700 mb-1">Fecha hasta:</label>
-                            <input type="date" id="fecha_fin" name="fecha_fin" value="<?= htmlspecialchars($fecha_fin) ?>" class="block w-full py-2 px-3 border border-gray-300 rounded-md leading-5 bg-white focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm">
-                        </div>
-                        
-                        <!-- Botones de acción -->
-                        <div class="flex items-end space-x-2">
-                            <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
-                                Buscar
-                            </button>
-                            <?php if (!empty($search) || !empty($fecha_inicio) || !empty($fecha_fin)): ?>
-                                <a href="<?= strtok($_SERVER["REQUEST_URI"], '?') ?>" class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
-                                    Limpiar
-                                </a>
-                            <?php endif; ?>
-                        </div>
-                    </form>
-                </div>
-                
-                <!-- Resultados de la búsqueda -->
-                <div class="mt-4">
-                    <p class="text-sm text-gray-600 mb-2">
-                        <?= mysqli_num_rows($result) ?> usuarios encontrados
-                        <?php if (!empty($search) || !empty($fecha_inicio) || !empty($fecha_fin)): ?>
-                            con los filtros aplicados
+                        <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                            Buscar
+                        </button>
+                        <?php if (!empty($search)): ?>
+                            <a href="<?= strtok($_SERVER["REQUEST_URI"], '?') ?>" class="ml-2 inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                                Limpiar
+                            </a>
                         <?php endif; ?>
-                    </p>
+                    </form>
                 </div>
                 
                 <div class="overflow-x-auto">
@@ -326,7 +269,7 @@ while ($row = $visitasPorMesResult->fetch_assoc()) {
                                 <?php endwhile; ?>
                             <?php else: ?>
                                 <tr>
-                                    <td colspan="8" class="py-6 px-4 text-center text-gray-500">No se encontraron usuarios con los criterios de búsqueda</td>
+                                    <td colspan="8" class="py-6 px-4 text-center text-gray-500">No se encontraron usuarios con ese nombre</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>
@@ -365,26 +308,6 @@ mysqli_close($conn);
                 dropdownMenu.classList.toggle('hidden');
             });
         });
-        
-        // Validación de fechas
-        const fechaInicio = document.getElementById('fecha_inicio');
-        const fechaFin = document.getElementById('fecha_fin');
-        
-        if (fechaInicio && fechaFin) {
-            fechaInicio.addEventListener('change', function() {
-                if (fechaFin.value && this.value > fechaFin.value) {
-                    alert('La fecha de inicio no puede ser posterior a la fecha de fin');
-                    this.value = '';
-                }
-            });
-            
-            fechaFin.addEventListener('change', function() {
-                if (fechaInicio.value && this.value < fechaInicio.value) {
-                    alert('La fecha de fin no puede ser anterior a la fecha de inicio');
-                    this.value = '';
-                }
-            });
-        }
     });
 </script>
 
