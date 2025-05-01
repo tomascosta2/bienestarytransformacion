@@ -11,7 +11,7 @@ if (!isset($_SESSION['admin_id']) || $_SESSION['role'] !== 'administrador') {
 }
 
 
-include("./include/head.php");
+include("../../../include/head.php");
 
 
 try { 
@@ -241,4 +241,4 @@ mysqli_close($conn);
 ?>
 
 
-<?php include("./include/footer.php"); ?>
+<?php include("../../../include/footer.php"); ?>
