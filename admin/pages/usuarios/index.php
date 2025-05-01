@@ -145,7 +145,7 @@ while ($row = $visitasPorMesResult->fetch_assoc()) {
                         <i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="mt-1 rounded-md shadow-lg bg-purple-100 hidden dropdown-menu z-20">
-                        <a href="./?page=clase" class="flex items-center p-3 text-gray-700 hover:bg-purple-400 hover:text-white transition duration-300 rounded-md mx-3 my-1">Subir Clase En vivo</a>
+                        <a href="./?page=clase" class="block px-4 py-2 text-gray-700 hover:bg-purple-200 rounded-md">Subir Clase En vivo</a>
                         <a href="./?page=ver_clase" class="block px-4 py-2 text-gray-700 hover:bg-purple-200 rounded-md">Ver Clases en vivo</a>
                     </div>
                 </li>
@@ -163,82 +163,152 @@ while ($row = $visitasPorMesResult->fetch_assoc()) {
         </nav>
     </aside>
 
-<?php
-// Consulta para obtener todos los usuarios
-$query = "SELECT id, nombre, correo, is_active, created_at, es_premium, premium_activated_at, premium_expires_at FROM usuarios";
-$result = mysqli_query($conn, $query);
+    <!-- Contenido principal -->
+    <div class="flex-1 flex flex-col overflow-hidden">
+        <main class="flex-1 overflow-y-auto p-4">
+            <?php
+            // Consulta para obtener todos los usuarios
+            // Inicializar la variable de búsqueda
+            $search = '';
+            if (isset($_GET['search'])) {
+                $search = mysqli_real_escape_string($conn, $_GET['search']);
+            }
 
-// Verifica si hubo un error en la consulta
-if (!$result) {
-    die("Error en la consulta: " . mysqli_error($conn));
-}
-?>
-<div class="container mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
-    <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Usuarios Registrados</h1>
-    <div class="overflow-x-auto">
-        <table class="min-w-full bg-white border-collapse border border-gray-200">
-            <thead>
-                <tr class="bg-gray-800 text-white text-left">
-                    <th class="py-3 px-6">Nombre</th>
-                    <th class="py-3 px-6">Correo</th>
-                    <th class="py-3 px-6">Activo</th>
-                    <th class="py-3 px-6">Creado en</th>
-                    <th class="py-3 px-6">Premium</th>
-                    <th class="py-3 px-6">Premium Activado</th>
-                    <th class="py-3 px-6">Premium Expira</th>
+            // Modificar la consulta para incluir la búsqueda por nombre
+            $query = "SELECT id, nombre, correo, is_active, created_at, es_premium, premium_activated_at, premium_expires_at FROM usuarios";
+            
+            // Agregar condición de búsqueda si se proporcionó un término de búsqueda
+            if (!empty($search)) {
+                $query .= " WHERE nombre LIKE '%$search%'";
+            }
+            
+            $result = mysqli_query($conn, $query);
 
-                    <th class="py-3 px-6 text-center">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($row = mysqli_fetch_assoc($result)): ?>
-                    <tr class="hover:bg-gray-100 border-b border-gray-200">
-                        <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['nombre']) ?></td>
-                        <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['correo']) ?></td>
-                        <td class="py-3 px-6 text-center">
-                            <?php if ($row['is_active']): ?>
-                                <i class="fas fa-check-circle text-green-500" title="Activo"></i>
+            // Verifica si hubo un error en la consulta
+            if (!$result) {
+                die("Error en la consulta: " . mysqli_error($conn));
+            }
+            ?>
+            <div class="container mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+                <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Usuarios Registrados</h1>
+                
+                <!-- Formulario de búsqueda -->
+                <div class="mb-6">
+                    <form action="" method="GET" class="flex items-center">
+                        <div class="relative flex-1 mr-4">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-search text-gray-400"></i>
+                            </div>
+                            <input type="text" name="search" value="<?= htmlspecialchars($search) ?>" placeholder="Buscar por nombre..." class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm">
+                        </div>
+                        <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                            Buscar
+                        </button>
+                        <?php if (!empty($search)): ?>
+                            <a href="<?= strtok($_SERVER["REQUEST_URI"], '?') ?>" class="ml-2 inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                                Limpiar
+                            </a>
+                        <?php endif; ?>
+                    </form>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white border-collapse border border-gray-200">
+                        <thead>
+                            <tr class="bg-gray-800 text-white text-left">
+                                <th class="py-3 px-6">Nombre</th>
+                                <th class="py-3 px-6">Correo</th>
+                                <th class="py-3 px-6">Activo</th>
+                                <th class="py-3 px-6">Creado en</th>
+                                <th class="py-3 px-6">Premium</th>
+                                <th class="py-3 px-6">Premium Activado</th>
+                                <th class="py-3 px-6">Premium Expira</th>
+                                <th class="py-3 px-6 text-center">Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php if (mysqli_num_rows($result) > 0): ?>
+                                <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                                    <tr class="hover:bg-gray-100 border-b border-gray-200">
+                                        <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['nombre']) ?></td>
+                                        <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['correo']) ?></td>
+                                        <td class="py-3 px-6 text-center">
+                                            <?php if ($row['is_active']): ?>
+                                                <i class="fas fa-check-circle text-green-500" title="Activo"></i>
+                                            <?php else: ?>
+                                                <i class="fas fa-times-circle text-red-500" title="Inactivo"></i>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['created_at']) ?></td>
+                                        <td class="py-3 px-6 text-center">
+                                            <?php if ($row['es_premium']): ?>
+                                                <i class="fas fa-star text-yellow-500" title="Premium"></i>
+                                            <?php else: ?>
+                                                <i class="fas fa-star text-gray-400" title="No Premium"></i>
+                                            <?php endif; ?>
+                                        </td>
+                                        <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['premium_activated_at'] ?? '-') ?></td>
+                                        <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['premium_expires_at'] ?? '-') ?></td>
+                                        <td class="py-3 px-6 text-center">
+                                            <div class="flex justify-center">
+                                                <!-- Botón para enviar email -->
+                                                <a href="./controllers/send_email.php?id=<?= $row['id'] ?>" class="text-blue-500 hover:text-blue-700 mx-2" title="Enviar email">
+                                                    <i class="fas fa-envelope"></i>
+                                                </a>
+                                                <!-- Botón para activar Premium -->
+                                                <a href="./controllers/activate_premium.php?id=<?= $row['id'] ?>" class="text-green-500 hover:text-green-700 mx-2" title="Activar Premium">
+                                                    <i class="fas fa-crown"></i>
+                                                </a>
+                                                <!-- Botón para eliminar usuario -->
+                                                <a href="./controllers/delete_user.php?id=<?= $row['id'] ?>" class="text-red-500 hover:text-red-700 mx-2" title="Eliminar usuario" onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
                             <?php else: ?>
-                                <i class="fas fa-times-circle text-red-500" title="Inactivo"></i>
+                                <tr>
+                                    <td colspan="8" class="py-6 px-6 text-center text-gray-500">No se encontraron usuarios con ese nombre</td>
+                                </tr>
                             <?php endif; ?>
-                        </td>
-                        <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['created_at']) ?></td>
-                        <td class="py-3 px-6 text-center">
-                            <?php if ($row['es_premium']): ?>
-                                <i class="fas fa-star text-yellow-500" title="Premium"></i>
-                            <?php else: ?>
-                                <i class="fas fa-star text-gray-400" title="No Premium"></i>
-                            <?php endif; ?>
-                        </td>
-                        <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['premium_activated_at']) ?></td>
-                        <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['premium_expires_at']) ?></td>
-
-                        <td class="py-3 px-6 text-center flex">
-                            <!-- Botón para enviar email -->
-                            <a href="./controllers/send_email.php?id=<?= $row['id'] ?>" class="text-blue-500 hover:text-blue-700 mx-2" title="Enviar email">
-                                <i class="fas fa-envelope"></i>
-                            </a>
-                            <!-- Botón para activar Premium -->
-                            <a href="./controllers/activate_premium.php?id=<?= $row['id'] ?>" class="text-green-500 hover:text-green-700 mx-2" title="Activar Premium">
-                                <i class="fas fa-crown"></i>
-                            </a>
-                            <!-- Botón para eliminar usuario -->
-                            <a href="./controllers/delete_user.php?id=<?= $row['id'] ?>" class="text-red-500 hover:text-red-700 mx-2" title="Eliminar usuario" onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
-                                <i class="fas fa-trash"></i>
-                            </a>
-                        </td>
-                    </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
     </div>
 </div>
-</div>
+
 <?php
 // Libera los recursos y cierra la conexión
 mysqli_free_result($result);
 mysqli_close($conn);
 ?>
 
+<script>
+    // Script para manejar los menús desplegables
+    document.addEventListener('DOMContentLoaded', function() {
+        // Manejo del menú hamburguesa para móviles
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.getElementById('sidebar');
+        
+        if (menuToggle) {
+            menuToggle.addEventListener('click', function() {
+                sidebar.classList.toggle('hidden');
+            });
+        }
+        
+        // Manejo de los menús desplegables
+        const dropdownButtons = document.querySelectorAll('.dropdown-button');
+        
+        dropdownButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const dropdownMenu = this.nextElementSibling;
+                dropdownMenu.classList.toggle('hidden');
+            });
+        });
+    });
+</script>
 
 <?php include("../../../include/footer.php"); ?>
