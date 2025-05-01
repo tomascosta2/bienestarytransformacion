@@ -1,1 +1,244 @@
-hola
+<?php
+
+session_name("admin_session");
+session_start();
+include './connection/database.php';
+
+// Verificar sesión y rol de administrador
+if (!isset($_SESSION['admin_id']) || $_SESSION['role'] !== 'administrador') {
+    header("Location:ingresar");
+    exit();
+}
+
+
+include("./include/head.php");
+
+
+try { 
+    $conn->query("SET GLOBAL sql_mode = ''");
+} catch (Exception $e) {
+    echo '<div class="hidden --warning">' . $e . '</div>';
+}
+
+// Consulta para obtener el total de usuarios registrados
+$totalUsuariosQuery = "SELECT COUNT(*) as total FROM usuarios";
+$totalUsuariosResult = $conn->query($totalUsuariosQuery);
+$totalUsuarios = $totalUsuariosResult->fetch_assoc()['total'];
+
+// Consulta para obtener el total de visitas
+$totalVisitasQuery = "SELECT SUM(cantidad) as total_visitas FROM visitas";
+$totalVisitasResult = $conn->query($totalVisitasQuery);
+$totalVisitas = $totalVisitasResult->fetch_assoc()['total_visitas'];
+
+try {
+    // Consulta para obtener el número de usuarios registrados por mes (último año)
+    $usuariosPorMesQuery = "
+        SELECT 
+            DATE_FORMAT(MIN(created_at), '%b') AS mes, 
+            COUNT(*) AS cantidad 
+        FROM usuarios 
+        WHERE created_at >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
+        GROUP BY YEAR(created_at), MONTH(created_at)
+        ORDER BY YEAR(created_at), MONTH(created_at);
+    ";
+    $usuariosPorMesResult = $conn->query($usuariosPorMesQuery);
+} catch (Exception $e) {
+    echo 'Error en la consulta: ' . $e->getMessage();
+    exit();
+}
+
+// Preparar datos para el JSON de usuarios nuevos
+$meses = [];
+$cantidades = [];
+while ($row = $usuariosPorMesResult->fetch_assoc()) {
+    $meses[] = $row['mes'];
+    $cantidades[] = $row['cantidad'];
+}
+
+try {
+    // Consulta para obtener el número de visitas por mes (último año)
+    $visitasPorMesQuery = "
+        SELECT 
+            DATE_FORMAT(fecha, '%b') AS mes, 
+            SUM(cantidad) AS total_visitas,
+            MIN(fecha) AS fecha_orden 
+        FROM visitas 
+        WHERE fecha >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
+        GROUP BY YEAR(fecha), MONTH(fecha) 
+        ORDER BY fecha_orden;
+    ";
+    $visitasPorMesResult = $conn->query($visitasPorMesQuery);
+} catch (Exception $e) {
+    echo 'Error en la consulta: ' . $e->getMessage();
+    exit();
+}
+
+// Preparar datos para el JSON de visitas mensuales
+$mesesVisitas = [];
+$cantidadesVisitas = [];
+while ($row = $visitasPorMesResult->fetch_assoc()) {
+    $mesesVisitas[] = $row['mes'];
+    $cantidadesVisitas[] = $row['total_visitas'];
+}
+
+?>
+
+<div class="flex h-screen">
+    <!-- Botón de menú hamburguesa para móviles -->
+    <div class="bg-purple-200 text-white flex-shrink-0 p-4 lg:hidden">
+        <button id="menu-toggle" class="focus:outline-none text-gray-700">
+            <i class="fas fa-bars text-2xl"></i>
+        </button>
+    </div>
+
+    <!-- Menú lateral izquierdo -->
+    <aside id="sidebar" class="w-64 bg-gradient-to-br from-purple-300 via-pink-200 to-purple-300 text-gray-900 flex-shrink-0 hidden lg:flex lg:flex-col shadow-xl overflow-hidden">
+        <div class="p-6 bg-purple-500 flex flex-col items-center justify-center">
+            <h1 class="text-2xl font-bold text-white">Admin Panel</h1>
+            <p class="text-sm text-purple-200">Escuela Bienestar Integral</p>
+        </div>
+        <nav class="mt-6 flex-grow overflow-y-auto scrollbar-thin scrollbar-thumb-purple-500 scrollbar-track-purple-200">
+            <ul class="space-y-2">
+                <li>
+                    <a href="./?page=home" class="flex items-center p-3 text-gray-700 hover:bg-purple-400 hover:text-white transition duration-300 rounded-md mx-3 my-1">
+                        <i class="fas fa-home mr-2 text-lg"></i> Dashboard
+                    </a>
+                </li>
+                <li>
+                    <a href="./?page=visitas" class="flex items-center p-3 text-gray-700 hover:bg-purple-400 hover:text-white transition duration-300 rounded-md mx-3 my-1">
+                        <i class="fas fa-eye mr-2 text-lg"></i> Visitas
+                    </a>
+                </li>
+                <li class="relative">
+                    <button type="button" class="flex justify-between items-center w-full p-3 text-gray-700 hover:bg-purple-400 hover:text-white transition duration-300 rounded-md mx-3 my-1 dropdown-button">
+                        <span class="flex items-center"><i class="fas fa-chalkboard-teacher mr-2 text-lg"></i> Cursos Gratuitos</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="mt-1 rounded-md shadow-lg bg-purple-100 hidden dropdown-menu z-20">
+                        <a href="./?page=gratuito" class="block px-4 py-2 text-gray-700 hover:bg-purple-200 rounded-md">Subir Charla/Cursos</a>
+                        <a href="./?page=ver_gratuito" class="block px-4 py-2 text-gray-700 hover:bg-purple-200 rounded-md">Ver Charlas/Cursos</a>
+                    </div>
+                </li>
+                <li class="relative">
+                    <button type="button" class="flex justify-between items-center w-full p-3 text-gray-700 hover:bg-purple-400 hover:text-white transition duration-300 rounded-md mx-3 my-1 dropdown-button">
+                        <span class="flex items-center"><i class="fas fa-star mr-2 text-lg"></i> Cursos Destacados</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="mt-1 rounded-md shadow-lg bg-purple-100 hidden dropdown-menu z-20">
+                        <a href="./?page=destacado" class="block px-4 py-2 text-gray-700 hover:bg-purple-200 rounded-md">Subir Charla/Cursos</a>
+                        <a href="./?page=ver_destacado" class="block px-4 py-2 text-gray-700 hover:bg-purple-200 rounded-md">Ver Charlas/Cursos</a>
+                    </div>
+                </li>
+                <li class="relative">
+                    <button type="button" class="flex justify-between items-center w-full p-3 text-gray-700 hover:bg-purple-400 hover:text-white transition duration-300 rounded-md mx-3 my-1 dropdown-button">
+                        <span class="flex items-center"><i class="fas fa-crown mr-2 text-lg"></i> Plan PREMIUM</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="mt-1 rounded-md shadow-lg bg-purple-100 hidden dropdown-menu z-20">
+                        <a href="./?page=premium" class="block px-4 py-2 text-gray-700 hover:bg-purple-200 rounded-md">Subir Charla/Cursos</a>
+                        <a href="./?page=ver_premium" class="block px-4 py-2 text-gray-700 hover:bg-purple-200 rounded-md">Ver Charlas/Cursos</a>
+                    </div>
+                </li>
+                <li class="relative">
+                    <button type="button" class="flex justify-between items-center w-full p-3 text-gray-700 hover:bg-purple-400 hover:text-white transition duration-300 rounded-md mx-3 my-1 dropdown-button">
+                        <span class="flex items-center"><i class="fas fa-chalkboard-teacher mr-2 text-lg"></i>Clases en Vivo</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="mt-1 rounded-md shadow-lg bg-purple-100 hidden dropdown-menu z-20">
+                        <a href="./?page=clase" class="flex items-center p-3 text-gray-700 hover:bg-purple-400 hover:text-white transition duration-300 rounded-md mx-3 my-1">Subir Clase En vivo</a>
+                        <a href="./?page=ver_clase" class="block px-4 py-2 text-gray-700 hover:bg-purple-200 rounded-md">Ver Clases en vivo</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="/admin/pages/usuarios/index.php" class="flex items-center p-3 text-gray-700 hover:bg-purple-400 hover:text-white transition duration-300 rounded-md mx-3 my-1">
+                        <i class="fas fa-users mr-2 text-lg"></i> Usuarios
+                    </a>
+                </li>
+                <li>
+                    <a href="./?page=salir" class="flex items-center p-3 text-gray-700 hover:bg-red-400 hover:text-white transition duration-300 rounded-md mx-3 my-1">
+                        <i class="fas fa-sign-out-alt mr-2 text-lg"></i> Salir
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+
+<?php
+// Consulta para obtener todos los usuarios
+$query = "SELECT id, nombre, correo, is_active, created_at, es_premium, premium_activated_at, premium_expires_at FROM usuarios";
+$result = mysqli_query($conn, $query);
+
+// Verifica si hubo un error en la consulta
+if (!$result) {
+    die("Error en la consulta: " . mysqli_error($conn));
+}
+?>
+<div class="container mx-auto mt-10 p-6 bg-white rounded-lg shadow-lg">
+    <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Usuarios Registrados</h1>
+    <div class="overflow-x-auto">
+        <table class="min-w-full bg-white border-collapse border border-gray-200">
+            <thead>
+                <tr class="bg-gray-800 text-white text-left">
+                    <th class="py-3 px-6">Nombre</th>
+                    <th class="py-3 px-6">Correo</th>
+                    <th class="py-3 px-6">Activo</th>
+                    <th class="py-3 px-6">Creado en</th>
+                    <th class="py-3 px-6">Premium</th>
+                    <th class="py-3 px-6">Premium Activado</th>
+                    <th class="py-3 px-6">Premium Expira</th>
+
+                    <th class="py-3 px-6 text-center">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                    <tr class="hover:bg-gray-100 border-b border-gray-200">
+                        <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['nombre']) ?></td>
+                        <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['correo']) ?></td>
+                        <td class="py-3 px-6 text-center">
+                            <?php if ($row['is_active']): ?>
+                                <i class="fas fa-check-circle text-green-500" title="Activo"></i>
+                            <?php else: ?>
+                                <i class="fas fa-times-circle text-red-500" title="Inactivo"></i>
+                            <?php endif; ?>
+                        </td>
+                        <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['created_at']) ?></td>
+                        <td class="py-3 px-6 text-center">
+                            <?php if ($row['es_premium']): ?>
+                                <i class="fas fa-star text-yellow-500" title="Premium"></i>
+                            <?php else: ?>
+                                <i class="fas fa-star text-gray-400" title="No Premium"></i>
+                            <?php endif; ?>
+                        </td>
+                        <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['premium_activated_at']) ?></td>
+                        <td class="py-3 px-6 text-gray-700"><?= htmlspecialchars($row['premium_expires_at']) ?></td>
+
+                        <td class="py-3 px-6 text-center flex">
+                            <!-- Botón para enviar email -->
+                            <a href="./controllers/send_email.php?id=<?= $row['id'] ?>" class="text-blue-500 hover:text-blue-700 mx-2" title="Enviar email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <!-- Botón para activar Premium -->
+                            <a href="./controllers/activate_premium.php?id=<?= $row['id'] ?>" class="text-green-500 hover:text-green-700 mx-2" title="Activar Premium">
+                                <i class="fas fa-crown"></i>
+                            </a>
+                            <!-- Botón para eliminar usuario -->
+                            <a href="./controllers/delete_user.php?id=<?= $row['id'] ?>" class="text-red-500 hover:text-red-700 mx-2" title="Eliminar usuario" onclick="return confirm('¿Estás seguro de que deseas eliminar este usuario?');">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<?php
+// Libera los recursos y cierra la conexión
+mysqli_free_result($result);
+mysqli_close($conn);
+?>
+
+
+<?php include("./include/footer.php"); ?>
