@@ -168,18 +168,33 @@ while ($row = $visitasPorMesResult->fetch_assoc()) {
         <main class="flex-1 overflow-y-auto p-4">
             <?php
             // Consulta para obtener todos los usuarios
-            // Inicializar la variable de búsqueda
+            // Inicializar las variables de búsqueda
             $search = '';
+            $expiry_date = '';
             if (isset($_GET['search'])) {
                 $search = mysqli_real_escape_string($conn, $_GET['search']);
+            }
+            if (isset($_GET['expiry_date'])) {
+                $expiry_date = mysqli_real_escape_string($conn, $_GET['expiry_date']);
             }
 
             // Modificar la consulta para incluir la búsqueda por nombre
             $query = "SELECT id, nombre, correo, is_active, created_at, es_premium, premium_activated_at, premium_expires_at FROM usuarios";
             
-            // Agregar condición de búsqueda si se proporcionó un término de búsqueda
+            // Agregar condiciones de búsqueda
+            $whereConditions = [];
+            
             if (!empty($search)) {
-                $query .= " WHERE nombre LIKE '%$search%'";
+                $whereConditions[] = "nombre LIKE '%$search%'";
+            }
+            
+            if (!empty($expiry_date)) {
+                $whereConditions[] = "DATE(premium_expires_at) = '$expiry_date'";
+            }
+            
+            // Añadir las condiciones WHERE a la consulta
+            if (!empty($whereConditions)) {
+                $query .= " WHERE " . implode(" AND ", $whereConditions);
             }
             
             $result = mysqli_query($conn, $query);
@@ -193,19 +208,28 @@ while ($row = $visitasPorMesResult->fetch_assoc()) {
                 <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Usuarios Registrados</h1>
                 
                 <!-- Formulario de búsqueda -->
-                <div class="mb-6 max-w-[350px] ms-auto">
-                    <form action="" method="GET" class="flex items-center">
-                        <div class="relative flex-1 mr-4">
+                <div class="mb-6 max-w-[600px] ms-auto">
+                    <form action="" method="GET" class="flex flex-wrap items-center gap-2">
+                        <div class="relative flex-1 min-w-[200px]">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <i class="fas fa-search text-gray-400"></i>
                             </div>
                             <input type="text" name="search" value="<?= htmlspecialchars($search) ?>" placeholder="Buscar por nombre..." class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm">
                         </div>
+                        
+                        <div class="relative flex-1 min-w-[200px]">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                <i class="fas fa-calendar text-gray-400"></i>
+                            </div>
+                            <input type="date" name="expiry_date" value="<?= htmlspecialchars($expiry_date) ?>" placeholder="Fecha de vencimiento" class="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-purple-500 focus:border-purple-500 sm:text-sm">
+                        </div>
+                        
                         <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
                             Buscar
                         </button>
-                        <?php if (!empty($search)): ?>
-                            <a href="<?= strtok($_SERVER["REQUEST_URI"], '?') ?>" class="ml-2 inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                        
+                        <?php if (!empty($search) || !empty($expiry_date)): ?>
+                            <a href="<?= strtok($_SERVER["REQUEST_URI"], '?') ?>" class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
                                 Limpiar
                             </a>
                         <?php endif; ?>
